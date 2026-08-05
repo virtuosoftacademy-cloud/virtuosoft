@@ -86,8 +86,8 @@ export const services_Nav = [
     subPages:[
       // {label:"IT governance",href:"#"},
       // {label:"cybersecurity",href:"#"},
-      {label:"RPA",href:"/services/Expertise/rpa"},
-      {label:"DevOps",href:"/services/Expertise/devops"},
+      {label:"RPA",href:"/services/expertise/rpa"},
+      {label:"DevOps",href:"/services/expertise/devops"},
     ]
   }
   // {
@@ -180,8 +180,8 @@ export const FooterData = [
     {
     title: 'Expertise',
     subPages: [
-      { label: 'RPA', href:"/services/Expertise/rpa" },
-      { label: 'DevOps', href:"/services/Expertise/devops" },
+      { label: 'RPA', href:"/services/expertise/rpa" },
+      { label: 'DevOps', href:"/services/expertise/devops" },
     ],
   },
   

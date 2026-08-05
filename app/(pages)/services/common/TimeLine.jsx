@@ -3,11 +3,11 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export default function TimeLine(timeLine) {
-  const { titleParts, timeLineItems,businessOutComes } = timeLine
+  const { titleParts, timeLineItems, businessOutComes, btnText } = timeLine
   return (
     <StepWidget
       heading={
-        <>
+        <div className="whitespace-pre-line">
           {titleParts.map((part, i) =>
             typeof part === 'string' ? (
               part
@@ -17,11 +17,13 @@ export default function TimeLine(timeLine) {
               </span>
             )
           )}
-        </>
+        </div>
       }
       button={
         <Button asChild>
-          <Link href="/">Build What’s Next</Link>
+          <Link href="/">
+            {btnText || "Build What’s Next"}
+          </Link>
         </Button>
       }
       steps={timeLineItems}

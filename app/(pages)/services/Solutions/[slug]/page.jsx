@@ -10,8 +10,8 @@ import Blogs from '@/app/(pages)/blogs/page';
 import Success from '../../common/Success';
 import Faq from '@/components/common/Faq';
 import Engage from '../../common/Engage';
-import { ErpEmpower, ErpHero, HelixEmpower ,HelixHero,DynamicsHero,DynamicsEmpower,ManageEngineHero,EngineEmpower,stepsDataErp,stepsDataHelix ,stepsDataDynamics,stepsDataEngine,valueDataErp ,valueDataHelix,valueDataDynamics, valueDataEngine,} from '../constant';
-import { Faq_ERP ,Faq_Helix,Faq_Dynamics ,Faq_ManageEngine } from '@/app/_constant';
+import { ErpEmpower, ErpHero, HelixEmpower ,HelixHero,DynamicsHero,DynamicsEmpower,ManageEngineHero,EngineEmpower,stepsDataErp,stepsDataHelix ,stepsDataDynamics,stepsDataEngine,valueDataErp ,valueDataHelix,valueDataDynamics, valueDataEngine, IbmHero, IbmvalueData, IbmstepsData, IbmEmpower,} from '../constant';
+import { Faq_ERP ,Faq_Helix,Faq_Dynamics ,Faq_ManageEngine, Faq_Ibm } from '@/app/_constant';
 
 
 // ────────────────────────────────────────────────
@@ -90,6 +90,25 @@ const services = [
       { Component: Blogs },
       { Component: Engage },
       { Component: Faq, props: { items: Faq_ManageEngine } },
+      { Component: Cta },
+    ],
+  },
+  {
+    slug: 'ibm',
+    title: 'IBM',
+    heroData: IbmHero,
+    value: IbmvalueData[0],
+    Data: IbmEmpower [0],
+    timeLine: IbmstepsData [0],
+    sections: [
+      { Component: Hero, props: IbmHero },
+      { Component: ValueSection, props: IbmvalueData[0] },
+      { Component: Success },
+      { Component: TimeLine, props: IbmstepsData [0] },
+      { Component: Empower, props: IbmEmpower [0] },
+      { Component: Blogs },
+      { Component: Engage },
+      { Component: Faq, props: { items: Faq_Ibm } },
       { Component: Cta },
     ],
   },

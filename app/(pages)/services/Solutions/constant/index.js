@@ -1,3 +1,4 @@
+
 export const ErpHero = {
   title: 'Enterprise Resource Planning (ERP) Transformation',
   topDescription: 'Solutions',
@@ -186,9 +187,8 @@ export const HelixHero = {
   title: 'BMC Helix ',
   topDescription: 'Solutions',
   bottomDescription:
-    'At Virtuosoft, we modernize IT operations with BMC Helix, delivering AI-driven service management, predictive analytics and intelligent automation. ' +
-    'From ITSM and ITOM to AIOps and workflow orchestration, we help you streamline operations, reduce downtime and accelerate service delivery across your enterprise.',
-  btnTitle: 'Modernize Your IT Operations with BMC Helix',
+    "Your service management platform should move as fast as your business does. We help enterprises implement, migrate and optimize BMC Helix and Remedy environments, from ITSM and CMDB configuration to custom workflow automation and ITIL aligned process design. The result is a service management foundation built for visibility, faster resolution and long term cost efficiency.",
+  btnTitle: 'Explore BMC Helix Services With Virtuosoft',
 };
 
 // When Should Organizations Adopt BMC Helix?
@@ -196,44 +196,46 @@ export const HelixHero = {
 export const valueDataHelix = [
   {
     titleParts: [
-      "Is Your IT Ecosystem Ready for ",
-      { text: "Intelligent Transformation", bold: true }
+      "When Does Your Organization Need ",
+      { text: "BMC Helix & Remedy Expertise", bold: true }
     ],
     valueItems: [
       {
-        title: "Fragmented IT Operations & Tools",
+        title:
+          "When Your Remedy Environment Is Reaching End of Life",
         description:
-          "When teams juggle multiple disconnected systems, efficiency drops. BMC Helix unifies ITSM into a single cloud-native platform. We help consolidate your tools to boost visibility and performance.",
+          "Legacy Remedy deployments carry rising maintenance costs and shrinking vendor support. We migrate you to Helix with zero data loss and minimal disruption, so your service desk keeps running while your platform moves forward.",
         image: `/${valueImg}/automate.svg`,
       },
       {
-        title: "Reactive IT Support & Slow Issue Resolution",
+        title:
+          "When ITSM Processes Slow Down Instead of Scaling",
         description:
-          "If your teams fix issues only after they impact users, you need predictive capabilities. With AI-powered insights and automated incident correlation, we enable faster, proactive IT operations.",
+          "Manual handoffs and inconsistent workflows create bottlenecks as your organization grows. We redesign incident, problem, change and asset management processes around ITIL best practices, so service delivery gets faster, not slower.",
         image: `/${valueImg}/scale.svg`,
       },
       {
-        title: "Rising Operational Costs",
+        title: "When Your CMDB No Longer Reflects Reality",
         description:
-          "Manual workflows and legacy systems increase expenses. BMC Helix automates repetitive tasks and optimizes resource usage. Our deployments ensure you get maximum ROI from automation.",
+          "Inaccurate asset data undermines every decision built on top of it. We configure CMDB and Discovery to map your infrastructure precisely, giving your teams a single source of truth they can actually rely on.",
         image: `/${valueImg}/enhance.svg`,
       },
       {
-        title: "Limited Visibility Across Infrastructure",
+        title: "When Systems Don't Talk to Each Other",
         description:
-          "When IT teams lack real-time visibility, downtime and bottlenecks increase. We integrate Helix with your cloud, on-prem and hybrid environments to create a unified operational view.",
+          "Disconnected tools mean duplicated effort and blind spots across monitoring, DevOps, cloud and HR systems. We integrate Helix and Remedy with your broader technology stack, so information flows without manual intervention.",
         image: `/${valueImg}/solve.svg`,
       },
       {
-        title: "Compliance & Audit Challenges",
+        title: "When Licensing Costs Outpace Actual Usage",
         description:
-          "Helix strengthens governance through centralized documentation, automated workflows and audit-ready reporting. We customize compliance workflows tailored to your standards and regulatory needs.",
+          "Over-provisioned licenses quietly drain the budget every year. We audit your BMC environment and right-size licensing to match real usage, reducing cost without reducing capability.",
         image: `/${valueImg}/mitigate.svg`,
       },
       {
-        title: "Struggle to Support Remote and Distributed Teams",
+        title: "When Adoption Lags and Support Tickets Pile Up",
         description:
-          "Modern workforces need intelligent, self-service support. We help implement BMC Helix Virtual Agent, knowledge portals and digital workplace tools to elevate employee experience.",
+          "A platform your teams don't fully understand becomes a platform they avoid. We deliver hands-on administrator and end-user training that drives adoption and cuts down on avoidable support tickets",
         image: `/${valueImg}/enable.svg`,
       },
     ]
@@ -246,57 +248,58 @@ export const valueDataHelix = [
 export const stepsDataHelix = [
   {
     titleParts: [
-      "Your Blueprint for ",
-      { text: "Intelligent Service Management", bold: true }
+      "A Structured Approach to ",
+      { text: "Helix & Remedy Implementation", bold: true }
     ],
     timeLineItems: [
       {
-        title: "Discovery & Requirement Analysis",
+        title: "Discovery & Environment Assessment",
         description:
-          "We begin with an in-depth assessment of your IT operations, tools and workflows to define Helix adoption goals.",
+          "We assess your current Remedy or Helix environment, existing workflows and business objectives to define the right scope and approach.",
       },
       {
-        title: "Solution Architecture & Planning",
+        title: "Architecture & Infrastructure Mapping",
         description:
-          "We design a cloud-native architecture tailored to your organizational needs, covering ITSM, ITOM and digital workplace.",
+          "Our team maps your systems, integrations and configuration items to build a clear picture of what needs to move, connect or change.",
       },
       {
-        title: "Configuration & Customization",
+        title: "Implementation & Configuration",
         description:
-          "Our team configures modules, builds workflows and customizes service catalogs, automation rules and AI capabilities.",
+          "We configure Helix ITSM, Discovery and CMDB around your specific workflows, not a generic template.",
       },
       {
-        title: "Data Migration & Integration",
+        title: "Migration & Data Cutover",
         description:
-          "We securely migrate data from legacy systems and integrate Helix with tools like Azure, AWS, ServiceNow, Jira and CMDB platforms.",
+          "For organizations moving off legacy Remedy, we execute the migration with historical data preserved and downtime kept to a minimum.",
       },
       {
-        title: "Testing & Validation",
+        title: "Process Design & Workflow Automation",
         description:
-          "We test workflows, automations, integrations, security configurations and AI models to ensure peak performance.",
+          "We design incident, problem, change and asset management processes aligned with ITIL, then automate the workflows and business rules that support them.",
       },
       {
-        title: "User Training & Change Management",
+        title: "Integration & Connectivity",
         description:
-          "We train your teams on dashboards, virtual agents, service catalogs and reporting tools to ensure smooth adoption.",
+          "We connect Helix and Remedy with your broader technology stack, including monitoring tools, DevOps platforms, cloud services and HR systems.",
       },
       {
-        title: "Go-Live Deployment",
+        title: "Dashboards, Reporting & Validation",
         description:
-          "Your Helix solution is deployed using phased or full migration strategies, ensuring minimal downtime.",
+          "We build executive dashboards and SLA reporting, then validate the environment for performance, accuracy and readiness.",
       },
       {
-        title: "Continuous Support & Optimization",
+        title: "Training, Go-Live & Ongoing Support",
         description:
-          "We provide ongoing enhancements, monitoring and upgrades to maximize platform value and operational efficiency.",
+          "We train administrators and end users, then provide managed support and health checks to keep the platform performing as your organization evolves.",
       },
     ],
     businessOutComes: [
       { point: "Faster Incident Resolution & Automated Workflows" },
-      { point: "Predictive Operations with AIOps Intelligence" },
-      { point: "Enhanced IT Visibility & Proactive Monitoring" },
-      { point: "Stronger Compliance & Process Governance" },
-      { point: "Reduced IT Costs & Increased Efficiency" }
+      { point: "A single, accurate source of truth via properly configured CMDB" },
+      { point: "ITIL-aligned processes that scale with organizational growth" },
+      { point: "Seamless connectivity across monitoring, DevOps, cloud and HR systems" },
+      { point: "Reduced licensing costs through right-sized BMC environments" },
+      {point:"Higher platform adoption and fewer avoidable support tickets"}
     ]
   }
 ];
@@ -308,55 +311,65 @@ export const HelixEmpower = [
     title: "Accelerate Digital Operations with BMC Helix Excellence",
     items: [
       {
-        title: "Helix ITSM Implementation",
+        title: "Helix Implementation & Deployment",
         description:
-          "Deploy modern, AI-powered IT service management that improves case resolution, simplifies workflows and enhances end-user experiences.",
+          "End-to-end setup and configuration of Helix ITSM, Discovery and CMDB, tailored to your organization's workflows rather than a generic template.",
       },
       {
-        title: "Helix ITOM & AIOps Enablement",
+        title: "Remedy Migration & Upgrade Services",
         description:
-          "Leverage predictive analytics, anomaly detection and intelligent event correlation to minimize downtime and optimize IT operations.",
+          "Seamless migration from legacy Remedy versions to Helix, with historical data preserved and downtime kept to a minimum.",
       },
       {
-        title: "Custom Workflow & Catalog Development",
+        title: "ITSM Process Design & Optimization",
         description:
-          "Build tailored workflows, service catalogs, automation rules and multi-step approval chains to support unique business processes.",
+          "Incident, problem, change and asset management processes designed around ITIL best practices to keep service delivery consistent as you scale.",
       },
       {
-        title: "Helix Discovery & CMDB Optimization",
+        title: "Custom Workflow & Automation Development",
         description:
-          "Achieve real-time visibility into your infrastructure with accurate asset discovery and a well-maintained CMDB.",
+          "Tailored workflows, business rules and automations that remove manual steps and streamline how service requests move through your organization.",
       },
       {
-        title: "Helix Chatbot & Virtual Agent Setup",
+        title: "CMDB & Discovery Configuration",
         description:
-          "Deploy intelligent virtual agents for faster, automated self-service support across IT and business functions.",
+          "Accurate asset and configuration item mapping, giving your teams full visibility into infrastructure instead of guesswork.",
       },
       {
-        title: "Integration with Cloud & Enterprise Systems",
+        title: "Integration Services",
         description:
-          "Connect Helix with AWS, Azure, Kubernetes, DevOps pipelines, SIEM tools and HR/Finance systems for unified operations.",
+          "Connecting Helix and Remedy with the tools you already run, including monitoring, DevOps, cloud platforms and HR systems.",
       },
       {
-        title: "Monitoring, Observability & Event Management",
+        title: "Dashboard & Reporting Solution",
         description:
-          "Implement end-to-end monitoring through event correlation, topology mapping and predictive alerts.",
+          "Custom reports, SLA tracking and executive dashboards that turn service data into decisions leadership can act on.",
       },
       {
-        title: "Helix Migration & Upgrade Services",
+        title: "System Health Checks & Performance Tuning",
         description:
-          "Migrate from legacy BMC systems or outdated ITSM tools to the modern Helix platform with zero disruption.",
+          "Auditing existing BMC environments to identify bottlenecks and keep performance where it needs to be.",
       },
       {
-        title: "Security, Compliance & Governance Frameworks",
+        title: "Administrator & End-User Training",
         description:
-          "Set up role-based access, audit trails, policy workflows and compliance dashboards tailored to your regulatory needs.",
+          "Hands-on training programs that drive adoption and reduce the volume of avoidable support tickets.",
       },
       {
-        title: "Support, Maintenance & Continuous Optimization",
+        title: "Managed Support & Maintenance",
         description:
-          "Ensure optimal performance with proactive support, automation enhancements and regular platform upgrades.",
-      }
+          "Ongoing administration, patching and troubleshooting, so your platform stays reliable without pulling your internal team off other priorities.",
+      },
+      {
+        title: "License & Cost Optimization Advisory",
+        description:
+          "Right-sizing your BMC licensing to reduce cost without sacrificing the capability your teams depend on.",
+      },
+      {
+        title: "Custom Development via BMC Developer Tools",
+        description:
+          "Building custom applications, forms and extensions using Innovation Studio, Digital Workplace Catalog Builder and the Remedy/Helix Developer Studio.",
+      },
     ]
   }
 ];
@@ -549,8 +562,8 @@ export const ManageEngineHero = {
 // FOLD 2: Challenges
 export const valueDataEngine = [
   {
-    titleParts:[ "Is Your",{ text: "IT Team", bold: true},
-        "Ready for Smarter, Faster and More Secure Operations"
+    titleParts: ["Is Your", { text: "IT Team", bold: true },
+      "Ready for Smarter, Faster and More Secure Operations"
     ],
     valueItems: [
       {
@@ -581,7 +594,7 @@ export const valueDataEngine = [
         title: "Lack of Device and Endpoint Control",
         description:
           "Managing distributed devices, remote teams or BYOD environments becomes challenging. ManageEngine’s endpoint tools give complete control over approvals, updates, compliance and security enforcement.",
-          image: `/${valueImg}/mitigate.svg`,
+        image: `/${valueImg}/mitigate.svg`,
       },
       {
         title: "Compliance Pressure & Audit Challenges",
@@ -706,5 +719,203 @@ export const EngineEmpower = [
       },
     ],
     btnTitle: "Build a Smarter IT Environment with ManageEngine",
+  },
+];
+
+
+
+// FOLD 1
+export const IbmHero = {
+  title: "IBM Middleware & DevOps Consulting Services",
+  topDescription: "Solutions",
+  bottomDescription: "Enterprise middleware is where reliability either gets built in or breaks down. We install, configure and administer IBM's core middleware stack, including WebSphere, MQ, Business Automation Workflow, DB2 and App Connect, alongside QRadar SIEM and IBM Cloud Private. The result is a platform environment that stays secure, performant and easy to maintain as your operations scale.",
+  btnTitle: "Explore IBM Middleware Services With Virtuosoft",
+};
+
+// FOLD 2: Challenges
+export const IbmvalueData = [
+  {
+    titleParts: ["Where Does", { text: "IBM Middleware Expertise", bold: true },
+      "Make the Biggest Difference?"
+    ],
+    valueItems: [
+      {
+        title: "Scaling Beyond a Single WebSphere Instance",
+        description:
+          "Growing application demand exposes the limits of an unoptimized WebSphere setup. We implement and administer clustered, secure, highly available WebSphere Network Deployment environments built to handle real production load.",
+        image: `/${valueImg}/automate.svg`,
+      },
+      {
+        title:
+          "Modernizing Commerce Platforms Without Starting Over",
+        description:
+          "Outdated WebSphere Commerce environments limit what your business can build. We deploy, configure and integrate commerce platforms, including full migration paths like Commerce V7 to V9 on AWS EKS.",
+        image: `/${valueImg}/scale.svg`,
+      },
+      {
+        title:
+          "Replacing Manual Process Handoffs With Automation",
+        description:
+          "Manual approvals and disconnected process handoffs cost time your teams don't have. We design and implement IBM Business Automation Workflow to automate processes end to end and improve operational efficiency.",
+        image: `/${valueImg}/enhance.svg`,
+      },
+      {
+        title:
+          "Closing Gaps in Security Event Visibility",
+        description:
+          "Threats move faster than manual monitoring can keep up with. We deploy and optimize IBM QRadar SIEM, covering log-source integration, security rules, dashboards and incident detection.",
+        image: `/${valueImg}/solve.svg`,
+      },
+      {
+        title:
+          "Turning Patch Management Into a Controlled Process",
+        description:
+          "Falling behind on patches across WAS, WCS, Jazz and BPM opens real vulnerabilities. We manage iFixes, Fix Packs and Feature Packs systematically, so your environment stays current without disrupting operations.",
+        image: `/${valueImg}/mitigate.svg`,
+      },
+      {
+        title:
+          "Running IBM Cloud Private the Way It Was Designed",
+        description:
+          "Standing up IBM Cloud Private is one thing, running it reliably is another. We handle installation, configuration and ongoing administration so your private cloud environment performs the way it was meant to.",
+        image: `/${valueImg}/enable.svg`,
+      },
+    ],
+  },
+];
+
+// FOLD 3: Deployment Process
+export const IbmstepsData = [
+  {
+    titleParts: ["A Structured Approach to\n",
+      { text: "IBM Middleware Implementation", bold: true },
+    ],
+    btnText: "Start Your Middleware Assessment",
+    timeLineItems: [
+      {
+        title: "Environment Assessment & Discovery",
+        description:
+          "We evaluate your current middleware landscape, including WebSphere, MQ, BPM, DB2 and App Connect environments, to understand what's in place and what needs to change.",
+      },
+      {
+        title: "Architecture & Capacity Planning",
+        description:
+          "We plan clustered, scalable configurations for WebSphere Network Deployment and related components, sized to your actual production requirements.",
+      },
+      {
+        title: "Installation & Configuration",
+        description:
+          "We install and configure the core middleware stack, WebSphere Application Server, MQ, Business Automation Workflow, DB2 and App Connect, aligned to your environment's specific requirements.",
+      },
+      {
+        title: "Network Deployment & Clustering Setup",
+        description:
+          "For high-availability requirements, we configure clustered, secure WebSphere Network Deployment environments built for uptime.",
+      },
+      {
+        title: "Integration & Application Deployment",
+        description:
+          "We deploy and integrate applications across your middleware environment, including WebSphere Commerce implementations and migrations.",
+      },
+      {
+        title: "Security Hardening & Patch Management",
+        description:
+          "We implement QRadar SIEM for security monitoring and manage ongoing patch cycles across WAS, WCS, Jazz and BPM.",
+      },
+      {
+        title: "Performance Tuning & Troubleshooting",
+        description:
+          "We identify and resolve application server, middleware and integration issues affecting capacity, availability and performance.",
+      },
+      {
+        title: "Ongoing Support & Modernization",
+        description:
+          "We provide continued administration and support, with a path toward modernizing legacy applications as your platform needs evolve.",
+      },
+    ],
+
+    businessOutComes: [
+      { point: "Clustered, highly available WebSphere environments built for production load." },
+      { point: "Automated business processes that reduce manual handoffs and delays." },
+      { point: "Stronger security posture through QRadar SIEM implementation and monitoring." },
+      { point: "Consistently patched environments with reduced vulnerability exposure." },
+      { point: "Reliable private cloud infrastructure through proper IBM Cloud Private administration." },
+      { point: "Improved application performance through targeted troubleshooting and tuning." }
+    ],
+  },
+];
+
+// FOLD 4: Services
+export const IbmEmpower = [
+  {
+    title: "Complete IBM Middleware & DevOps Capabilities",
+    items: [
+      {
+        title: "WebSphere Application Server Implementation and Administration",
+        description:
+          "Installation, configuration, administration, application deployment, performance tuning, troubleshooting, WAS clustering, and support for enterprise WebSphere environments.",
+      },
+      {
+        title: "WebSphere Network Deployment and Support",
+        description:
+          "Design and management of clustered, scalable, secure, and highly available WebSphere Network Deployment environments.",
+      },
+      {
+        title: "WebSphere Commerce Implementation and Integration",
+        description:
+          "Deployment, configuration, customization, integration, maintenance, and performance optimization for enterprise e-commerce platforms.",
+      },
+      {
+        title: "WebSphere Liberty Administration and Application Modernization",
+        description:
+          "WebSphere Liberty configuration, application deployment, monitoring, performance optimization, and modernization of traditional enterprise applications.",
+      },
+      {
+        title: "IBM Business Automation Workflow Development",
+        description:
+          "Design, development, implementation, and integration of automated workflows to improve business processes and operational efficiency.",
+      },
+      {
+        title: "IBM QRadar SIEM Implementation and Optimization",
+        description:
+          "QRadar deployment, log-source integration, security rules, dashboards, event monitoring, incident detection, and platform optimization.",
+      },
+      {
+        title: "IBM Cloud Private Implementation and Configuration",
+        description:
+          "Installation, configuration, administration, application deployment, integration, and operational support for IBM Cloud Private environments.",
+      },
+      {
+        title: "IBM MQ Setup, Configuration and Administration",
+        description:
+          "Reliable messaging infrastructure setup and ongoing administration to support dependable communication between enterprise applications.",
+      },
+      {
+        title: "IBM DB2 Installation and Administration",
+        description:
+          "Installation and administration of DB2 environments to support your middleware and enterprise application stack.",
+      },
+      {
+        title: "IBM App Connect Installation and Administration",
+        description:
+          "Setup and administration of IBM App Connect to support integration across enterprise systems and applications.",
+      },
+      {
+        title: "Enterprise Application Deployment and Release Management",
+        description:
+          "Structured application deployment, release planning, configuration management, rollback procedures, and production support.",
+      },
+      {
+        title: "Middleware Performance Optimization and Troubleshooting",
+        description:
+          "Identification and resolution of application server, middleware, integration, capacity, availability, and performance issues.",
+      },
+      {
+        title: "Patch Management",
+        description:
+          "Ongoing management of Patches, iFixes, Fix Packs, and Feature Packs across WAS, WCS, Jazz, and BPM to keep environments current and secure.",
+      },
+    ],
+    btnTitle: "Build a Smarter IT Environment with IBM Middleware",
   },
 ];

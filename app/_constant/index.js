@@ -3,7 +3,6 @@
 const logoIcon = 'assets/Images/ClientLogo/'
 export const logos = [
   { src: `${logoIcon}/tarabut.svg`, alt: "Tarabut" },
-  { src: `${logoIcon}/neogies.svg`, alt: "Client" },
   { src: `${logoIcon}/amax.svg`, alt: "AMAX" },
   { src: `${logoIcon}/eyecare.svg`, alt: "Eye Care Professional" },
   { src: `${logoIcon}/dvago.svg`, alt: "Client" },
@@ -75,10 +74,11 @@ export const services_Nav = [
   {
     title:"Solutions",
     subPages:[
-      {label:"ERP solutions",href:"/services/Solutions/erp"},
-      {label:"BMC helix",href:"/services/Solutions/bmc-helix"},
-      {label:"microsoft dynamics 365",href:"/services/Solutions/microsoft-360"},
-      {label:"Manage Engine",href:"/services/Solutions/manage-engine"},
+      {label:"ERP solutions",href:"/services/solutions/erp"},
+      {label:"BMC helix",href:"/services/solutions/bmc-helix"},
+      {label:"microsoft dynamics 365",href:"/services/solutions/microsoft-360"},
+      {label:"Manage Engine",href:"/services/solutions/manage-engine"},
+      {label:"IBM",href:"/services/solutions/ibm"},
     ]
   },
   {
@@ -170,10 +170,11 @@ export const FooterData = [
    {
     title: 'Solutions',
     subPages: [
-      { label: 'ERP Solutions', href:"/services/Solutions/erp" },
-      { label: 'BMC Hleix', href:"/services/Solutions/bmc-helix" },
-      { label: 'Microsoft Dynamics 365', href:"/services/Solutions/microsoft-360" },
-      { label: 'Manage Engine', href:"/services/Solutions/manage-engine" },
+      { label: 'ERP Solutions', href:"/services/solutions/erp" },
+      { label: 'BMC Hleix', href:"/services/solutions/bmc-helix" },
+      { label: 'Microsoft Dynamics 365', href:"/services/solutions/microsoft-360" },
+      { label: 'Manage Engine', href:"/services/solutions/manage-engine" },
+      { label: 'IBM', href:"/services/solutions/ibm" },
     ],
   },
     {
@@ -2572,68 +2573,61 @@ export const Faq_Dynamics = [
       "Begin with our discovery workshop to identify your key requirements and develop a phased implementation roadmap tailored to your business goals.",
   },
 ];
+
 export const Faq_Helix = [
   {
     value: "item-1",
-    question: "What is BMC Helix in simple terms?",
+    question: "How long does a Helix implementation take?",
     answer:
-      "BMC Helix is a cloud-based platform that helps businesses manage IT services, operations and automation using AI.",
+      "Timelines depend on the scope of your environment, the number of modules involved and whether you're implementing fresh or migrating from legacy Remedy.",
   },
   {
     value: "item-2",
-    question: "Is BMC Helix only for large enterprises?",
+    question: "Will migrating to Helix disrupt our service desk operations?",
     answer:
-      "No. While it supports large-scale operations, it’s flexible and suitable for mid-sized organizations as well.",
+      "No. Our migration approach is built to preserve historical data and minimize disruption to your service desk. Your teams continue operating while the transition happens in the background.",
   },
   {
     value: "item-3",
-    question: "How long does a Helix implementation take?",
+    question:
+      "Do we have to change our workflows to fit Helix, or can it be configured to match ours?",
     answer:
-      "Most implementations take 8–16 weeks, depending on scope, customization and integrations.",
+      "We configure Helix and Remedy to match your organization's workflows, not the other way around. Custom workflows, business rules and automations are built specifically around how your teams already operate.",
   },
   {
     value: "item-4",
-    question: "Can Helix integrate with tools we already use?",
+    question:
+      "Can Helix and Remedy integrate with the other tools in our technology stack?",
     answer:
-      "Yes. Helix integrates with ServiceNow, Jira, AWS, Azure, CMDBs and many enterprise applications.",
+      "Helix and Remedy can be integrated with third-party systems across monitoring, DevOps, cloud platforms and HR. If your organization runs a mixed technology stack, we connect it rather than asking you to replace it.",
   },
   {
     value: "item-5",
-    question: "Does BMC Helix support cloud, on-prem, or hybrid?",
+    question: "Do you provide ongoing support after go-live?",
     answer:
-      "It is cloud-native but can integrate with on-prem and hybrid infrastructures.",
+      "Yes. We offer managed support and maintenance, including ongoing administration, patching and troubleshooting, so your platform continues to perform without requiring your internal team to manage it alone.",
   },
   {
     value: "item-6",
-    question: "What ITSM features does Helix offer?",
+    question: "Can you help reduce our BMC licensing costs?",
     answer:
-      "Incident, problem, change, asset, service catalog, knowledge management and automation.",
+      "Yes. We audit your existing BMC environment and right-size your licensing to match actual usage, reducing cost without reducing the capability your teams rely on.",
   },
   {
     value: "item-7",
-    question: "Does Helix include AIOps capabilities?",
+    question:
+      "If our CMDB data is inaccurate, can it be fixed without starting over?",
     answer:
-      "Yes. It provides anomaly detection, event correlation, root-cause analysis and predictive monitoring.",
+      "In most cases, yes. We reconfigure Discovery and CMDB to accurately map your infrastructure, correcting inaccurate asset data rather than requiring a full rebuild from scratch.",
   },
   {
     value: "item-8",
-    question: "Can we migrate from a legacy BMC system?",
+    question: "Is training included as part of the engagement?",
     answer:
-      "Yes. We offer structured migration from BMC Remedy ITSM and earlier products.",
-  },
-  {
-    value: "item-9",
-    question: "Will training be provided for our teams?",
-    answer:
-      "Yes, we provide hands-on training, documentation and change enablement sessions.",
-  },
-  {
-    value: "item-10",
-    question: "Is BMC Helix secure?",
-    answer:
-      "Yes. It includes strong access control, encrypted data, compliance reporting and audit trails.",
+      "We include hands-on administrator and end-user training as part of every engagement, so adoption doesn't become a second project after go-live.",
   },
 ];
+
 export const Faq_ERP = [
   {
     value: "item-1",
@@ -2696,6 +2690,7 @@ export const Faq_ERP = [
       "We implement strict access controls, encryption and monitoring to keep your data protected and compliant.",
   },
 ];
+
 export const Faq_ManageEngine = [
   {
     value: "item-1",
@@ -2750,6 +2745,64 @@ export const Faq_ManageEngine = [
     question: "Do you provide ongoing support?",
     answer:
       "Yes, we offer managed services, optimization, monitoring and extended technical support.",
+  },
+];
+
+export const Faq_Ibm = [
+  {
+    value: "item-1",
+    question:
+      "Do you handle new WebSphere implementations, ongoing support, or both?",
+    answer:
+      "Both. We handle new WebSphere implementations as well as ongoing administration, performance tuning and troubleshooting for environments you already have in production.",
+  },
+  {
+    value: "item-2",
+    question:
+      "Can you design highly available WebSphere Network Deployment environments?",
+    answer:
+      "Yes. We design and implement clustered, scalable WebSphere Network Deployment environments built for production availability requirements.",
+  },
+  {
+    value: "item-3",
+    question:
+      "Can you help with WebSphere Commerce integration and version upgrades?",
+    answer:
+      "Yes. We handle WebSphere Commerce integration and migration, including full version upgrades such as Commerce V7 to V9 on AWS EKS.",
+  },
+  {
+    value: "item-4",
+    question:
+      "How does IBM Business Automation Workflow improve our processes?",
+    answer:
+      "It automates the process steps and approvals your teams currently handle manually, so requests move through your organization without waiting on individual handoffs.",
+  },
+  {
+    value: "item-5",
+    question:
+      "Why use QRadar SIEM instead of a general monitoring tool?",
+    answer:
+      "QRadar SIEM is purpose-built for security event correlation, log-source integration and incident detection, which general monitoring tools typically aren't designed to handle at the same depth.",
+  },
+  {
+    value: "item-6",
+    question:
+      "How do you handle patch management for WebSphere and related platforms?",
+    answer:
+      "We manage patch cycles, including iFixes, Fix Packs and Feature Packs, on a planned schedule across WAS, WCS, Jazz and BPM, so updates happen without unplanned downtime.",
+  },
+  {
+    value: "item-7",
+    question:
+      "Do you support IBM Cloud Private installation and ongoing administration?",
+    answer:
+      "We support both. IBM Cloud Private installation, configuration and ongoing administration is part of our core service offering.",
+  },
+  {
+    value: "item-8",
+    question: "Do you provide support after go-live?",
+    answer:
+      "Yes. We provide continued administration, troubleshooting and performance tuning after go-live, so your middleware environment stays reliable over time.",
   },
 ];
 // Add/Update this in /app/_constant/index.js

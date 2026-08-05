@@ -29,8 +29,8 @@ export default function StepWidget({ heading, button, steps, outComes }) {
               />
             ))}
           </div>
-          {outComes && outComes.length>0 &&
-            (<div className="flex flex-col gap-2 md:pl-6">
+          {outComes && outComes.length > 0 &&
+            (<div className="flex flex-col gap-2 list-inside">
               <h2 className="text-3xl md:text-4xl"><strong>Business</strong> OutComes</h2>
               {outComes.map((outCome, index) => (
                 <li key={index} className="list-disc">

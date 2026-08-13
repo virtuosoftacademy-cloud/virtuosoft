@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Ban, CircleCheck, CircleSlash2, TrendingUp } from "lucide-react";
+import { Ban, CircleCheck, TrendingUp } from "lucide-react";
 
 const highlights = [
   { icon: CircleCheck, label: "No Generic \nDemo" },

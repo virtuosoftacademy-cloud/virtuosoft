@@ -2,15 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { FileText, LayoutDashboard, ShieldCheck, Landmark, Factory, ShoppingBag } from "lucide-react";
 import Image from "next/image";
-
-const trustIndustries = [
-  { label: "Banking & Fintech", icon: Landmark },
-  { label: "Manufacturing", icon: Factory },
-  { label: "Retail & FMCG", icon: ShoppingBag },
-  { label: "Enterprise Finance", icon: ShieldCheck },
-];
 
 export default function Hero() {
   return (

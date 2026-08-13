@@ -1,4 +1,4 @@
-import { Sparkles, Box, Image as ImageIcon, Mail, MessageSquare } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import Image from "next/image";
 
 const imgSrc = "/assets/Images/products/certus/docchannels/"

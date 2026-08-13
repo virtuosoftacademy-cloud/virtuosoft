@@ -18,7 +18,7 @@ export default function VideoShowcase() {
           </h4>
 
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
-            This 3-minute walkthrough shows a real invoice moving through the pipeline: captured
+            This 4-minute walkthrough shows a real invoice moving through the pipeline: captured
             from the source folder, cleaned, identified, extracted, validated across three AI
             layers, and posted into the ERP. No editing. No narration tricks. Just the system
             running.

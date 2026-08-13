@@ -46,3 +46,5 @@ package-lock.json
 .vscode
 .claude
 
+AGENTS.md
+CLAUDE.md

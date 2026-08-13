@@ -1,0 +1,5 @@
+export const Italic: string = "text-[46px] md:text-[92px] font-black italic"
+export const HeroRegular: string = "text-3xl md:text-[62px] font-light"
+export const CommonHead: string = "text-3xl lg:text-[55px]"
+export const HeroHeadPages: string = "text-6xl lg:text-[80px] font-black"
+export const CardHeading: string = "text-6xl lg:text-5xl font-black"

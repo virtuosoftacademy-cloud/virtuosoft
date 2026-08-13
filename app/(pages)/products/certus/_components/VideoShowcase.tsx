@@ -1,10 +1,7 @@
 'use client'
 
-import Image from "next/image";
 import Link from "next/link";
-import { Sparkles, Play } from "lucide-react";
-import Background from "@/public/assets/Images/products/certus/video/background.png";
-import CertusLogo from "@/public/assets/Images/products/certus/video/certus-logo-mask.png";
+import { Sparkles } from "lucide-react";
 
 export default function VideoShowcase() {
   return (
@@ -28,25 +25,21 @@ export default function VideoShowcase() {
           </p>
         </div>
 
-        <Button />
+        <div className="relative shrink-0">
+          <span className="absolute -left-8 top-1/2 size-18 -translate-y-1/2 rounded-full bg-primary/40 blur-2xl" aria-hidden="true" />
+          <Button />
+        </div>
       </div>
 
-      <button
-        type="button"
-        aria-label="Play Certus product walkthrough"
-        className="group relative mt-8 flex aspect-video w-full items-center justify-center overflow-hidden rounded-2xl border-[4.5px] border-[#0a162c] shadow-2xl"
-      >
-        <Image src={Background} alt="" fill className="object-cover opacity-60" />
-        <div className="relative z-10 flex flex-col items-center gap-5 pt-10">
-          <Image src={CertusLogo} alt="Certus" className="h-auto w-56 brightness-0 invert sm:w-72" />
-          <span className="flex size-20 items-center justify-center rounded-full bg-primary shadow-xl transition-transform group-hover:scale-110">
-            <Play className="size-8 fill-white text-white" />
-          </span>
-        </div>
-        <span className="absolute bottom-4 left-4 rounded-md border border-white/20 bg-[#0f1a2e]/80 px-4 py-2.5 text-xs font-bold text-[#b0c9f7] backdrop-blur">
-          Ready to See It Against Your Own Documents?
-        </span>
-      </button>
+      <div className="relative mt-8 aspect-video w-full overflow-hidden rounded-2xl border-[4.5px] border-[#0a162c] shadow-2xl">
+        <iframe
+          className="size-full"
+          src="https://www.youtube.com/embed/bYoCsR-rGFE"
+          title="Certus product walkthrough"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+        />
+      </div>
     </section>
   );
 }

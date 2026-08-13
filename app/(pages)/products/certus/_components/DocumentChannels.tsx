@@ -1,7 +1,7 @@
 import { Sparkles, Box, Image as ImageIcon, Mail, MessageSquare } from "lucide-react";
 import Image from "next/image";
 
-const imgSrc = "/assets/images/products/certus/docchannels/"
+const imgSrc = "/assets/Images/products/certus/docchannels/"
 const channels = [
   {
     label: "PDF Documents",

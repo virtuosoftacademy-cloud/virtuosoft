@@ -38,10 +38,14 @@ export default function Hero() {
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <Button asChild size="xl" className="rounded-lg hover:bg-accent hover:text-primary hover:border-2 border-primary">
-                <Link href="#">Book a Working Session</Link>
+                <Link href="/contact">Book a Working Session</Link>
               </Button>
-              <Button asChild className="rounded-lg py-7 bg-accent text-primary hover:text-accent border-2 border-primary!">
-                <Link href="#video">Watch 3 Min Demo</Link>
+              <Button
+                type="button"
+                onClick={() => document.getElementById("video")?.scrollIntoView({ behavior: "smooth", block: "start" })}
+                className="rounded-lg py-7 bg-accent text-primary hover:text-accent border-2 border-primary!"
+              >
+                Watch 4 Min Demo
               </Button>
             </div>
           </div>

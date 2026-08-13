@@ -114,7 +114,7 @@ export default function TrackRecord() {
             <CarouselContent>
               {stories.map((story) => (
                 <CarouselItem key={story.title} className="basis-[85%] lg:pl-5 sm:basis-1/2 lg:basis-2/5">
-                  <div className="group relative flex h-[420px] flex-col justify-between overflow-hidden rounded-2xl shadow-lg">
+                  <div className="group relative flex h-105 flex-col justify-between overflow-hidden rounded-2xl shadow-lg">
                     <Image
                       src={story.background}
                       alt=""

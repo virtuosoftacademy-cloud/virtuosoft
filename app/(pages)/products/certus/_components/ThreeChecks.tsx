@@ -21,7 +21,7 @@ const channels = [
   { label: "PDF", icon: FileText, color: "text-red-500" },
   { label: "Image / Photo", icon: ImageIcon, color: "text-green-500" },
   { label: "Email", icon: Mail, color: "text-primary" },
-  { label: "WhatsApp / SMS", icon: "", src: "/assets/Images/products/certus/whatsapp.png", color: "text-green-600" },
+  { label: "WhatsApp / SMS", img: "/assets/Images/products/certus/whatsapp.png", color: "text-green-600" },
 ];
 
 const readMethods = [
@@ -58,12 +58,12 @@ export default function ThreeChecks() {
         </p>
 
         <div className="mt-14 flex flex-wrap justify-center gap-x-10 gap-y-6 sm:gap-x-16">
-          {channels.map(({ label, icon: Icon, color, src }) => (
+          {channels.map(({ label, icon: Icon, color, img }) => (
             <div key={label} className="flex flex-col items-center gap-3">
               <span className="flex size-16 items-center justify-center rounded-full bg-white shadow-md">
                 {Icon ?
                   <Icon className={`size-7 ${color}`} /> :
-                  <Image src={src} alt={label} className="size-8" width={200} height={200} />
+                  <Image src={img} alt={label} className="size-8" width={200} height={200} />
                 }
               </span>
               <span className="text-sm font-semibold text-foreground">{label}</span>

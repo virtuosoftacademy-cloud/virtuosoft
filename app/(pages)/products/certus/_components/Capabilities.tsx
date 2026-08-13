@@ -1,5 +1,7 @@
+
 import Image from "next/image";
 import { Sparkles } from "lucide-react";
+
 import Invoices from "@/public/assets/Images/products/certus/doctypes/invoices.png";
 import PurchaseOrders from "@/public/assets/Images/products/certus/doctypes/purchase-orders.png";
 import Receipts from "@/public/assets/Images/products/certus/doctypes/receipts.png";
@@ -47,7 +49,7 @@ export default function Capabilities() {
             key={label}
             className="flex h-40 flex-col items-center justify-center gap-2 rounded-xl border border-primary/15 px-4 py-6 text-center transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-md"
           >
-            <Image src={icon} alt="" className="size-13" />
+            <Image src={icon} alt={label} className="size-13" width={200} height={200} loading="lazy"/>
             <span className="text-lg font-medium text-foreground">{label}</span>
           </div>
         ))}

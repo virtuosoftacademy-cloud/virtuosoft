@@ -1,22 +1,35 @@
 import React from 'react'
-import PostCard from './_components/postCard'
+import Cta from '@/app/(pages)/home/_components/global/Cta'
+import BlogGrid from './_components/BlogGrid'
+import BlogHero from './_components/BlogHero'
+import FeaturedPost from './_components/FeaturedPost'
 import { blogPosts } from './_components'
 
+// Figma: Blog page frame 1971:24031
 function Blogs(): React.JSX.Element {
+    const [featuredPost] = blogPosts
+
     return (
         <>
-            <div className='mx-auto max-w-7xl px-8 py-14 md:py-20'>
-                <h4 className='text-3xl md:text-5xl pb-4 md:pb-8 text-center'>Latest <strong>
-                    <em>
-                        Insights
-                    </em>
-                </strong> </h4>
-                <div className='grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4'>
-                    {blogPosts.map((post) =>
-                        <PostCard post={post} key={post.id} />
-                    )}
+            <BlogHero />
+
+            <section className="mx-auto mt-14 max-w-7xl px-6 md:mt-16 md:px-10">
+                <h2 className="font-helvetica-now-display text-3xl font-bold leading-10 text-[#050f21] md:text-[32px]">
+                    Latest
+                </h2>
+
+                {featuredPost && (
+                    <div className="mt-8">
+                        <FeaturedPost post={featuredPost} />
+                    </div>
+                )}
+
+                <div className="mt-14 md:mt-16">
+                    <BlogGrid posts={blogPosts} />
                 </div>
-            </div>
+            </section>
+
+            <Cta />
         </>
     )
 }

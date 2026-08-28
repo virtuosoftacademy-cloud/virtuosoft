@@ -1,0 +1,18 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="94.6759" height="94.6759" viewBox="0 0 94.6759 94.6759" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Icon Tile" filter="url(#filter0_d_0_147)">
+<rect x="17.2138" y="8.6069" width="60.2483" height="60.2483" rx="17.2138" fill="#0051E4"/>
+<path id="Vector" d="M34.4276 38.7309C39.5917 27.255 55.0841 27.255 60.2483 38.7309C55.0841 50.2067 39.5917 50.2067 34.4276 38.7309Z" stroke="white" stroke-width="2.15172" stroke-linecap="round" stroke-linejoin="round"/>
+<circle id="Ellipse" cx="47.3376" cy="38.7309" r="4.30345" fill="white"/>
+</g>
+<defs>
+<filter id="filter0_d_0_147" x="0" y="0" width="94.6759" height="94.6759" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="8.6069"/>
+<feGaussianBlur stdDeviation="8.6069"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0.2 0 0 0 0 0.7 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_147"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_147" result="shape"/>
+</filter>
+</defs>
+</svg>

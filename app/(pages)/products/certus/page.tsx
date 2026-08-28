@@ -1,51 +1,51 @@
 'use client'
 
 import { ReactLenis } from 'lenis/react'
-import Faq from './_components/Faq'
-import { Faq_Products_Certus } from '@/app/_constant'
-import Hero from './_components/Hero'
-import Capabilities from './_components/Capabilities'
-import ManualVsAutomated from './_components/ManualVsAutomated'
-import VideoShowcase from './_components/VideoShowcase'
-import ThreeChecks from './_components/ThreeChecks'
-import PlatformCapabilities from './_components/PlatformCapabilities'
-import LiveStats from './_components/LiveStats'
-import DocumentChannels from './_components/DocumentChannels'
-import VisibilityTable from './_components/VisibilityTable'
-import ImpactStats from './_components/ImpactStats'
-import ComparisonTable from './_components/ComparisonTable'
-import Industries from './_components/Industries'
-import Integrations from './_components/Integrations'
-import CustomerSegments from './_components/CustomerSegments'
-import TrackRecord from './_components/TrackRecord'
-import FinalCta from './_components/FinalCta'
-import LogoCloud from '@/components/LogoLoop'
-import TrustedStats from './_components/TrustedStats'
 
-export default function CertusPage() {
+import Hero from './_components/Hero'
+import Evidence from './_components/Evidence'
+import Problem from './_components/Problem'
+import Demo from './_components/Demo'
+import SectionA1 from './_components/SectionA1'
+import SectionA2 from './_components/SectionA2'
+import SectionB1 from './_components/SectionB1'
+import SectionB2 from './_components/SectionB2'
+import SectionB3 from './_components/SectionB3'
+import SectionC1 from './_components/SectionC1'
+import SectionC2 from './_components/SectionC2'
+import SectionD1 from './_components/SectionD1'
+import SectionD2 from './_components/SectionD2'
+import SectionE1 from './_components/SectionE1'
+import SectionE2 from './_components/SectionE2'
+import SectionF1 from './_components/SectionF1'
+import SectionF2 from './_components/SectionF2'
+import SectionF3 from './_components/SectionF3'
+import Cta from '@/app/(pages)/home/_components/global/Cta'
+
+// Sections are ordered to match the vertical order of the Figma frame.
+// Nav, Footer and BackToTop come from app/(pages)/layout.tsx.
+export default function TarabutCaseStudyPage() {
   return (
     <ReactLenis root>
       <Hero />
-      <div className="py-10 opacity-60 bg-accent">
-        <LogoCloud />
-      </div>
-      <TrustedStats />
-      <Capabilities />
-      <ManualVsAutomated />
-      <VideoShowcase />
-      <ThreeChecks />
-      <PlatformCapabilities />
-      <LiveStats />
-      <DocumentChannels />
-      <VisibilityTable />
-      <ImpactStats />
-      <ComparisonTable />
-      <Industries />
-      <Integrations />
-      <CustomerSegments />
-      <Faq items={Faq_Products_Certus} />
-      <TrackRecord />
-      <FinalCta />
+      <Evidence />
+      <Problem />
+      <Demo />
+      <SectionA1 />
+      <SectionA2 />
+      <SectionB1 />
+      <SectionB2 />
+      <SectionB3 />
+      <SectionC1 />
+      <SectionC2 />
+      <SectionD1 />
+      <SectionD2 />
+      <SectionE1 />
+      <SectionE2 />
+      <SectionF1 />
+      <SectionF2 />
+      <SectionF3 />
+      <Cta />
     </ReactLenis>
   )
 }

@@ -16,6 +16,15 @@ export interface NavItem {
   subPages: NavLink[];
 }
 
+// A mega-menu link. Omit `href` to render a disabled "Soon" row instead of a
+// dead link. Set `comingSoon` to keep the item clickable (e.g. pointing at a
+// coming-soon page) while still flagging it as not yet launched.
+export interface MegaMenuLink {
+  label: string;
+  href?: string;
+  comingSoon?: boolean;
+}
+
 export interface ServiceButton {
   label: string;
   href: string;
@@ -131,16 +140,17 @@ export const logos: LogoItem[] = [
 ];
 //Navbar
 export function getSpotlightVideo(title: string): string {
+  // Keys must match services_Nav titles exactly.
   const videoMap: Record<string, string> = {
     "Advisory": "/2.png",
     "Artificial Intelligence": "/3.png",
     "Software Engineering": "/4.png",
-    "CyberSecurity":"/8.png",
-    "Data Service": "/5.png",
+    "Cybersecurity": "/8.png",
+    "Data Engineering": "/5.png",
     "Solutions": "/6.png",
     "Expertise": "/7.png",
   };
-  return videoMap[title] || "/8.png";
+  return videoMap[title] || "/assets/Images/nav/services-panel.png";
 }
 export const services_Nav: NavItem[] = [
   {
@@ -172,6 +182,15 @@ export const services_Nav: NavItem[] = [
     ],
   },
   {
+    // Labelled "Data Engineering" in the nav design; routes stay /dataservices/*
+    title: "Data Engineering",
+    subPages: [
+      { label: "Data Strategy Consulting ", href: "/services/dataservices/data-strategy" },
+      { label: "Data Warehouse Solutions", href: "/services/dataservices/data-warehouse" },
+      { label: "Data Analytics & BI", href: "/services/dataservices/data-analytics" },
+    ],
+  },
+  {
     title:"Cybersecurity",
     subPages:[
       {label:"Solution Deployment and Management",href:"/services/cybersecurity/solution-deployment"},
@@ -182,30 +201,19 @@ export const services_Nav: NavItem[] = [
     ]
   },
   {
-    title: "Data Service",
+    // Labelled "Policy & Governance" in the nav design; routes stay /itgovernance/*
+    title: "Policy & Governance",
     subPages: [
-      { label: "Data Strategy Consulting ", href: "/services/dataservices/data-strategy" },
-      { label: "Data Warehouse Solutions", href: "/services/dataservices/data-warehouse" },
-      { label: "Data Analytics & BI", href: "/services/dataservices/data-analytics" },
+      { label: "Regulatory Compliance", href: "/services/itgovernance/regulatory-compliance" },
+      { label: "Governance Framework Development", href: "/services/itgovernance/governance-framework-development" },
+      { label: "Resource Augmentation", href: "/services/itgovernance/resource-augmentation" },
     ],
-  },
-  {
-    title:"Solutions",
-    subPages:[
-      {label:"ERP solutions",href:"/services/solutions/erp"},
-      {label:"BMC helix",href:"/services/solutions/bmc-helix"},
-      {label:"microsoft dynamics 365",href:"/services/solutions/microsoft-360"},
-      {label:"Manage Engine",href:"/services/solutions/manage-engine"},
-      {label:"IBM",href:"/services/solutions/ibm"},
-    ]
   },
   {
     title:"Expertise",
     subPages:[
-      // {label:"IT governance",href:"#"},
-      // {label:"cybersecurity",href:"#"},
-      {label:"RPA",href:"/services/expertise/rpa"},
-      {label:"DevOps",href:"/services/expertise/devops"},
+      {label:"RPA",href:"/services/Expertise/rpa"},
+      {label:"DevOps",href:"/services/Expertise/devops"},
     ]
   }
   // {
@@ -228,8 +236,46 @@ export const services_Nav: NavItem[] = [
   //   ],
   // },
 ];
+
+// "Solutions" top-nav dropdown (separate from services_Nav's categories)
+export const solutions_Nav: NavLink[] = [
+  { label: "ERP Solutions", href: "/services/solutions/erp" },
+  { label: "BMC Helix", href: "/services/solutions/bmc-helix" },
+  { label: "Microsoft Dynamics 365", href: "/services/solutions/microsoft-360" },
+  { label: "Manage Engine", href: "/services/solutions/manage-engine" },
+];
+
+// "Products" top-nav dropdown — items without an `href` render as "Soon".
+// Cortex Radiology and Catalyst.ai resolve to coming-soon pages until their
+// real product pages are built.
+export const products_Nav: MegaMenuLink[] = [
+  { label: "Certus", href: "/products/certus" },
+  { label: "Cortex Radiology", href: "/products/cortex-radiology", comingSoon: true },
+  { label: "Catalyst.ai", href: "/products/catalyst-ai", comingSoon: true },
+];
+
+// "About Us" top-nav dropdown — items without an `href` render as "Soon"
+export const aboutUs_Nav: MegaMenuLink[] = [
+  { label: "About Us", href: "/about-us" },
+  { label: "Our Team", href: "/team" },
+  { label: "Insights" },
+  { label: "News & Article", href: "/blogs" },
+  { label: "Case Study", href: "/case-studies" },
+  { label: "White Paper", href: "/white-paper" },
+  { label: "Careers", href: "/careers" },
+];
+
 // Footer Links and Data
 export const FooterData: NavItem[] = [
+  {
+    title: "Company",
+    subPages: [
+      { label: "About Us", href: "/about-us" },
+      { label: "Our Team", href: "/team" },
+      { label: "Careers", href: "/careers" },
+      { label: "Contact Us", href: "/contact" },
+    ],
+  },
   {
     title: "Advisory",
     subPages: [
@@ -298,8 +344,8 @@ export const FooterData: NavItem[] = [
     {
     title: 'Expertise',
     subPages: [
-      { label: 'RPA', href:"/services/expertise/rpa" },
-      { label: 'DevOps', href:"/services/expertise/devops" },
+      { label: 'RPA', href:"/services/Expertise/rpa" },
+      { label: 'DevOps', href:"/services/Expertise/devops" },
     ],
   },
   
@@ -905,6 +951,35 @@ export const Faq_Home: FaqItem[] = [
     question:"How do we get started working with Virtuosoft?",
     answer:"Begin with a complimentary discovery session where we analyze your needs and create a tailored proposal with clear timeline and investment details.",
   }
+];
+
+// Shared "AI Agent" FAQ set used by the Global and UK home page variants
+export const Faq_AIAgent: FaqItem[] = [
+  {
+    value: "item-1",
+    question: "What is an AI Agent?",
+    answer: "An AI Agent is a smart system that operates independently to complete complex tasks. It analyzes situations, makes decisions and executes actions across business functions like customer service, operations and data management without constant human oversight.",
+  },
+  {
+    value: "item-2",
+    question: "How do AI Agents function?",
+    answer: "AI Agents combine large language models with tool access and memory to perceive context, reason about the best next step and take action, looping until the task is complete or a human is needed to intervene.",
+  },
+  {
+    value: "item-3",
+    question: "What happens when my subscription expires?",
+    answer: "Your workflows pause and data remains safely stored. Renewing your subscription resumes every automation exactly where it left off, with no reconfiguration required.",
+  },
+  {
+    value: "item-4",
+    question: "How do AI Agents differ from basic automation tools?",
+    answer: "Basic automation follows fixed, pre-programmed rules. AI Agents reason over ambiguous inputs, adapt to changing conditions and make judgment calls, closer to how a skilled team member would handle the same task.",
+  },
+  {
+    value: "item-5",
+    question: "What business processes can AI Agents handle?",
+    answer: "From document intelligence and customer support to data reconciliation and reporting, AI Agents can take on high-volume, rules-heavy processes across finance, operations and IT service management.",
+  },
 ];
 
 export const Faq_softwareeng_SoftwareDevelopment: FaqItem[] = [
@@ -3075,4 +3150,362 @@ export const Faq_Products_Certus: FaqItem[] = [
     question: "Can this handle documents beyond invoices and purchase orders?",
     answer: "Yes. Beyond invoices and purchase orders, Certus processes receipts, delivery notes, bank statements, contracts and tax documents across the same validation pipeline."
   }
+];
+
+// Global Home Page
+
+export interface GlobalSolutionItem {
+  id: string;
+  index: string;
+  title: string;
+  description?: string;
+  tags?: string[];
+}
+
+export const global_Solutions: GlobalSolutionItem[] = [
+  {
+    id: "ai",
+    index: "01",
+    title: "Artificial Intelligence",
+    description: "AI Solution That Automate And Innovate.",
+    tags: ["Custom Agent Development", "AI PoC & MVP", "AI agents", "Gen AI"],
+  },
+  {
+    id: "software-engineering",
+    index: "02",
+    title: "Software Engineering",
+  },
+  {
+    id: "data-engineering",
+    index: "03",
+    title: "Data Engineering",
+  },
+  {
+    id: "cyber-security",
+    index: "04",
+    title: "Cyber Security",
+  },
+];
+
+export interface GlobalCaseStudy {
+  title: string;
+  description: string;
+  industry: string;
+  bgImage: string;
+  logo: string;
+}
+
+export const global_CaseStudies: GlobalCaseStudy[] = [
+  {
+    title: "Industrial Grade Service management for GASCO",
+    description:
+      "GASCO partnered with us to implement and manage IT Service management on BMC Helix across its Riyadh operation, replacing fragmented request handling with a single, measured service desk aligned to ITIL and ISO/IEC 20000.",
+    industry: "Oil & Gas",
+    bgImage: "/assets/Images/home/global/case-alwatania-bg.png",
+    logo: "/assets/Images/home/global/case-alwatania-logo.svg",
+  },
+  {
+    title: "Advancing Cyber Resilience",
+    description:
+      "We engaged with Tawal Telecom as a third-party cybersecurity vendor to perform advanced Red Teaming assessments. The engagement focused on simulating real-world attacks to test detection and response security controls.",
+    industry: "Holding & Investment",
+    bgImage: "/assets/Images/home/global/case-tarabut-bg.png",
+    logo: "/assets/Images/home/global/case-tarabut-logo.svg",
+  },
+];
+
+export interface GlobalTestimonial {
+  rating: number;
+  quote: string;
+  name: string;
+  role: string;
+  initials: string;
+}
+
+export const global_Testimonials: GlobalTestimonial[] = [
+  {
+    rating: 4,
+    quote:
+      "Virtuosoft cut through the noise and delivered a system that actually works the way our teams operate day to day.",
+    name: "Maxin Will",
+    role: "Product Manager",
+    initials: "MW",
+  },
+  {
+    rating: 4,
+    quote:
+      "From discovery to launch, their engineers understood the complexity of our enterprise stack better than teams three times their size.",
+    name: "Maxin Will",
+    role: "Product Manager",
+    initials: "MW",
+  },
+  {
+    rating: 5,
+    quote:
+      "The results were measurable within weeks, not quarters. That pace of delivery changed how we plan technology investment.",
+    name: "Maxin Will",
+    role: "Product Manager",
+    initials: "MW",
+  },
+  {
+    rating: 5,
+    quote:
+      "Reliable, transparent and genuinely invested in our success, Virtuosoft feels like an extension of our own team.",
+    name: "Maxin Will",
+    role: "Product Manager",
+    initials: "MW",
+  },
+  {
+    rating: 5,
+    quote:
+      "Reliable, transparent and genuinely invested in our success, Virtuosoft feels like an extension of our own team.",
+    name: "Maxin Will",
+    role: "Product Manager",
+    initials: "MW",
+  },
+];
+
+export interface GlobalCtaStat {
+  value: string;
+  label: string;
+}
+
+export const global_CtaStats: GlobalCtaStat[] = [
+  { value: "16+", label: "Years in Production" },
+  { value: "50+", label: "Enterprises Scaled" },
+  { value: "50K+", label: "Users Impacted" },
+];
+
+// KSA Home Page
+
+// "Innovative Solution Real Results" accordion — reuses the GlobalSolutionItem
+// shape since the card component pattern is identical, but KSA's Figma frame
+// (node 2005:33134) specifies its own category set and AI copy.
+export const ksa_Solutions: GlobalSolutionItem[] = [
+  {
+    id: "ai",
+    index: "01",
+    title: "Artificial Intelligence",
+    description: "Identify high-ROI use cases and define a realistic, measurable AI roadmap.",
+    tags: ["Stakeholder discovery", "Value model & KPI definition", "Data readiness assessment"],
+  },
+  {
+    id: "software-engineering",
+    index: "02",
+    title: "Software Engineering",
+  },
+  {
+    id: "advisory-strategy",
+    index: "03",
+    title: "Advisory & Strategy",
+  },
+  {
+    id: "it-governance",
+    index: "04",
+    title: "IT Governance",
+  },
+];
+
+export interface KsaWhyChooseUsItem {
+  index: string;
+  title: string;
+  description: string;
+  icon: string;
+}
+
+// "Why Choose Us? Technology With Purpose" connected card row (node 2005:38517).
+// Uses the concise Figma copy — distinct from the longer-form `values_Section`
+// copy written for the About page — so it lives as its own KSA-scoped export.
+export const ksa_WhyChooseUs: KsaWhyChooseUsItem[] = [
+  {
+    index: "01",
+    title: "Transparency",
+    description: "We believe in openness at every level, with our clients, partners and teams. Every action and decision is guided by honesty and clarity.",
+    icon: "/assets/Images/home/ksa/icon-transparency.svg",
+  },
+  {
+    index: "02",
+    title: "Teamwork",
+    description: "Our strength lies in the way we work together, across teams and disciplines. Everyone contributes, challenges and supports one another.",
+    icon: "/assets/Images/home/ksa/icon-teamwork.svg",
+  },
+  {
+    index: "03",
+    title: "Integrity",
+    description: "Integrity guides our choices and shapes our culture. We stand by our word and always choose fairness, even when no one is watching.",
+    icon: "/assets/Images/home/ksa/icon-integrity.svg",
+  },
+  {
+    index: "04",
+    title: "Reliability",
+    description: "We stand for consistency, precision and accountability — from the smallest task to the most complex project, every time.",
+    icon: "/assets/Images/home/ksa/icon-reliability.svg",
+  },
+];
+
+export interface GlobalWhyChooseUsItem {
+  index: string;
+  title: string;
+  description: string;
+  imageSrc: string;
+}
+
+// Short-copy "Why Choose Us" card set matching the Global home page Figma (card copy is
+// intentionally condensed vs. the longer `values_Section` copy used elsewhere).
+export const global_WhyChooseUs: GlobalWhyChooseUsItem[] = [
+  {
+    index: "01",
+    title: "Transparency",
+    description:
+      "We believe in openness at every level, with our clients, partners and teams. Every action and decision is guided by honesty and clarity.",
+    imageSrc: "/assets/Images/home/global/whychoose-icon-transparency.svg",
+  },
+  {
+    index: "02",
+    title: "Teamwork",
+    description:
+      "Our strength lies in the way we work together, across teams and disciplines. Everyone contributes, challenges and supports one another.",
+    imageSrc: "/assets/Images/home/global/whychoose-icon-teamwork.svg",
+  },
+  {
+    index: "03",
+    title: "Integrity",
+    description:
+      "Integrity guides our choices and shapes our culture. We stand by our word and always choose fairness, even when no one is watching.",
+    imageSrc: "/assets/Images/home/global/whychoose-icon-integrity.svg",
+  },
+  {
+    index: "04",
+    title: "Reliability",
+    description:
+      "We stand for consistency, precision and accountability — from the smallest task to the most complex project, every time.",
+    imageSrc: "/assets/Images/home/global/whychoose-icon-reliability.svg",
+  },
+];
+
+// White Paper page — the paper itself plus any localized editions. `href` must
+// point at a real destination; until a hosted PDF exists these route to the
+// contact page, where the paper can be requested.
+export interface WhitePaperTranslation {
+  language: string;
+  linkLabel: string;
+  href: string;
+}
+
+export const whitePaper_Translations: WhitePaperTranslation[] = [
+  {
+    language: "English (Original)",
+    linkLabel: "Download Paper",
+    href: "/contact",
+  },
+];
+
+// Case Studies listing page (/case-studies)
+export const caseStudies_HeroTags: string[] = ["Growth", "Success"];
+
+export interface CaseStudyHeroStat {
+  value: string;
+  label: string;
+  icon: "institutions" | "users" | "funding";
+}
+
+export const caseStudies_HeroStats: CaseStudyHeroStat[] = [
+  { value: "50+", label: "Financial institutions integrated in KSA & UAE", icon: "institutions" },
+  { value: "2.5M+", label: "Users with digital financial access", icon: "users" },
+  { value: "$45M", label: "Funding secured in total", icon: "funding" },
+];
+
+export interface CaseStudyPanel {
+  titleLead: string;
+  titleAccent: string;
+  intro: string;
+  points: string[];
+}
+
+export const caseStudies_Problem: CaseStudyPanel = {
+  titleLead: "Problem",
+  titleAccent: "Statement",
+  intro:
+    "Tarabut faced rapid growth challenges with scaling its core platform while maintaining security and compliance across MENA markets. They needed:",
+  points: [
+    "Skilled backend and frontend engineers to build scalable microservices and responsive interfaces.",
+    "QA experts to automate testing and maintain stability in a highly regulated environment.",
+    "Cloud and DevOps specialists to streamline deployments and ensure high availability.",
+    "Faster development cycles to deliver new open banking APIs and stay competitive.",
+  ],
+};
+
+export const caseStudies_Solution: CaseStudyPanel = {
+  titleLead: "How Virtuosoft",
+  titleAccent: "Solved It",
+  intro:
+    "Virtuosoft strengthened Tarabut's engineering capabilities with dedicated experts, scalable architecture, and automated delivery processes.",
+  points: [
+    "Embedded specialized backend and frontend engineers into Tarabut's product teams.",
+    "Automated QA processes with regression and compliance testing to improve release stability.",
+    "Managed cloud infrastructure, CI/CD pipelines, and site reliability to improve deployment speed and reduce downtime.",
+    "Delivered hands-on domain expertise in financial services, contributing to both technical execution and product evolution.",
+  ],
+};
+
+export interface CaseStudyImpactRow {
+  label: string;
+  icon: "efficiency" | "latency" | "availability" | "delivery";
+  before: string;
+  after: string;
+}
+
+export const caseStudies_Impact: CaseStudyImpactRow[] = [
+  {
+    label: "Efficiency",
+    icon: "efficiency",
+    before: "Fragmented engineering resources",
+    after: "Streamlined full-stack teams delivering faster cycles",
+  },
+  {
+    label: "Latency",
+    icon: "latency",
+    before: "Slower release cycles due to manual QA",
+    after: "Automated QA testing removed release bottlenecks",
+  },
+  {
+    label: "Availability",
+    icon: "availability",
+    before: "Deployment downtime risks",
+    after: "Reliable cloud infrastructure with CI/CD automation",
+  },
+  {
+    label: "Efficiency",
+    icon: "delivery",
+    before: "Resource gaps slowed feature delivery",
+    after: "Stable, skilled teams maintained predictable delivery",
+  },
+];
+
+export const caseStudies_ImpactNote =
+  "This engagement demonstrates Virtuosoft's capability to deliver secure, regulation-aligned fintech and Open Banking solutions within the KSA market.";
+
+export interface CaseStudyCardContent {
+  id: "gasco" | "tarabut";
+  title: string;
+  description: string;
+  industry?: string;
+  href?: string;
+}
+
+export const caseStudies_Cards: CaseStudyCardContent[] = [
+  {
+    id: "gasco",
+    title: "Industrial Grade Service management for GASCO",
+    description:
+      "GASCO partnered with us to implement and manage IT Service management on BMC Helix across its Riyadh operation, replacing fragment requested handing with a single, measured service desk aligned to ITIL and ISO/IEC 20000.",
+  },
+  {
+    id: "tarabut",
+    title: "Advancing Cyber Resilience",
+    description:
+      "We engaged with Tawal Telecom as a third-party cybersecurity vendor to perform advance Red Teaming assessments. The engagement focus on simulation real-detective and response security controls.",
+    industry: "Holding & Investment",
+    href: "/case-studies/tarabut",
+  },
 ];

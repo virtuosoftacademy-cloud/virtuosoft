@@ -9,6 +9,11 @@ export interface BlogPost {
   readTime: string;
   category: string;
   author: string;
+  /** Optional author detail rendered by the article sidebar card (Figma 1971:23724). */
+  authorRole?: string;
+  authorBio?: string;
+  authorImage?: string;
+  authorLinkedIn?: string;
 }
 
 const blogImg = "/assets/Images/blog/";

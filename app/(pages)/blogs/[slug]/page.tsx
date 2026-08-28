@@ -1,9 +1,17 @@
 // app/blogs/[slug]/page.tsx
 
-import { Calendar } from "lucide-react";
-import Image from "next/image";
-import { blogPosts, type BlogPost } from "../_components";
-import ReactLenis from 'lenis/react'
+import Image from "next/image"
+import ReactLenis from "lenis/react"
+import HeroBg from "@/public/assets/Images/blog/hero-bg.svg"
+import Cta from "@/app/(pages)/home/_components/global/Cta"
+import { blogPosts, type BlogPost } from "../_components"
+import ArticleHero from "./_components/ArticleHero"
+import AuthorCard from "./_components/AuthorCard"
+import ShareCard from "./_components/ShareCard"
+import ArticleToc from "./_components/ArticleToc"
+import ShareBar from "./_components/ShareBar"
+import RelatedBlogs from "./_components/RelatedBlogs"
+import { prepareArticle } from "./_components/articleContent"
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -16,6 +24,10 @@ interface StaticParam {
 // Helper function
 function getPostBySlug(slug: string): BlogPost | undefined {
   return blogPosts.find((post) => post.slug === slug);
+}
+
+function getRelatedPosts(slug: string): BlogPost[] {
+  return blogPosts.filter((post) => post.slug !== slug).slice(0, 3);
 }
 
 export async function generateStaticParams(): Promise<StaticParam[]> {
@@ -38,70 +50,66 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     );
   }
 
-  const { title, excerpt, date, category, Src, content } = post;
+  const { title, content } = post;
+  const { html, sections } = prepareArticle(content || "<p>No content available.</p>");
+  const relatedPosts = getRelatedPosts(slug);
 
   return (
     <ReactLenis root>
-      <article className="container mx-auto max-w-4xl px-4 pt-32 pb-16 md:pt-38 md:pb-22">
-        {/* Hero Image */}
-        <div className="relative mb-10 md:mb-12 rounded-2xl overflow-hidden shadow-2xl">
-          <Image
-            src={Src || "/images/blog-fallback.jpg"} // ← fallback prevents broken images
-            alt={title}
-            width={400}
-            height={475}
-            priority
-            className="w-full aspect-[16/9] object-cover"
-          />
-          {category && (
-            <div className="absolute top-5 left-5 z-10">
-              <span className="inline-block bg-primary capitalize text-white px-4 py-1.5 rounded-full text-sm font-semibold tracking-wide shadow-sm">
-                {category}
-              </span>
-            </div>
-          )}
+      {/* Figma node 1971:23568 — the dark hero band (node 2017:6371) runs the
+          full width behind the nav, with the article card overlapping it. */}
+      <div className="relative -mt-20 pt-20">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-[441px] overflow-hidden">
+          <Image src={HeroBg} alt="" fill priority className="object-cover" />
         </div>
 
-        {/* Header */}
-        <header className="mb-6 md:mb-8">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-6 leading-tight">
-            {title}
-          </h2>
+        <div className="relative mx-auto w-full max-w-[1248px] px-6 pt-8 pb-16 md:pt-[52px] lg:px-0">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-[824fr_400fr] lg:items-start">
+            {/* Left column: hero card, article body, share bar */}
+            <div className="flex min-w-0 flex-col gap-6">
+              <ArticleHero post={post} />
 
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-slate-600 text-sm mb-6">
-            <div className="flex items-center gap-2">
-              <Calendar className="w-4 h-4" />
-              <time dateTime={date}>{date}</time>
+              <article
+                className="font-helvetica-now-display text-[#050F21]
+                  [&_h2]:mt-10 [&_h2]:mb-5 [&_h2]:scroll-mt-28 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:leading-[1.25] md:[&_h2]:text-[32px]
+                  [&_h3]:mt-10 [&_h3]:mb-5 [&_h3]:scroll-mt-28 [&_h3]:text-2xl [&_h3]:font-bold [&_h3]:leading-[1.25] md:[&_h3]:text-[32px]
+                  [&_h4]:mt-8 [&_h4]:mb-4 [&_h4]:text-xl [&_h4]:font-bold [&_h4]:leading-7
+                  [&_p]:mb-5 [&_p]:text-base [&_p]:leading-[22px]
+                  [&_ul]:mb-5 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:mb-5 [&_ol]:list-decimal [&_ol]:pl-5
+                  [&_li]:mb-2 [&_li]:text-base [&_li]:leading-[22px]
+                  [&_strong]:font-bold
+                  [&_a]:text-primary [&_a]:underline-offset-2 hover:[&_a]:underline
+                  [&_img]:my-6 [&_img]:w-full [&_img]:rounded-xl
+                  [&_blockquote]:my-6 [&_blockquote]:border-l-4 [&_blockquote]:border-primary [&_blockquote]:pl-5 [&_blockquote]:italic
+                  [&>*:first-child]:mt-0"
+                dangerouslySetInnerHTML={{ __html: html }}
+              />
+
+              <ShareBar title={title} />
             </div>
-            {/* Add author later if needed */}
-            {/* <div className="flex items-center gap-2">
-            <User className="w-4 h-4" />
-            <span>{post.author}</span>
-            </div> */}
+
+            {/* Right column: author, share, table of contents */}
+            <aside className="flex min-w-0 flex-col gap-6">
+              <AuthorCard post={post} />
+              <ShareCard title={title} />
+              <ArticleToc
+                sections={sections}
+                thumbnail={post.Src}
+                thumbnailAlt={title}
+              />
+            </aside>
           </div>
+        </div>
+      </div>
 
-          {excerpt && (
-            <h3 className="text-2xl md:text-3xl text-slate-700 md:leading-relaxed font-light">
-              {excerpt}
-            </h3>
-          )}
-        </header>
+      {relatedPosts.length > 0 && (
+        <div className="mx-auto w-full max-w-[1248px] px-6 lg:px-0">
+          <hr className="mb-7 border-t border-[#E8EBF2]" />
+          <RelatedBlogs posts={relatedPosts} />
+        </div>
+      )}
 
-        {/* Main Content */}
-        <div
-          className="prose prose-lg prose-slate max-w-none 
-        prose-headings:font-serif prose-headings:font-bold
-        prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6
-        prose-p:mb-6 prose-p:leading-relaxed
-        prose-a:text-primary prose-a:no-underline hover:prose-a:underline"
-          dangerouslySetInnerHTML={{ __html: content || "<p>No content available.</p>" }}
-        />
-
-        {/* If switching to MDX later, replace above with:
-      <div className="prose ...">
-        <MDXRemote source={content} components={customComponents} />
-      </div> */}
-      </article>
+      <Cta />
     </ReactLenis>
   );
 }

@@ -258,8 +258,9 @@ export const products_Nav: MegaMenuLink[] = [
 export const aboutUs_Nav: MegaMenuLink[] = [
   { label: "About Us", href: "/about-us" },
   { label: "Our Team", href: "/team" },
-  { label: "Insights" },
-  { label: "News & Article", href: "/blogs" },
+  // The blog is the Insights hub — its hero reads "Insights, Ideas & Industry Trends".
+  { label: "Insights", href: "/blogs" },
+  { label: "News & Article" },
   { label: "Case Study", href: "/case-studies" },
   { label: "White Paper", href: "/white-paper" },
   { label: "Careers", href: "/careers" },

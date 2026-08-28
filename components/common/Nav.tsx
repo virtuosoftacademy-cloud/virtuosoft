@@ -5,8 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { StaticImageData } from "next/image";
 import { usePathname } from "next/navigation";
-import Logo from "@/public/assets/Images/Logo.svg";
-import LogoV from "@/public/logoV.svg";
+import Logo_Light from "@/public/logo-light.png";
 import CertusLogoImg from "@/public/assets/Images/nav/certus-logo.png";
 import SolutionsPanelImg from "@/public/assets/Images/nav/solutions-panel.png";
 import AboutPanelImg from "@/public/assets/Images/nav/about-panel.png";
@@ -46,8 +45,8 @@ export default function Nav() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState<boolean>(false);
-  const [activeService, setActiveService] = useState<number>(0);
   const [NavHidden, setNavHidden] = useState<boolean>(false);
+  const [activeService, setActiveService] = useState<number>(0);
   const [mobileServicesOpen, setMobileServicesOpen] = useState<boolean>(false);
   const [mobileProductsOpen, setMobileProductsOpen] = useState<boolean>(false);
   const [mobileSolutionOpen, setMobileSolutionOpen] = useState<boolean>(false);
@@ -86,12 +85,9 @@ export default function Nav() {
 }, [lastScrollY, mobileOpen]);
 
 
-// Text color follows the theme's foreground token from globals.css, so it
-// stays dark on this site's light background instead of a hardcoded white
-// that goes invisible on light-background pages (About Us, Services, etc.).
 const pillItem =
-  "rounded-full px-4 py-2 text-sm font-medium text-foreground/80 transition-colors hover:text-foreground data-[state=open]:bg-white data-[state=open]:text-[#0b1020] data-[state=open]:hover:text-[#0b1020]";
-const pillItemActive = "bg-white text-[#0b1020] hover:text-[#0b1020]";
+  "rounded-full px-4 py-2 text-sm font-medium text-white transition-colors hover:text-foreground data-[state=open]:bg-white data-[state=open]:text-[#0b1020] data-[state=open]:hover:text-[#0b1020]";
+const pillItemActive = "bg-white text-[#0b1020] group-hover:text-[#0b1020]";
 
   interface ServiceItemProps {
     service: NavServiceItem;
@@ -279,14 +275,16 @@ const pillItemActive = "bg-white text-[#0b1020] hover:text-[#0b1020]";
   return (
     <nav
       className={cn(
-        "sticky z-50 w-full mx-auto transition-all duration-500 max-w-7xl bg-transparent mt-4 py-3 shadow-none"
+        "sticky z-50 w-full mx-auto transition-all duration-500 max-w-7xl bg-transparent mt-4 py-3 shadow-none",
+        scrolled,
+        NavHidden
       )}
     >
       <div className="flex items-center justify-between px-6 lg:px-4 xl:px-0 -my-2">
         {/* Logo */}
         <Link href="/">
             <Image
-              src={Logo}
+              src={Logo_Light}
               alt="Company Logo"
               width={160}
               height={48}
@@ -297,7 +295,7 @@ const pillItemActive = "bg-white text-[#0b1020] hover:text-[#0b1020]";
 
         {/* Desktop Menu */}
         <NavigationMenu className="hidden lg:flex">
-          <NavigationMenuList className="gap-0.75 rounded-full bg-white/10 px-1.75 py-1.5">
+          <NavigationMenuList className="gap-0.75 rounded-full bg-white/15 backdrop-blur-3xl border border-white/20 px-1.75 py-1.5">
             <NavigationMenuItem>
               <NavigationMenuTrigger className={cn(pillItem, isActivePath("/services") && pillItemActive)}>
                 Services
@@ -381,7 +379,7 @@ const pillItemActive = "bg-white text-[#0b1020] hover:text-[#0b1020]";
         </div>
 
         {/* Mobile Menu Button */}
-        <div className="lg:hidden">
+        <div className="lg:hidden text-white">
           <button onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
             {mobileOpen ? <X size={28} /> : <Menu size={28} />}
           </button>

@@ -8,7 +8,7 @@ import ContactForm from "./_components/ContactForm"
 import EnquiryForm from "./_components/EnquiryForm"
 import ContactInfoPanel from "./_components/ContactInfoPanel"
 import Hero from "./_components/Hero"
-import Cta from "@/app/(pages)/home/_components/global/Cta"
+import Cta from "@/components/common/Cta"
 import HeroBg from "@/public/assets/Images/contact/hero-bg.svg"
 
 function ContactBody() {
@@ -29,11 +29,11 @@ function ContactBody() {
   return (
     <div className="relative -mt-20">
       {/* Dark hero band behind the top of the page */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[600px] overflow-hidden bg-[#060B19]">
+      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[700px] md:h-[600px] overflow-hidden bg-[#060B19]">
         <Image src={HeroBg} alt="" fill className="object-cover" priority />
       </div>
 
-      <div className="mx-auto max-w-7xl px-6 pb-16 pt-28 md:px-10 lg:pt-42">
+      <div className="mx-auto max-w-7xl px-6 pt-28 md:px-10 lg:pt-42">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,564px)_minmax(0,1fr)] lg:gap-14">
           <EnquiryForm />
           <div className="lg:pt-6">

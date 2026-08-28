@@ -111,7 +111,7 @@ function EnquiryForm() {
   return (
     <div>
       {/* Heading sits on the dark hero band */}
-      <h1 className="font-helvetica-now-display text-3xl leading-[1.2] text-white md:text-[40px]">
+      <h1 className="font-helvetica-now-display text-3xl leading-[1.2] text-white md:text-[40px] md:whitespace-pre">
         Your Next Big Move <span className="font-bold">Starts Here</span>
       </h1>
       <p className="font-helvetica-now-display mt-3 max-w-lg text-sm leading-6 text-white/72">
@@ -149,7 +149,7 @@ function EnquiryForm() {
       </div>
 
       {/* Fields sit below the band, on white */}
-      <form onSubmit={handleSubmit} className="mt-10 max-w-xl space-y-5" noValidate>
+      <form onSubmit={handleSubmit} className="mt-20 md:mt-50 lg:mt-36 max-w-xl space-y-5" noValidate>
         <div>
           <label htmlFor="fullName" className={labelClass}>
             Full Name*

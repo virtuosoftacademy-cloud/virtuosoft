@@ -1,10 +1,10 @@
 ' use client'
-import { FooterData, services_Nav, socialLinks } from '@/app/_constant';
+import { FooterData, socialLinks } from '@/app/_constant';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import dmca from '@/public/assets/Images/dmca.svg'
-import Logo from '@/public/assets/Images/logowhite.svg'
+import Logo from '@/public/logo-light.png'
 
 interface AddressItem {
   flagimg: string;

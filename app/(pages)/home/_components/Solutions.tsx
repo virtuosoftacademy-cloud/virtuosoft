@@ -4,17 +4,17 @@ import { useState } from "react"
 import Image from "next/image"
 import { ChevronDown } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { ksa_Solutions } from "@/app/_constant"
-import BadgeIcon from "@/public/assets/Images/home/ksa/badge-sparkle.svg"
-import SolutionsPhoto from "@/public/assets/Images/home/ksa/solutions-purpose-photo.png"
-import CardGlow from "@/public/assets/Images/home/ksa/solutions-card-glow.svg"
+import { global_Solutions } from "@/app/_constant"
+import BadgeIcon from "@/public/assets/Images/home/global/badge-sparkle.svg"
+import SolutionsPhoto from "@/public/assets/Images/home/global/solutions-photo.png"
+import CardGlow from "@/public/assets/Images/home/global/solutions-card-glow.svg"
 
-function SolutionsKSA() {
-  const [openId, setOpenId] = useState<string | undefined>(ksa_Solutions[0]?.id)
+function Solutions() {
+  const [openId, setOpenId] = useState<string | undefined>(global_Solutions[0]?.id)
 
   return (
     <div className="max-w-7xl mx-auto px-6 md:px-10 my-16 lg:my-24">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-primary bg-[#F8FAFF] px-4 py-2">
             <Image src={BadgeIcon} alt="" className="size-3.5" />
@@ -35,7 +35,7 @@ function SolutionsKSA() {
         </div>
 
         <div className="flex flex-col gap-3">
-          {ksa_Solutions.map((item) => {
+          {global_Solutions.map((item) => {
             const isOpen = openId === item.id
             return (
               <div
@@ -109,4 +109,4 @@ function SolutionsKSA() {
   )
 }
 
-export default SolutionsKSA
+export default Solutions

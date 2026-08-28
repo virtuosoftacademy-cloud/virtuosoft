@@ -1,5 +1,5 @@
 import React from 'react'
-import Cta from '@/app/(pages)/home/_components/global/Cta'
+import Cta from '@/components/common/Cta'
 import BlogGrid from './_components/BlogGrid'
 import BlogHero from './_components/BlogHero'
 import FeaturedPost from './_components/FeaturedPost'

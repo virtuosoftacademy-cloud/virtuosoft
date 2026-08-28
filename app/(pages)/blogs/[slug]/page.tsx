@@ -3,7 +3,7 @@
 import Image from "next/image"
 import ReactLenis from "lenis/react"
 import HeroBg from "@/public/assets/Images/blog/hero-bg.svg"
-import Cta from "@/app/(pages)/home/_components/global/Cta"
+import Cta from "@/components/common/Cta"
 import { blogPosts, type BlogPost } from "../_components"
 import ArticleHero from "./_components/ArticleHero"
 import AuthorCard from "./_components/AuthorCard"

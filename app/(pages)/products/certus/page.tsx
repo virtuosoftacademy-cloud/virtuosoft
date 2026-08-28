@@ -20,7 +20,7 @@ import SectionE2 from './_components/SectionE2'
 import SectionF1 from './_components/SectionF1'
 import SectionF2 from './_components/SectionF2'
 import SectionF3 from './_components/SectionF3'
-import Cta from '@/app/(pages)/home/_components/global/Cta'
+import Cta from '@/components/common/Cta'
 
 // Sections are ordered to match the vertical order of the Figma frame.
 // Nav, Footer and BackToTop come from app/(pages)/layout.tsx.

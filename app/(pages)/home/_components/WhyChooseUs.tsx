@@ -30,9 +30,10 @@ function WhyChooseUs() {
           <Image src={BadgeIcon} alt="" className="size-3.5" />
           <span className="text-xs font-bold text-primary font-helvetica-now-display">The intelligence layer</span>
         </div>
-        <h2 className="font-helvetica-now-display mt-5 max-w-2xl text-4xl leading-[1.4] text-[#050f21] md:text-[40px]">
-          Why Choose Us? <span className="text-primary font-bold">Technology With Purpose</span>
+        <h2 className="font-helvetica-now-display mt-5 max-w-2xl text-4xl leading-[1.4] text-[#050f21] md:text-[40px] whitespace-pre-line">
+          Why Choose Us? {"\n"}<span className="text-primary font-bold">Technology With Purpose</span>
         </h2>
+        {" "}
         <p className="mt-3 text-base leading-[1.4] text-[#474747] max-w-xl font-helvetica-now-display">
           We combine innovation, industry expertise and proven execution to deliver scalable technology solutions that create measurable business value.
         </p>
@@ -49,8 +50,8 @@ function WhyChooseUs() {
             {global_WhyChooseUs.map((card, index) => (
               <div
                 key={card.title}
-                className={`rounded-[21px] bg-white border border-[#E8EBF2] shadow-[0_15px_32px_-8px_rgba(26,38,89,0.08)] p-7 ${
-                  index % 2 === 1 ? "lg:mt-20" : ""
+                className={`rounded-[21px] bg-white border border-[#E8EBF2] shadow-[0_15px_32px_-8px_rgba(26,38,89,0.08)] p-7 transition ${
+                  index % 2 === 1 ? "lg:translate-y-15" : ""
                 }`}
               >
                 <div className="flex items-start justify-between">

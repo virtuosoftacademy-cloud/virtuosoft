@@ -23,7 +23,7 @@ export default function LogoCloud({
   const finalAnimate = animate || defaultAnimate;
   const doubledLogos = [...logos, ...logos]
   return (
-    <div className="w-full overflow-hidden bg-white/5">
+    <div className="w-full overflow-hidden">
       <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen">
         <motion.div
           className="flex items-center whitespace-nowrap"
@@ -45,7 +45,7 @@ export default function LogoCloud({
                 alt={logo.alt}
                 width={380}
                 height={280}
-                className="h-10 md:h-12 lg:h-14 w-auto max-w-[160px] object-contain grayscale opacity-75 transition-all duration-300 hover:grayscale-0 hover:opacity-100 hover:scale-105"
+                className="h-10 md:h-12 lg:h-14 w-auto max-w-[160px] object-contain transition-all duration-300 contrast-0 brightness-100"
                 loading="lazy"
               />
             </div>

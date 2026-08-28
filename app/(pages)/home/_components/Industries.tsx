@@ -12,11 +12,12 @@ import GlassPanelIcon from "@/public/assets/Images/home/global/glass-panel-icon.
 import NetworkConnectors from "@/public/assets/Images/home/global/network-connectors.svg"
 import NetworkNodeDot from "@/public/assets/Images/home/global/network-node-dot.svg"
 import NetworkNodeDotActive from "@/public/assets/Images/home/global/network-node-dot-active.svg"
+import { Button } from "@/components/ui/button"
 
 const productTabs = [
   { id: "certus", label: "Certus", href: "/products/certus" },
-  { id: "cortex-radiology", label: "Cortex Radiology", href: "/products/cortex-radiology" },
-  { id: "catalyst-ai", label: "Catalyst.ai", href: "/products/catalyst-ai" },
+  { id: "cortex-radiology", label: "Cortex Radiology", href: "#" },
+  { id: "catalyst-ai", label: "Catalyst.ai", href: "#" },
 ]
 
 const whoItServes = [
@@ -35,16 +36,27 @@ const networkNodes = [
 function Industries() {
   return (
     <div className="max-w-7xl mx-auto px-6 md:px-10 my-16 lg:my-24">
-      <div className="inline-flex items-center gap-2 rounded-full border border-primary bg-[#F8FAFF] px-4 py-2">
-        <Image src={BadgeIcon} alt="" className="size-3.5" />
-        <span className="text-xs font-bold text-primary font-helvetica-now-display">Our Products</span>
+      <div className="flex justify-between items-center">
+        <div>
+
+          <div className="inline-flex items-center gap-2 rounded-full border border-primary bg-[#F8FAFF] px-4 py-2">
+            <Image src={BadgeIcon} alt="" className="size-3.5" />
+            <span className="text-xs font-bold text-primary font-helvetica-now-display">Our Products</span>
+          </div>
+          <h2 className="font-helvetica-now-display mt-5 max-w-2xl text-4xl leading-[1.2] text-[#080e19] md:text-[40px]">
+            Purpose-Built Technology for <span className="text-primary font-bold">Complex Industries</span>
+          </h2>
+          <p className="mt-4 text-base leading-[1.4] text-[#474747] max-w-xl font-helvetica-now-display">
+            From intelligent document processing to AI-powered medical imaging, Virtuosoft builds specialized platforms that turn complex workflows into smarter, scalable digital experiences.
+          </p>
+        </div>
+        <Link
+          href="/services"
+          className="relative mt-8 hidden lg:inline-flex items-center rounded-full border-2 border-primary px-4 py-2 text-lg font-semibold text-primary hover:bg-primary hover:text-white transition-colors"
+        >
+          View All Services
+        </Link>
       </div>
-      <h2 className="font-helvetica-now-display mt-5 max-w-2xl text-4xl leading-[1.2] text-[#080e19] md:text-[40px]">
-        Purpose-Built Technology for <span className="text-primary font-bold">Complex Industries</span>
-      </h2>
-      <p className="mt-4 text-base leading-[1.4] text-[#474747] max-w-xl font-helvetica-now-display">
-        From intelligent document processing to AI-powered medical imaging, Virtuosoft builds specialized platforms that turn complex workflows into smarter, scalable digital experiences.
-      </p>
 
       {/* Product tab selector — each product now has its own page */}
       <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -52,11 +64,10 @@ function Industries() {
           <Link
             key={tab.id}
             href={tab.href}
-            className={`flex h-10 items-center justify-center rounded-full px-4 text-xs font-bold font-helvetica-now-display transition-colors ${
-              i === 0
-                ? "bg-primary text-white hover:bg-primary/90"
-                : "border border-primary text-primary hover:bg-primary/5"
-            }`}
+            className={`flex h-10 items-center justify-center rounded-full px-4 md:px-6 text-xs font-bold font-helvetica-now-display transition-colors ${i === 0
+              ? "bg-primary text-white hover:bg-primary/90"
+              : "border border-primary text-primary hover:bg-primary/5"
+              }`}
           >
             {tab.label}
           </Link>
@@ -71,21 +82,21 @@ function Industries() {
           <div className="relative flex size-14 items-center justify-center">
             <Image src={CertusCardIcon} alt="Certus" className="size-14" />
           </div>
-          <h3 className="relative mt-4 text-xl font-bold text-secondary">Certus</h3>
+          <h3 className="relative mt-4 text-xl font-bold text-foreground">Certus</h3>
           <p className="relative mt-3 text-xs text-neutral-500 leading-relaxed font-helvetica-now-display">
             AI-native document intelligence for enterprise finance teams. Certus reads, validates and posts invoices and purchase orders in seconds — combining OCR, LLMs and Agentic AI in a single platform.
           </p>
           <div className="relative mt-6 grid grid-cols-3 gap-4 border-t border-[#E5E8ED] pt-5">
             <div>
-              <p className="font-semibold text-secondary text-sm">6 sec</p>
+              <p className="font-semibold text-foreground text-sm">6 sec</p>
               <p className="text-xs text-neutral-500 mt-1 font-helvetica-now-display">per document, start to post</p>
             </div>
             <div>
-              <p className="font-semibold text-secondary text-sm">3×</p>
+              <p className="font-semibold text-foreground text-sm">3×</p>
               <p className="text-xs text-neutral-500 mt-1 font-helvetica-now-display">self-verification passes</p>
             </div>
             <div>
-              <p className="font-semibold text-secondary text-sm">99.9%</p>
+              <p className="font-semibold text-foreground text-sm">99.9%</p>
               <p className="text-xs text-neutral-500 mt-1 font-helvetica-now-display">posting accuracy</p>
             </div>
           </div>
@@ -100,7 +111,7 @@ function Industries() {
         {/* Middle column: Tagline + Glass Icon panels */}
         <div className="flex flex-col gap-4">
           <div className="rounded-3xl border border-white bg-[#E3E8FA] shadow-[0_0_29px_0_rgba(52,67,122,0.09)] p-7 text-center">
-            <p className="font-bold text-secondary text-lg font-helvetica-now-display">Documents, understood.</p>
+            <p className="font-bold text-foreground text-lg font-helvetica-now-display">Documents, understood.</p>
             <p className="mt-2 text-xs text-neutral-500 font-helvetica-now-display">
               Every invoice read, verified against your business rules, and posted — never guessed.
             </p>
@@ -128,7 +139,7 @@ function Industries() {
                 style={{ left: node.left, top: node.top, width: node.size, aspectRatio: "1 / 1" }}
               >
                 <Image src={node.active ? NetworkNodeDotActive : NetworkNodeDot} alt="" className="size-2.5" />
-                <span className="text-[10px] font-medium text-secondary font-helvetica-now-display">{node.label}</span>
+                <span className="text-[10px] font-medium text-foreground font-helvetica-now-display">{node.label}</span>
               </div>
             ))}
           </div>
@@ -138,9 +149,8 @@ function Industries() {
               {whoItServes.map((pill) => (
                 <span
                   key={pill.label}
-                  className={`rounded-full px-4 py-2 text-[11px] font-medium font-helvetica-now-display ${
-                    pill.active ? "bg-primary text-white" : "bg-[#F6F7F9] text-secondary"
-                  }`}
+                  className={`rounded-full px-4 py-2 text-[11px] font-medium font-helvetica-now-display ${pill.active ? "bg-primary text-white" : "bg-[#F6F7F9] text-foreground"
+                    }`}
                 >
                   {pill.label}
                 </span>

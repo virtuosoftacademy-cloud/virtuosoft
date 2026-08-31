@@ -1,6 +1,5 @@
 
 import React from 'react'
-import LogoCloud from "../LogoCloud"
 import Solutions from "../Solutions"
 import Industries from "../Industries"
 import WhyChooseUs from "../WhyChooseUs"
@@ -14,10 +13,8 @@ import { Faq_AIAgent } from "@/app/_constant"
 function CommonComponents() {
     return (
         <>
+            {/* LogoCloud is rendered inside Hero, overlaid on the dark band */}
             <Hero />
-            <div className="-mt-20">
-                <LogoCloud />
-            </div>
             <Industries />
             <Solutions />
             <WhyChooseUs />

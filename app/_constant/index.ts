@@ -4,6 +4,12 @@
 export interface LogoItem {
   src: string;
   alt: string;
+  /**
+   * Figma renders these as alpha masks filled white. The exported PNG is the
+   * original coloured artwork (e.g. GASCO is blue, Tawal is black), so it must
+   * be masked rather than drawn directly or it disappears on the dark hero.
+   */
+  masked?: boolean;
 }
 
 export interface NavLink {
@@ -126,17 +132,31 @@ export interface SocialLink {
   src: string;
 }
 
-// Client Logos
-const logoIcon = '/assets/Images/ClientLogo/'
+// Client Logos — white-filled exports from Figma's hero marquee. These are
+// designed to sit over the dark hero band; they are invisible on a light
+// background, so keep the marquee on a dark surface.
+const logoIcon = '/assets/Images/ClientLogo/marquee'
 export const logos: LogoItem[] = [
-  { src: `${logoIcon}/tarabut.svg`, alt: "Tarabut" },
-  { src: `${logoIcon}/amax.svg`, alt: "AMAX" },
-  { src: `${logoIcon}/eyecare.svg`, alt: "Eye Care Professional" },
-  { src: `${logoIcon}/dvago.svg`, alt: "Client" },
-  { src: `${logoIcon}/instijam.svg`, alt: "Insijam" },
-  { src: `${logoIcon}/hbl.svg`, alt: "Client" },
-  { src: `${logoIcon}/lmkr.svg`, alt: "Client" },
-  { src: `${logoIcon}/ncc.svg`, alt: "Client" },
+  { src: `${logoIcon}/tarabut.png`, alt: "Tarabut" },
+  { src: `${logoIcon}/neogies.png`, alt: "Neogies", masked: true },
+  { src: `${logoIcon}/amax.png`, alt: "AMAX", masked: true },
+  { src: `${logoIcon}/eyecare.png`, alt: "Eye Care Professional", masked: true },
+  { src: `${logoIcon}/client-frame1217.svg`, alt: "Client logo" },
+  { src: `${logoIcon}/client-419.png`, alt: "Client logo", masked: true },
+  { src: `${logoIcon}/eaglehills-mark.png`, alt: "Eagle Hills Properties", masked: true },
+  { src: `${logoIcon}/client-424.png`, alt: "Client logo", masked: true },
+  { src: `${logoIcon}/client-423.png`, alt: "Client logo", masked: true },
+  { src: `${logoIcon}/gasco.png`, alt: "GASCO", masked: true },
+  { src: `${logoIcon}/client-426.png`, alt: "Client logo", masked: true },
+  { src: `${logoIcon}/tawal.png`, alt: "Tawal", masked: true },
+  { src: `${logoIcon}/client-422.png`, alt: "Client logo", masked: true },
+  { src: `${logoIcon}/client-425.png`, alt: "Client logo" },
+  { src: `${logoIcon}/client-32.png`, alt: "Client logo" },
+  { src: `${logoIcon}/client-427.png`, alt: "Client logo" },
+  { src: `${logoIcon}/client-unnamed.png`, alt: "Client logo" },
+  { src: `${logoIcon}/client-229.png`, alt: "Client logo" },
+  { src: `${logoIcon}/client-535.png`, alt: "Client logo" },
+  { src: `${logoIcon}/client-534.png`, alt: "Client logo" },
 ];
 //Navbar
 export function getSpotlightVideo(title: string): string {
@@ -250,8 +270,8 @@ export const solutions_Nav: NavLink[] = [
 // real product pages are built.
 export const products_Nav: MegaMenuLink[] = [
   { label: "Certus", href: "/products/certus" },
-  { label: "Cortex Radiology", href: "/products/cortex-radiology", comingSoon: true },
-  { label: "Catalyst.ai", href: "/products/catalyst-ai", comingSoon: true },
+  { label: "Cortex Radiology",  comingSoon: true },
+  { label: "Catalyst.ai",  comingSoon: true },
 ];
 
 // "About Us" top-nav dropdown — items without an `href` render as "Soon"

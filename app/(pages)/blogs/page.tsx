@@ -13,7 +13,7 @@ function Blogs(): React.JSX.Element {
         <>
             <BlogHero />
 
-            <section className="mx-auto mt-14 max-w-7xl px-6 md:mt-16 md:px-10">
+            <section className="mx-auto mt-14 max-w-7xl px-6 md:mt-16 md:px-10 lg:px-0">
                 <h2 className="font-helvetica-now-display text-3xl font-bold leading-10 text-[#050f21] md:text-[32px]">
                     Latest
                 </h2>

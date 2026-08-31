@@ -9,7 +9,7 @@ export interface FaqProps {
 
 export default function Faq({ items = [] }: FaqProps) {
   return (
-    <div className="mx-auto max-w-[850px] px-6 sm:px-12 text-foreground pt-10">
+    <div className="mx-auto max-w-[850px] px-6 md:px-12 lg:px-0 text-foreground pt-10">
       <h4 className="text-2xl md:text-[42px] text-center mb-10">
         Frequently Asked <span className="font-bold">Questions</span>
       </h4>

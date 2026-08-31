@@ -12,7 +12,7 @@ import HeroBg from "@/public/assets/Images/casestudies/detail/hero-bg.svg"
  */
 function Hero() {
   return (
-    <section className="relative isolate overflow-hidden bg-[#060b19]">
+    <section className="relative isolate overflow-hidden bg-[#060b19] -mt-20">
       <Image
         src={HeroBg}
         alt=""
@@ -21,7 +21,7 @@ function Hero() {
         className="pointer-events-none absolute inset-0 -z-10 size-full select-none object-cover"
       />
 
-      <div className={`${SHELL} py-14 lg:py-16`}>
+      <div className={`${SHELL} pt-32 pb-16 md:pt-[172px] md:pb-[115px]`}>
         <Eyebrow>Case Study</Eyebrow>
 
         <h1 className="font-helvetica-now-display mt-2 text-4xl leading-[1.17] text-white md:text-5xl">

@@ -35,7 +35,7 @@ const networkNodes = [
 
 function Industries() {
   return (
-    <div className="max-w-7xl mx-auto px-6 md:px-10 my-16 lg:my-24">
+    <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-0 my-16 lg:my-24">
       <div className="flex justify-between items-center">
         <div>
 

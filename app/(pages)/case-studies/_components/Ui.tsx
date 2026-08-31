@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils"
  *   primary #0051E4 · heading #050F21 · body #474747 · badge surface #F8FAFF
  */
 
-export const SHELL = "mx-auto w-full max-w-[1248px] px-6 xl:px-0"
+export const SHELL = "mx-auto w-full max-w-7xl px-6 xl:px-0"
 
 export function Eyebrow({
   children,

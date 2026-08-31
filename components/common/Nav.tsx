@@ -6,6 +6,7 @@ import Image from "next/image";
 import type { StaticImageData } from "next/image";
 import { usePathname } from "next/navigation";
 import Logo_Light from "@/public/logo-light.png";
+import Logo_Dark from "@/public/logo-dark.png";
 import CertusLogoImg from "@/public/assets/Images/nav/certus-logo.png";
 import SolutionsPanelImg from "@/public/assets/Images/nav/solutions-panel.png";
 import AboutPanelImg from "@/public/assets/Images/nav/about-panel.png";
@@ -25,6 +26,7 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
+import { isLightBackgroundRoute } from "@/lib/navTheme";
 import {
   getSpotlightVideo,
   services_Nav as servicesNavRaw,
@@ -44,8 +46,6 @@ const services_Nav = servicesNavRaw as NavServiceItem[];
 export default function Nav() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
-  const [scrolled, setScrolled] = useState<boolean>(false);
-  const [NavHidden, setNavHidden] = useState<boolean>(false);
   const [activeService, setActiveService] = useState<number>(0);
   const [mobileServicesOpen, setMobileServicesOpen] = useState<boolean>(false);
   const [mobileProductsOpen, setMobileProductsOpen] = useState<boolean>(false);
@@ -55,39 +55,14 @@ export default function Nav() {
 
   const isActivePath = (href: string) => pathname?.startsWith(href) ?? false;
 
-  // Added only for detecting scroll direction
-  const [lastScrollY, setLastScrollY] = useState(0);
+  // Dark logo + dark link text on pages that open on a light background.
+  const isLightBackground = isLightBackgroundRoute(pathname);
 
-  useEffect(() => {
-  const handleScroll = () => {
-    const currentScrollY = window.scrollY;
-
-    setScrolled(currentScrollY > 100);
-
-    if (mobileOpen) {
-      setNavHidden(false);
-      return;
-    }
-
-    const halfScreen = window.innerHeight / 2;
-
-    if (currentScrollY > halfScreen) {
-      setNavHidden(currentScrollY > lastScrollY);
-    } else {
-      setNavHidden(false);
-    }
-
-    setLastScrollY(currentScrollY);
-  };
-
-  window.addEventListener("scroll", handleScroll);
-  return () => window.removeEventListener("scroll", handleScroll);
-}, [lastScrollY, mobileOpen]);
-
-
-const pillItem =
-  "rounded-full px-4 py-2 text-sm font-medium text-white transition-colors hover:text-foreground data-[state=open]:bg-white data-[state=open]:text-[#0b1020] data-[state=open]:hover:text-[#0b1020]";
-const pillItemActive = "bg-white text-[#0b1020] group-hover:text-[#0b1020]";
+  const pillItem = cn(
+    "rounded-full px-4 py-2 text-sm font-medium transition-colors data-[state=open]:bg-white data-[state=open]:text-[#0b1020] data-[state=open]:hover:text-[#0b1020]",
+    isLightBackground ? "text-[#0b1020] hover:text-primary" : "text-white hover:text-foreground"
+  );
+  const pillItemActive = "bg-white text-[#0b1020] group-hover:text-[#0b1020]";
 
   interface ServiceItemProps {
     service: NavServiceItem;
@@ -108,7 +83,7 @@ const pillItemActive = "bg-white text-[#0b1020] group-hover:text-[#0b1020]";
             )}
             onMouseEnter={onHover}
           >
-            <span className="font-helvetica-now-display text-base font-bold leading-6">{service.title}</span>
+            <span className="font-public-sans text-base font-bold leading-6">{service.title}</span>
             <ChevronRight className="size-5 shrink-0" />
           </Link>
         </NavigationMenuLink>
@@ -136,7 +111,7 @@ const pillItemActive = "bg-white text-[#0b1020] group-hover:text-[#0b1020]";
     // Shared row styling with the Services panel: 60px tall, 16px padding,
     // bold #002D7D label, chevron always visible.
     const rowBase =
-      "font-helvetica-now-display flex h-15 items-center justify-between gap-3 rounded-xl p-4 text-base font-bold leading-6";
+      "font-public-sans flex h-15 items-center justify-between gap-3 rounded-xl p-4 text-base font-bold leading-6";
 
     return (
       <NavigationMenuItem>
@@ -158,20 +133,13 @@ const pillItemActive = "bg-white text-[#0b1020] group-hover:text-[#0b1020]";
                         )}
                       >
                         {item.label}
-                        {item.comingSoon ? (
-                          <span className="shrink-0 rounded-full bg-muted px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[#002D7D]/60">
-                            Soon
-                          </span>
-                        ) : (
-                          <ChevronRight className="size-5 shrink-0 text-[#002D7D]" />
-                        )}
                       </Link>
                     </NavigationMenuLink>
                   ) : (
                     <span className={cn(rowBase, "cursor-not-allowed text-[#002D7D]/40")}>
                       {item.label}
-                      <span className="rounded-full bg-muted px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide">
-                        Soon
+                      <span className="rounded-full bg-muted px-2 py-0.5 text-xs font-semibold tracking-wide">
+                        Coming Soon!
                       </span>
                     </span>
                   )}
@@ -274,31 +242,36 @@ const pillItemActive = "bg-white text-[#0b1020] group-hover:text-[#0b1020]";
 
   return (
     <nav
-      className={cn(
-        "sticky z-50 w-full mx-auto transition-all duration-500 max-w-7xl bg-transparent mt-4 py-3 shadow-none",
-        scrolled,
-        NavHidden
-      )}
+      className="sticky z-50 w-full mx-auto transition-all duration-500 max-w-7xl bg-transparent mt-4 py-3 shadow-none"
     >
       <div className="flex items-center justify-between px-6 lg:px-4 xl:px-0 -my-2">
         {/* Logo */}
         <Link href="/">
-            <Image
-              src={Logo_Light}
-              alt="Company Logo"
-              width={160}
-              height={48}
-              className="transition-all duration-500"
-              priority
-            />
+          <Image
+            src={isLightBackground ? Logo_Dark : Logo_Light}
+            alt="Company Logo"
+            width={160}
+            height={48}
+            className="transition-all duration-500"
+            priority
+          />
         </Link>
 
         {/* Desktop Menu */}
         <NavigationMenu className="hidden lg:flex">
-          <NavigationMenuList className="gap-0.75 rounded-full bg-white/15 backdrop-blur-3xl border border-white/20 px-1.75 py-1.5">
+          <NavigationMenuList
+            className={cn(
+              "gap-0.75 rounded-full backdrop-blur-3xl px-1.75 py-1.5 border",
+              isLightBackground
+                ? "bg-black/5 border-black/10"
+                : "bg-white/15 border-white/20"
+            )}
+          >
             <NavigationMenuItem>
               <NavigationMenuTrigger className={cn(pillItem, isActivePath("/services") && pillItemActive)}>
+                <Link href = {"/services"}>
                 Services
+                </Link>
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <div className="flex items-stretch gap-8 py-5 pl-5 pr-8">
@@ -325,7 +298,7 @@ const pillItemActive = "bg-white text-[#0b1020] group-hover:text-[#0b1020]";
                             className="group flex items-center gap-4 text-[#3374E9]"
                           >
                             <span className="size-2 shrink-0 rounded-[2px] bg-[#3374E9]" />
-                            <span className="font-helvetica-now-display text-base font-bold leading-6 group-hover:underline">
+                            <span className="font-public-sans text-base font-bold leading-6 group-hover:underline">
                               {sub.label}
                             </span>
                           </Link>
@@ -390,7 +363,7 @@ const pillItemActive = "bg-white text-[#0b1020] group-hover:text-[#0b1020]";
       {mobileOpen && (
         <div className="lg:hidden mt-4 px-4 bg-foreground text-accent overflow-hidden">
           <div className="flex flex-col py-8 px-8 gap-6 text-xl font-medium">
-         {/* Services section with animated dropdown */}
+            {/* Services section with animated dropdown */}
             <div>
               <div
                 className="font-semibold flex items-center justify-between cursor-pointer transition-colors hover:text-primary"

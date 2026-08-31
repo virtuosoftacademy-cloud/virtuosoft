@@ -63,7 +63,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <Image src={HeroBg} alt="" fill priority className="object-cover" />
         </div>
 
-        <div className="relative mx-auto w-full max-w-[1248px] px-6 pt-8 pb-16 md:pt-[52px] lg:px-0">
+        <div className="relative mx-auto w-full max-w-7xl px-6 pt-8 pb-16 md:pt-[52px] lg:px-0">
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-[824fr_400fr] lg:items-start">
             {/* Left column: hero card, article body, share bar */}
             <div className="flex min-w-0 flex-col gap-6">
@@ -103,7 +103,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       </div>
 
       {relatedPosts.length > 0 && (
-        <div className="mx-auto w-full max-w-[1248px] px-6 lg:px-0">
+        <div className="mx-auto w-full max-w-7xl px-6 lg:px-0">
           <hr className="mb-7 border-t border-[#E8EBF2]" />
           <RelatedBlogs posts={relatedPosts} />
         </div>

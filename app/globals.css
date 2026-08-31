@@ -1,3 +1,7 @@
+/* Public Sans — Figma's "Desktop Label large" token (nav mega-menu labels).
+   Must stay first: the imports below are inlined, so any @import after them
+   would end up following real rules, which CSS forbids. */
+@import url("https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "flag-icons/css/flag-icons.min.css";
@@ -51,6 +55,9 @@ body{
 }
 h1,h2,h3{
   font-family: var(--font-sofia-condensed-sans),sans-serif;
+}
+.font-public-sans{
+  font-family: "Public Sans",sans-serif;
 }
 .font-helvetica-now-display{
   font-family: var(--font-helvetica-now-display),sans-serif;

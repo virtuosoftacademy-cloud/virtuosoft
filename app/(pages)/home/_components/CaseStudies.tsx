@@ -87,7 +87,7 @@ const stories: Story[] = [
 
 function CaseStudies() {
   return (
-    <div className="max-w-7xl mx-auto px-6 md:px-10 my-16 lg:my-24">
+    <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-0 my-16 lg:my-24">
       <div className="inline-flex items-center gap-2 rounded-full border border-primary bg-[#F8FAFF] px-4 py-2">
         <Image src={BadgeIcon} alt="" className="size-3.5" />
         <span className="text-xs font-bold text-primary font-helvetica-now-display">Who Built This</span>
@@ -103,7 +103,7 @@ function CaseStudies() {
       <Carousel opts={{ align: "start", loop: true }} className="w-full mt-10">
         <CarouselContent>
           {stories.map((story) => (
-            <CarouselItem key={story.title} className="basis-[85%] sm:basis-1/2 lg:basis-3/5">
+            <CarouselItem key={story.title} className="basis-full sm:basis-1/2 lg:basis-3/5">
               <div
                 className="group flex h-full flex-col overflow-hidden rounded-[22px] border border-white/95 p-3 shadow-[0_0_29px_0_rgba(52,67,122,0.09)]"
                 style={{
@@ -128,7 +128,7 @@ function CaseStudies() {
                       alt={story.logo.alt}
                       width={800}
                       height={200}
-                      className={`absolute left-8 top-8 h-auto w-[150px] max-w-[45%] object-contain ${
+                      className={`absolute left-4 top-6 lg:left-8 lg:top-8 h-auto w-[150px] max-w-[15%] object-contain ${
                         story.logo.forceWhite ? "brightness-0 invert" : ""
                       }`}
                     />

@@ -1,14 +1,19 @@
 'use client'
 
+import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import HeroBg from "@/public/assets/Images/home/ksa/hero-bg.png"
+import ConsultationModal from "@/components/common/ConsultationModal"
+import LogoCloud from "./LogoCloud"
 
 function Hero() {
+  const [isConsultationOpen, setIsConsultationOpen] = useState(false)
+
   return (
     <section
-      className="relative min-h-[600px] md:min-h-screen flex items-center overflow-hidden pt-10 -mt-20"
+      className="relative h-screen md:min-h-screen flex items-center overflow-hidden pt-28 md:pt-10 -mt-20"
     >
 
       <div className="absolute inset-0 -z-10">
@@ -29,7 +34,7 @@ function Hero() {
 
       <div className="relative mx-auto w-full max-w-7xl px-6 md:px-0 pb-16">
         <div
-          className="max-w-2xl rounded-3xl px-8 py-10 md:px-12 md:py-10 bg-accent/20 backdrop-blur-3xl border border-white/20"
+          className="mx-auto lg:mx-0 max-w-2xl rounded-3xl px-8 py-10 md:px-12 md:py-10 bg-accent/20 backdrop-blur-3xl border border-white/20"
         >
           <h1 className="text-4xl md:text-6xl font-semibold text-white leading-[1.05] tracking-tight">
             Innovative Tech That Drives Progress
@@ -38,8 +43,13 @@ function Hero() {
             From custom applications to full scale enterprise systems, we help businesses cut through complexity and ship technology that drives real results, without the bureaucracy of a big consultancy.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-4">
-            <Button variant="default" size="lg" className="rounded-full font-sans" asChild>
-              <Link href="/contact">Get Your Free Consultation</Link>
+            <Button
+              variant="default"
+              size="lg"
+              className="rounded-full font-sans"
+              onClick={() => setIsConsultationOpen(true)}
+            >
+              Get Your Free Consultation
             </Button>
             <Button
               variant="ghost"
@@ -52,6 +62,17 @@ function Hero() {
           </div>
         </div>
       </div>
+
+      {/* Client marquee sits over the dark hero band — the logo exports are
+          white-filled and would be invisible on the light sections below. */}
+      <div className="absolute inset-x-0 bottom-4">
+        <LogoCloud />
+      </div>
+
+      <ConsultationModal
+        open={isConsultationOpen}
+        onClose={() => setIsConsultationOpen(false)}
+      />
     </section>
   )
 }

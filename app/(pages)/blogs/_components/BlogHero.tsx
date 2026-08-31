@@ -17,7 +17,7 @@ function BlogHero() {
                 />
             </div>
 
-            <div className="relative mx-auto w-full max-w-7xl px-6 py-14 md:px-10 md:py-16">
+            <div className="relative mx-auto w-full max-w-7xl px-6 py-14 md:px-10 lg:px-0 md:py-16">
                 <span className="inline-flex items-center gap-2 rounded-full border border-primary bg-[#F8FAFF] px-4 py-2">
                     <Image src={BadgeIcon} alt="" className="size-3.5" />
                     <span className="font-helvetica-now-display text-xs font-bold leading-4 text-primary">

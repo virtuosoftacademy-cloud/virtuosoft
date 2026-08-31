@@ -13,7 +13,7 @@ function Solutions() {
   const [openId, setOpenId] = useState<string | undefined>(global_Solutions[0]?.id)
 
   return (
-    <div className="max-w-7xl mx-auto px-6 md:px-10 my-16 lg:my-24">
+    <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-0 my-16 lg:my-24">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-primary bg-[#F8FAFF] px-4 py-2">

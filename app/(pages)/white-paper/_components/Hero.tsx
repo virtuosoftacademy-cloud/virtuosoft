@@ -6,7 +6,7 @@ import BadgeSparkle from "@/public/assets/Images/whitepaper/badge-sparkle.svg"
 // from the exported Figma frame, so nothing here is redrawn by hand.
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-[#060B19]">
+    <section className="relative overflow-hidden bg-[#060B19] -mt-20">
       <Image
         src={HeroBg}
         alt=""
@@ -15,7 +15,7 @@ function Hero() {
         className="object-cover object-center"
       />
 
-      <div className="relative mx-auto max-w-7xl px-6 pt-32 pb-16 md:px-10 md:pt-[172px] md:pb-[115px] lg:px-6">
+      <div className="relative mx-auto max-w-7xl px-6 pt-32 pb-16 md:px-10 md:pt-[172px] md:pb-[115px] lg:px-0">
         <span className="inline-flex items-center gap-2 rounded-[180px] border border-[#0051e4] bg-[#f8faff] px-[17px] py-[9px]">
           <span className="relative block size-[14px] shrink-0">
             <Image src={BadgeSparkle} alt="" fill className="size-full" />

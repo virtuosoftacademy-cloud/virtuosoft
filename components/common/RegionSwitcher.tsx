@@ -6,7 +6,9 @@ import { useEffect, useRef, useState } from "react"
 import { usePathname } from "next/navigation"
 import { ChevronUp } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { isLightBackgroundRoute } from "@/lib/navTheme"
 import GlobeIcon from "@/public/assets/Images/nav/globe-icon.svg"
+import GlobeIconWhite from "@/public/assets/Images/nav/globe-icon-white.svg"
 
 // Global's canonical URL is the site root; UK/KSA live under /home/<region>.
 const REGION_OPTIONS = [
@@ -43,6 +45,8 @@ export default function RegionSwitcher({ variant = "desktop", onNavigate }: Regi
   const containerRef = useRef<HTMLDivElement>(null)
   const pathname = usePathname()
   const activeRegion = resolveActiveRegion(pathname)
+  // Blue globe on light-background pages, white over a dark hero.
+  const isLightBackground = isLightBackgroundRoute(pathname)
 
   // Close on outside click / Escape rather than on the button's blur: blur
   // fires on mousedown, which would unmount the menu before the click on a
@@ -78,7 +82,8 @@ export default function RegionSwitcher({ variant = "desktop", onNavigate }: Regi
           onClick={() => setOpen((prev) => !prev)}
         >
           <span className="flex items-center gap-2">
-            <Image src={GlobeIcon} alt="" className="size-5" />
+            {/* The mobile menu panel is always dark, so this stays white. */}
+            <Image src={GlobeIconWhite} alt="" className="size-5" />
             Region
           </span>
           <span
@@ -132,7 +137,11 @@ export default function RegionSwitcher({ variant = "desktop", onNavigate }: Regi
         aria-haspopup="menu"
         aria-expanded={open}
       >
-        <Image src={GlobeIcon} alt="" className="size-5" />
+        <Image
+          src={isLightBackground ? GlobeIcon : GlobeIconWhite}
+          alt=""
+          className="size-5"
+        />
       </button>
 
       {open && (

@@ -36,18 +36,39 @@ export default function LogoCloud({
           whileHover={{ animationPlayState: "paused" }}
         >
           {doubledLogos.map((logo, i) => (
+            // Figma spaces the cells 32.9px apart -> ~16px of padding a side.
             <div
               key={i}
-              className="shrink-0 px-6 md:px-10 lg:px-12"
+              className="shrink-0 px-3 md:px-4"
             >
-              <Image
-                src={logo.src}
-                alt={logo.alt}
-                width={380}
-                height={280}
-                className="h-10 md:h-12 lg:h-14 w-auto max-w-[160px] object-contain transition-all duration-300 contrast-0 brightness-100"
-                loading="lazy"
-              />
+              {logo.masked ? (
+                // Coloured artwork used as an alpha mask and filled white, so
+                // it reads consistently against the dark hero (matches Figma).
+                <span
+                  role="img"
+                  aria-label={logo.alt}
+                  className="block h-11 w-32 bg-white opacity-90 transition-opacity duration-300 hover:opacity-100 md:h-13 md:w-36 lg:h-15 lg:w-37.5"
+                  style={{
+                    maskImage: `url("${logo.src}")`,
+                    maskRepeat: "no-repeat",
+                    maskPosition: "center",
+                    maskSize: "contain",
+                    WebkitMaskImage: `url("${logo.src}")`,
+                    WebkitMaskRepeat: "no-repeat",
+                    WebkitMaskPosition: "center",
+                    WebkitMaskSize: "contain",
+                  }}
+                />
+              ) : (
+                <Image
+                  src={logo.src}
+                  alt={logo.alt}
+                  width={380}
+                  height={280}
+                  className="h-11 md:h-13 lg:h-15 w-auto max-w-37.5 object-contain opacity-90 transition-opacity duration-300 hover:opacity-100"
+                  loading="lazy"
+                />
+              )}
             </div>
           ))}
         </motion.div>

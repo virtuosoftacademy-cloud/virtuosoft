@@ -41,7 +41,7 @@ function Testimonials() {
   }, [api])
 
   return (
-    <div className="max-w-7xl mx-auto px-6 md:px-10 my-16 lg:my-24">
+    <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-0 my-16 lg:my-24">
       <div className="inline-flex items-center gap-2 rounded-full border border-primary bg-white px-4 py-2">
         <Image src={BadgeIcon} alt="" className="size-3.5" />
         <span className="text-xs font-bold text-primary font-helvetica-now-display">Testimonial</span>

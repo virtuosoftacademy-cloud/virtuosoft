@@ -25,7 +25,7 @@ function WhyChooseUs() {
         className="pointer-events-none select-none absolute left-0 bottom-0 w-[260px] rotate-180 opacity-70"
       />
 
-      <div className="relative max-w-7xl mx-auto px-6 md:px-10">
+      <div className="relative max-w-7xl mx-auto px-6 md:px-12 lg:px-0">
         <div className="inline-flex items-center gap-2 rounded-full border border-primary bg-[#F8FAFF] px-4 py-2">
           <Image src={BadgeIcon} alt="" className="size-3.5" />
           <span className="text-xs font-bold text-primary font-helvetica-now-display">The intelligence layer</span>

@@ -1,5 +1,5 @@
 import { SHELL, SectionBadge } from "../../_components/Ui"
-import type { CaseStudyDetailProps } from "@/lib/case-study/types"
+import type { CaseStudyDetailProps } from "@/lib/lib-backend/case-study/types"
 
 function Approach({ caseStudy }: { caseStudy: CaseStudyDetailProps }) {
   const { approach, timeline } = caseStudy

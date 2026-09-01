@@ -10,7 +10,7 @@
 // Type: Plain module (importable from actions and the form)
 // ============================================================================
 
-import { isRenderableImageSrc } from "@/lib/blog-actions/blog-image";
+import { isRenderableImageSrc } from "@/lib/lib-backend/blog-actions/blog-image";
 import { isEmptyRichText } from "@/lib/rich-text";
 
 export type CaseStudyFormState = {

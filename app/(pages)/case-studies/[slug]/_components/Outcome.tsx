@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { SHELL, SectionBadge } from "../../_components/Ui"
-import type { CaseStudyDetailProps } from "@/lib/case-study/types"
+import type { CaseStudyDetailProps } from "@/lib/lib-backend/case-study/types"
 import Tick from "@/public/assets/Images/casestudies/tick.svg"
 
 function Outcome({ caseStudy }: { caseStudy: CaseStudyDetailProps }) {

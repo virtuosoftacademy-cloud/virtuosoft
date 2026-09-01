@@ -2,7 +2,7 @@
 
 import { useActionState } from "react"
 import { AlertCircle, CheckCircle2 } from "lucide-react"
-import { subscribe, type NewsletterState } from "@/lib/newsletter/actions"
+import { subscribe, type NewsletterState } from "@/lib/lib-backend/newsletter/actions"
 import { Button } from "@/components/ui/button"
 
 const initialState: NewsletterState = {}

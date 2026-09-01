@@ -1,7 +1,7 @@
 import Image from "next/image"
 import { Eyebrow, SHELL } from "../../_components/Ui"
-import { isRenderableImageSrc, FALLBACK_POST_IMAGE } from "@/lib/blog-actions/blog-image"
-import type { CaseStudyDetailProps } from "@/lib/case-study/types"
+import { isRenderableImageSrc, FALLBACK_POST_IMAGE } from "@/lib/lib-backend/blog-actions/blog-image"
+import type { CaseStudyDetailProps } from "@/lib/lib-backend/case-study/types"
 
 import HeroBg from "@/public/assets/Images/casestudies/detail/hero-bg.svg"
 

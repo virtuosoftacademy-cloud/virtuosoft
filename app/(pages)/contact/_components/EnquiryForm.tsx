@@ -3,8 +3,8 @@
 import { useActionState, useState } from "react"
 import Link from "next/link"
 import { AlertCircle, CheckCircle2, ShieldCheck } from "lucide-react"
-import { sendContactMessage, type ContactState } from "@/lib/contact/actions"
-import { INTEREST_OPTIONS } from "@/lib/contact/options"
+import { sendContactMessage, type ContactState } from "@/lib/lib-backend/contact/actions"
+import { INTEREST_OPTIONS } from "@/lib/lib-backend/contact/options"
 import { cn } from "@/lib/utils"
 
 const initialState: ContactState = {}

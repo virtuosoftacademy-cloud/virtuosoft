@@ -2,7 +2,7 @@
 
 import { useState, useRef, Suspense, useEffect, type FormEvent } from 'react'
 import { useSearchParams } from 'next/navigation'
-import { X, ChevronDown, Video, AlertCircle, Github } from "lucide-react"
+import { X, ChevronDown, Video, AlertCircle, GitBranch,  } from "lucide-react"
 import Captcha from './Captcha'
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -255,7 +255,7 @@ if (!formData.loomLink || !formData.loomLink.trim()) {
                             <label className={labelStyle}>GitHub Profile (Optional)</label>
                             <div className="relative">
                                 <input type="text" placeholder="github.com/username" onChange={(e) => setFormData({ ...formData, github: e.target.value })} className={cn(inputBase, "pl-10", "border-slate-300")} />
-                                <Github className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-slate-400" />
+                                <GitBranch className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-slate-400" />
                             </div>
                         </div>
                         <div>

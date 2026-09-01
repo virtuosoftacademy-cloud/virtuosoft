@@ -28,7 +28,7 @@ import {
 import { cn } from "@/lib/utils";
 import { isLightBackgroundRoute } from "@/lib/navTheme";
 import {
-  getSpotlightVideo,
+  getSpotlightImage,
   services_Nav as servicesNavRaw,
   solutions_Nav,
   products_Nav,
@@ -43,10 +43,118 @@ interface NavServiceItem extends NavItem {
 
 const services_Nav = servicesNavRaw as NavServiceItem[];
 
+interface SimpleMegaDropdownProps {
+  label: string;
+  items: MegaMenuLink[];
+  image: StaticImageData;
+  /** Fully-computed classes for the pill trigger, built by Nav. */
+  triggerClassName: string;
+  // "cover" fills the right panel with photography; "logo" centres a
+  // contained brand mark (the Products panel in the design).
+  panel?: "cover" | "logo";
+  // Menus whose items carry their own art (Solutions) swap the panel as you
+  // move down the list. The index is owned by Nav so it survives re-renders.
+  activeIndex?: number;
+  onItemHover?: (index: number) => void;
+  // Figma sizes the art per menu: 330x252 for Products/Solutions, and a
+  // portrait 330x444 for About Us, whose list is twice as long.
+  panelRatio?: "wide" | "tall";
+}
+
+// Declared at module scope on purpose: defining this inside Nav gave it a new
+// component identity on every render, so any state update remounted the whole
+// dropdown and collapsed Radix's open state mid-hover.
+function SimpleMegaDropdown({
+  label,
+  items,
+  image,
+  triggerClassName,
+  panel = "cover",
+  panelRatio = "wide",
+  activeIndex = 0,
+  onItemHover,
+}: SimpleMegaDropdownProps) {
+  const panelImage = items[activeIndex]?.image ?? image;
+  // Shared row styling with the Services panel: 60px tall, 16px padding,
+  // bold #002D7D label.
+  const rowBase =
+    "font-public-sans flex h-15 items-center justify-between gap-3 rounded-xl p-4 text-base font-bold leading-6";
+
+  return (
+    <NavigationMenuItem>
+      <NavigationMenuTrigger className={triggerClassName}>{label}</NavigationMenuTrigger>
+      <NavigationMenuContent>
+        <div className="flex items-stretch gap-8 py-8 pl-5 pr-8">
+          <ul className="grid w-[280px] shrink-0 content-start gap-1">
+            {items.map((item, index) => (
+              <li
+                key={item.label}
+                className="group"
+                onMouseEnter={() => onItemHover?.(index)}
+              >
+                {item.href ? (
+                  <NavigationMenuLink asChild>
+                    <Link
+                      href={item.href}
+                      className={cn(
+                        rowBase,
+                        "no-underline outline-none transition-colors text-[#002D7D]",
+                        "group-hover:bg-linear-to-r from-[rgba(0,81,228,0.8)] to-[rgba(0,81,228,0.4)] group-hover:text-white!"
+                      )}
+                    >
+                      {item.label}
+                    </Link>
+                  </NavigationMenuLink>
+                ) : (
+                  <span className={cn(rowBase, "cursor-not-allowed text-[#002D7D]/40")}>
+                    {item.label}
+                    <span className="rounded-full bg-muted px-2 py-0.5 text-xs font-semibold tracking-wide">
+                      Coming Soon!
+                    </span>
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
+
+          <div className="w-px shrink-0 self-stretch bg-black/10" />
+
+          {panel === "logo" ? (
+            // The exported asset is a large full-bleed image; Figma frames it
+            // to the wordmark via this crop, so reproduce that rather than
+            // scaling the whole PNG into the panel.
+            <div className="flex w-[320px] shrink-0 items-center justify-center p-2.5">
+              <div className="relative aspect-[1682/442] w-full overflow-hidden">
+                <Image
+                  src={image}
+                  alt=""
+                  className="absolute left-[-12.54%] top-[-95.7%] h-[268.33%] w-[125.39%] max-w-none"
+                />
+              </div>
+            </div>
+          ) : (
+            // A `fill` image is absolutely positioned and contributes no
+            // height, so the panel needs its own aspect ratio.
+            <div
+              className={cn(
+                "relative w-[330px] shrink-0 self-center overflow-hidden rounded-lg",
+                panelRatio === "tall" ? "aspect-[330/444]" : "aspect-[330/252]"
+              )}
+            >
+              <Image src={panelImage} alt="" fill sizes="330px" className="object-cover" />
+            </div>
+          )}
+        </div>
+      </NavigationMenuContent>
+    </NavigationMenuItem>
+  );
+}
+
 export default function Nav() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
   const [activeService, setActiveService] = useState<number>(0);
+  const [activeSolution, setActiveSolution] = useState<number>(0);
   const [mobileServicesOpen, setMobileServicesOpen] = useState<boolean>(false);
   const [mobileProductsOpen, setMobileProductsOpen] = useState<boolean>(false);
   const [mobileSolutionOpen, setMobileSolutionOpen] = useState<boolean>(false);
@@ -58,11 +166,14 @@ export default function Nav() {
   // Dark logo + dark link text on pages that open on a light background.
   const isLightBackground = isLightBackgroundRoute(pathname);
 
+  // The open mobile menu also calls for the dark logo, regardless of route.
+  const useDarkLogo = isLightBackground || mobileOpen;
+
   const pillItem = cn(
     "rounded-full px-4 py-2 text-sm font-medium transition-colors data-[state=open]:bg-white data-[state=open]:text-[#0b1020] data-[state=open]:hover:text-[#0b1020]",
     isLightBackground ? "text-[#0b1020] hover:text-primary" : "text-white hover:text-foreground"
   );
-  const pillItemActive = "bg-white text-[#0b1020] group-hover:text-[#0b1020]";
+  const pillItemActive = "bg-linear-to-r from-[rgba(0,81,228,0.8)] to-[rgba(0,81,228,0.4)] text-white!"
 
   interface ServiceItemProps {
     service: NavServiceItem;
@@ -74,104 +185,29 @@ export default function Nav() {
     return (
       <li>
         <NavigationMenuLink asChild>
+
           <Link
             href={service.href || "#"}
             className={cn(
-              "flex h-15 flex-row select-none items-center justify-between gap-3 rounded-xl p-4 no-underline outline-none transition-colors text-[#002D7D]",
-              "hover:bg-primary/5 focus:bg-primary/5",
-              isActive && "bg-primary/5"
+              "flex h-15 flex-row select-none items-center justify-between gap-3 rounded-xl p-4 no-underline outline-none transition-colors",
+              isActive
+                ? "bg-linear-to-r from-[rgba(0,81,228,0.8)] to-[rgba(0,81,228,0.4)] text-white!"
+                : "text-[#002D7D] hover:bg-primary/5 focus:bg-primary/5"
             )}
             onMouseEnter={onHover}
           >
             <span className="font-public-sans text-base font-bold leading-6">{service.title}</span>
-            <ChevronRight className="size-5 shrink-0" />
+            <ChevronRight className={cn("size-5 shrink-0",
+              isActive
+                ? "text-white!"
+                : "text-[#002D7D]"
+            )} />
           </Link>
         </NavigationMenuLink>
       </li>
     );
   }
 
-  interface SimpleMegaDropdownProps {
-    label: string;
-    items: MegaMenuLink[];
-    image: StaticImageData;
-    isActive: boolean;
-    // "cover" fills the right panel with photography; "logo" centres a
-    // contained brand mark (the Products panel in the design).
-    panel?: "cover" | "logo";
-  }
-
-  function SimpleMegaDropdown({
-    label,
-    items,
-    image,
-    isActive,
-    panel = "cover",
-  }: SimpleMegaDropdownProps) {
-    // Shared row styling with the Services panel: 60px tall, 16px padding,
-    // bold #002D7D label, chevron always visible.
-    const rowBase =
-      "font-public-sans flex h-15 items-center justify-between gap-3 rounded-xl p-4 text-base font-bold leading-6";
-
-    return (
-      <NavigationMenuItem>
-        <NavigationMenuTrigger className={cn(pillItem, isActive && pillItemActive)}>
-          {label}
-        </NavigationMenuTrigger>
-        <NavigationMenuContent>
-          <div className="flex items-stretch gap-8 py-8 pl-5 pr-8">
-            <ul className="grid w-[280px] shrink-0 content-start gap-1">
-              {items.map((item) => (
-                <li key={item.label}>
-                  {item.href ? (
-                    <NavigationMenuLink asChild>
-                      <Link
-                        href={item.href}
-                        className={cn(
-                          rowBase,
-                          "text-[#002D7D] no-underline outline-none transition-colors hover:bg-primary/5 focus:bg-primary/5"
-                        )}
-                      >
-                        {item.label}
-                      </Link>
-                    </NavigationMenuLink>
-                  ) : (
-                    <span className={cn(rowBase, "cursor-not-allowed text-[#002D7D]/40")}>
-                      {item.label}
-                      <span className="rounded-full bg-muted px-2 py-0.5 text-xs font-semibold tracking-wide">
-                        Coming Soon!
-                      </span>
-                    </span>
-                  )}
-                </li>
-              ))}
-            </ul>
-
-            <div className="w-px shrink-0 self-stretch bg-black/10" />
-
-            {panel === "logo" ? (
-              // The exported asset is a large full-bleed image; Figma frames it
-              // to the wordmark via this crop, so reproduce that rather than
-              // scaling the whole PNG into the panel.
-              <div className="flex w-[320px] shrink-0 items-center justify-center p-2.5">
-                <div className="relative aspect-[1682/442] w-full overflow-hidden">
-                  <Image
-                    src={image}
-                    alt=""
-                    className="absolute left-[-12.54%] top-[-95.7%] h-[268.33%] w-[125.39%] max-w-none"
-                  />
-                </div>
-              </div>
-            ) : (
-              <div className="w-[330px] shrink-0 self-center overflow-hidden rounded-lg">
-                <Image src={image} alt="" className="h-full w-full object-cover" />
-              </div>
-            )}
-          </div>
-        </NavigationMenuContent>
-      </NavigationMenuItem>
-    );
-  }
 
   interface MobileMegaSectionProps {
     label: string;
@@ -248,7 +284,7 @@ export default function Nav() {
         {/* Logo */}
         <Link href="/">
           <Image
-            src={isLightBackground ? Logo_Dark : Logo_Light}
+            src={useDarkLogo ? Logo_Dark : Logo_Light}
             alt="Company Logo"
             width={160}
             height={48}
@@ -261,16 +297,12 @@ export default function Nav() {
         <NavigationMenu className="hidden lg:flex">
           <NavigationMenuList
             className={cn(
-              "gap-0.75 rounded-full backdrop-blur-3xl px-1.75 py-1.5 border",
-              isLightBackground
-                ? "bg-black/5 border-black/10"
-                : "bg-white/15 border-white/20"
-            )}
+              "gap-0.75 rounded-full bg-accent/5 backdrop-blur-sm px-1.75 py-1.5 border border-white/20")}
           >
             <NavigationMenuItem>
               <NavigationMenuTrigger className={cn(pillItem, isActivePath("/services") && pillItemActive)}>
-                <Link href = {"/services"}>
-                Services
+                <Link href={"/services"}>
+                  Services
                 </Link>
               </NavigationMenuTrigger>
               <NavigationMenuContent>
@@ -295,9 +327,11 @@ export default function Nav() {
                           <Link
                             key={i}
                             href={sub.href}
-                            className="group flex items-center gap-4 text-[#3374E9]"
+                            // Deepens to #002D7D on hover, matching the
+                            // highlighted sub-service in the design.
+                            className="group flex items-center gap-4 text-[#3374E9] transition-colors hover:text-[#002D7D]"
                           >
-                            <span className="size-2 shrink-0 rounded-[2px] bg-[#3374E9]" />
+                            <span className="size-2 shrink-0 rounded-[2px] bg-current" />
                             <span className="font-public-sans text-base font-bold leading-6 group-hover:underline">
                               {sub.label}
                             </span>
@@ -313,7 +347,7 @@ export default function Nav() {
                         width={330}
                         height={156}
                         alt=""
-                        src={getSpotlightVideo(services_Nav[activeService].title)}
+                        src={getSpotlightImage(services_Nav[activeService].title)}
                         className="h-full w-full object-cover"
                       />
                     </div>
@@ -327,19 +361,24 @@ export default function Nav() {
               items={products_Nav}
               image={CertusLogoImg}
               panel="logo"
-              isActive={isActivePath("/products")}
+              triggerClassName={cn(pillItem, isActivePath("/products") && pillItemActive)}
             />
             <SimpleMegaDropdown
               label="Solutions"
               items={solutions_Nav}
               image={SolutionsPanelImg}
-              isActive={isActivePath("/services/solutions")}
+              triggerClassName={cn(pillItem, isActivePath("/services/solutions") && pillItemActive)}
+              activeIndex={activeSolution}
+              onItemHover={setActiveSolution}
             />
             <SimpleMegaDropdown
               label="About Us"
               items={aboutUs_Nav}
               image={AboutPanelImg}
-              isActive={isActivePath("/about-us")}
+              panelRatio="tall"
+              triggerClassName={cn(pillItem, isActivePath("/about-us") && pillItemActive)}
+              activeIndex={activeSolution}
+              onItemHover={setActiveSolution}
             />
           </NavigationMenuList>
         </NavigationMenu>
@@ -352,16 +391,28 @@ export default function Nav() {
         </div>
 
         {/* Mobile Menu Button */}
-        <div className="lg:hidden text-white">
-          <button onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
-            {mobileOpen ? <X size={28} /> : <Menu size={28} />}
+        <div className="lg:hidden">
+          <button
+            type="button"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-menu"
+            // The icon inherits currentColor, so it needs the same light/dark
+            // treatment as the logo and nav links.
+            className={cn(
+              "transition-colors",
+              isLightBackground ? "text-[#0b1020]" : "text-white"
+            )}
+          >
+            {mobileOpen ? <X size={28} className="text-[#0b1020]" /> : <Menu size={28} />}
           </button>
         </div>
       </div>
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="lg:hidden mt-4 px-4 bg-foreground text-accent overflow-hidden">
+        <div id="mobile-menu" className="lg:hidden mt-4 px-4 bg-foreground text-accent overflow-hidden">
           <div className="flex flex-col py-8 px-8 gap-6 text-xl font-medium">
             {/* Services section with animated dropdown */}
             <div>

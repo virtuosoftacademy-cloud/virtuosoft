@@ -15,17 +15,17 @@ function Translations() {
             <span className="relative block size-[14px] shrink-0">
               <Image src={BadgeSparkle} alt="" fill className="size-full" />
             </span>
-            <span className="font-helvetica-now-display text-[12px] font-bold leading-[16px] text-[#0051e4]">
+            <span className="text-[12px] font-bold leading-[16px] text-[#0051e4]">
               Original Paper
             </span>
           </span>
 
-          <h2 className="font-helvetica-now-display mt-2 text-4xl font-normal leading-[1.2] text-[#050f21] md:text-[40px] md:leading-[56px]">
+          <h2 className="mt-2 text-4xl font-normal leading-[1.2] text-[#050f21] md:text-[40px] md:leading-[56px]">
             Choose your preferred{" "}
             <span className="font-bold text-[#0051e4]">translation to read</span>
           </h2>
 
-          <p className="font-helvetica-now-display mt-3 text-[16px] leading-[22px] text-[#474747]">
+          <p className="mt-3 text-[16px] leading-[22px] text-[#474747]">
             Explore the original paper and its available translations, making
             valuable research and insights accessible to a wider audience.
           </p>
@@ -44,7 +44,7 @@ function Translations() {
                 </span>
               </span>
 
-              <p className="font-helvetica-now-display mt-8 text-center text-[24px] font-bold leading-[32px] text-black">
+              <p className="mt-8 text-center text-[24px] font-bold leading-[32px] text-black">
                 {paper.language}
               </p>
 

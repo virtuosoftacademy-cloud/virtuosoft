@@ -27,12 +27,12 @@ function MoreCaseStudies() {
     <section className="mx-auto max-w-7xl px-6 pb-16 md:px-10 lg:pb-24">
       <SectionBadge label="Who Built This" />
 
-      <h2 className="font-helvetica-now-display mt-5 max-w-3xl text-4xl leading-[1.2] text-[#080e19] md:text-[40px]">
+      <h2 className="mt-5 max-w-3xl text-4xl leading-[1.2] text-[#080e19] md:text-[40px]">
         16+ Years Building Enterprise Systems That{" "}
         <span className="font-bold text-[#0051e4]">Work in Production</span>
       </h2>
 
-      <p className="font-helvetica-now-display mt-3 max-w-2xl text-base leading-[22px] text-[#4c5468]">
+      <p className="mt-3 max-w-2xl text-base leading-[22px] text-[#4c5468]">
         Virtuosoft is an enterprise technology and AI consulting firm with offices in Pakistan,
         Saudi Arabia, UAE, USA and France. We have scaled 50+ startups and enterprises, impacted
         50,000+ users and built systems across ERP, FinTech, cybersecurity and custom software
@@ -89,16 +89,16 @@ function MoreCaseStudies() {
                   <div className="mx-2 mt-6 h-px bg-[#f3f6ff]" />
 
                   <div className="px-2 pb-3 pt-5">
-                    <h3 className="font-helvetica-now-display text-2xl font-bold leading-8 text-[#050f21]">
+                    <h3 className="text-2xl font-bold leading-8 text-[#050f21]">
                       {card.title}
                     </h3>
 
                     <div className="mt-4 flex flex-col gap-4 md:flex-row md:gap-8">
                       <div className="flex-1">
-                        <p className="font-helvetica-now-display text-sm font-bold leading-5 text-[#050f21]">
+                        <p className="text-sm font-bold leading-5 text-[#050f21]">
                           DESCRIPTION
                         </p>
-                        <p className="font-helvetica-now-display mt-1.5 text-sm leading-6 text-[#050f21]">
+                        <p className="mt-1.5 text-sm leading-6 text-[#050f21]">
                           {card.description}
                         </p>
                       </div>

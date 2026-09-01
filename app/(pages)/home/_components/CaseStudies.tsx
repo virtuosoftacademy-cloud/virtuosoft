@@ -90,13 +90,13 @@ function CaseStudies() {
     <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-0 my-16 lg:my-24">
       <div className="inline-flex items-center gap-2 rounded-full border border-primary bg-[#F8FAFF] px-4 py-2">
         <Image src={BadgeIcon} alt="" className="size-3.5" />
-        <span className="text-xs font-bold text-primary font-helvetica-now-display">Who Built This</span>
+        <span className="text-xs font-bold text-primary">Who Built This</span>
       </div>
-      <h2 className="font-helvetica-now-display mt-5 max-w-3xl text-4xl leading-[1.2] text-[#080e19] md:text-[40px]">
+      <h2 className="mt-5 max-w-3xl text-4xl leading-[1.2] text-[#080e19] md:text-[40px]">
         16+ Years Building Enterprise Systems That{" "}
         <span className="text-primary font-bold">Work in Production</span>
       </h2>
-      <p className="mt-3 text-base leading-[1.4] text-[#4c5468] max-w-2xl font-helvetica-now-display">
+      <p className="mt-3 text-base leading-[1.4] text-[#4c5468] max-w-2xl">
         Virtuosoft is an enterprise technology and AI consulting firm with offices in Pakistan, Saudi Arabia, UAE, USA and France. We have scaled 50+ startups and enterprises, impacted 50,000+ users and built systems across ERP, FinTech, cybersecurity and custom software engineering.
       </p>
 
@@ -143,17 +143,15 @@ function CaseStudies() {
                   </span>
                 </div>
 
-                {/* Divider sits above the title, per the design */}
-                <div className="mx-2 mt-6 h-px bg-[#F3F6FF]" />
 
-                <div className="px-2 pb-3 pt-5">
-                  <h3 className="font-helvetica-now-display text-2xl font-bold leading-8 text-[#050f21]">
+                <div className="px-2 pb-3 pt-10">
+                  <h3 className="text-2xl font-bold leading-8 text-[#050f21]">
                     {story.title}
                   </h3>
-                  <p className="font-helvetica-now-display mt-4 text-sm font-bold leading-5 text-[#050f21]">
+                  <p className="mt-4 text-sm font-bold leading-5 text-primary">
                     DESCRIPTION
                   </p>
-                  <p className="font-helvetica-now-display mt-1.5 text-sm leading-6 text-[#050f21]">
+                  <p className="mt-1.5 text-sm leading-6 text-[#050f21]">
                     {story.description}
                   </p>
                 </div>

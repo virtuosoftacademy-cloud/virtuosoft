@@ -45,20 +45,20 @@ function Cta() {
         <div className="relative flex flex-col lg:flex-row items-start lg:items-stretch justify-between gap-10 lg:gap-6">
           {/* Left: copy + actions */}
           <div className="max-w-[480px] shrink-0">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3.5 py-1.5 text-xs font-bold text-white font-helvetica-now-display">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3.5 py-1.5 text-xs font-bold text-white">
               <span className="size-1.5 rounded-full bg-white" />
               Get In Touch
             </span>
-            <h3 className="font-helvetica-now-display mt-5 text-3xl font-bold leading-tight text-white md:text-[40px]">
+            <h3 className="mt-5 text-3xl font-bold leading-tight text-white md:text-[40px]">
               Talk To An Expert
             </h3>
-            <p className="font-helvetica-now-display mt-3 text-sm leading-6 text-white/72">
+            <p className="mt-3 text-sm leading-6 text-white/72">
               Get professional insights to take your business to the next level. Connect with our experts and start your journey toward growth today.
             </p>
             <div className="mt-7 flex items-center gap-8">
               <Link
                 href="/contact"
-                className="font-helvetica-now-display inline-flex items-center justify-center rounded-full bg-white px-[26px] py-3.5 text-sm font-bold leading-5 text-[#050f21] transition-colors hover:bg-white/90"
+                className="inline-flex items-center justify-center rounded-full bg-white px-[26px] py-3.5 text-sm font-bold leading-5 text-[#050f21] transition-colors hover:bg-white/90"
               >
                 Get Started
               </Link>
@@ -79,10 +79,10 @@ function Cta() {
                   className="text-center lg:pt-[var(--step)]"
                   style={{ ["--step" as string]: `${i * 78}px` }}
                 >
-                  <p className="font-helvetica-now-display text-xl md:text-[32px] font-bold leading-10 text-white">
+                  <p className="text-xl md:text-[32px] font-bold leading-10 text-white">
                     {stat.value}
                   </p>
-                  <p className="font-helvetica-now-display mt-1 text-xs leading-4 text-white/65 md:whitespace-nowrap">
+                  <p className="mt-1 text-xs leading-4 text-white/65 md:whitespace-nowrap">
                     {stat.label}
                   </p>
                 </div>

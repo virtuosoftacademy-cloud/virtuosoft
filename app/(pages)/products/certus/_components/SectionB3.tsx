@@ -40,7 +40,7 @@ export default function SectionB3() {
             {TABS.map((tab, index) => (
               <span
                 key={tab}
-                className={`font-helvetica-now-display inline-flex h-10 items-center justify-center rounded-[50px] px-4 text-center text-xs font-bold leading-4 ${
+                className={`inline-flex h-10 items-center justify-center rounded-[50px] px-4 text-center text-xs font-bold leading-4 ${
                   index === 0
                     ? "w-[100px] bg-[#0051e4] text-white"
                     : "border border-[#0051e4] text-[#0051e4]"
@@ -53,11 +53,11 @@ export default function SectionB3() {
 
           <div className="flex flex-col items-start gap-8 lg:flex-row lg:gap-[62px]">
             <div className="flex w-full flex-col gap-3 lg:w-[362px] lg:shrink-0">
-              <h3 className="font-helvetica-now-display text-[28px] font-bold leading-[36px] text-[#050f21] md:text-[32px] md:leading-10">
+              <h3 className="text-[28px] font-bold leading-[36px] text-[#050f21] md:text-[32px] md:leading-10">
                 Every Document, Sorted{" "}
                 <span className="text-[#0051e4]">by Company</span>
               </h3>
-              <p className="font-helvetica-now-display text-sm leading-6 text-[#474747]">
+              <p className="text-sm leading-6 text-[#474747]">
                 Certus keeps every document organized by company, automatically. No
                 folders to manage, no manual sorting. Open any company and see every
                 invoice or purchase order it has processed, and whether it went through

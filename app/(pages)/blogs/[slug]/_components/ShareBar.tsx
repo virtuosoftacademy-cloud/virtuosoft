@@ -17,7 +17,7 @@ function ShareBar({ title }: ShareBarProps) {
             />
 
             <div className="relative flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
-                <p className="font-helvetica-now-display text-base font-bold leading-6 text-white">
+                <p className="text-base font-bold leading-6 text-white">
                     Like what you see? Share with a friend.
                 </p>
                 <ShareLinks title={title} variant="white" />

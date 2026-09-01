@@ -70,7 +70,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <ArticleHero post={post} />
 
               <article
-                className="font-helvetica-now-display text-[#050F21]
+                className="text-[#050F21]
                   [&_h2]:mt-10 [&_h2]:mb-5 [&_h2]:scroll-mt-28 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:leading-[1.25] md:[&_h2]:text-[32px]
                   [&_h3]:mt-10 [&_h3]:mb-5 [&_h3]:scroll-mt-28 [&_h3]:text-2xl [&_h3]:font-bold [&_h3]:leading-[1.25] md:[&_h3]:text-[32px]
                   [&_h4]:mt-8 [&_h4]:mb-4 [&_h4]:text-xl [&_h4]:font-bold [&_h4]:leading-7

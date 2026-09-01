@@ -3,8 +3,10 @@
 import { ReactLenis } from 'lenis/react'
 
 import Hero from './_components/Hero'
+import AuditProcess from './_components/AuditProcess'
 import Evidence from './_components/Evidence'
 import Problem from './_components/Problem'
+import ProcessingByHand from './_components/ProcessingByHand'
 import Demo from './_components/Demo'
 import SectionA1 from './_components/SectionA1'
 import SectionA2 from './_components/SectionA2'
@@ -28,8 +30,10 @@ export default function TarabutCaseStudyPage() {
   return (
     <ReactLenis root>
       <Hero />
+      <AuditProcess />
       <Evidence />
       <Problem />
+      <ProcessingByHand />
       <Demo />
       <SectionA1 />
       <SectionA2 />

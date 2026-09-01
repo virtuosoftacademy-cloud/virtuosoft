@@ -10,11 +10,11 @@ function Panel({ panel, visual }: { panel: CaseStudyPanel; visual: StaticImageDa
   return (
     <div className="flex h-full flex-col drop-shadow-[0px_4px_4px_rgba(0,0,0,0.07)]">
       <div className="rounded-t-[20px] border border-[#dbeafe] bg-white px-6 py-5 md:px-8">
-        <p className="font-helvetica-now-display text-2xl leading-10 text-[#050f21] md:text-[28px]">
+        <p className="text-2xl leading-10 text-[#050f21] md:text-[28px]">
           {panel.titleLead}{" "}
           <span className="font-bold text-[#0051e4]">{panel.titleAccent}</span>
         </p>
-        <p className="font-helvetica-now-display mt-2 text-base leading-[22px] text-[#474747]">
+        <p className="mt-2 text-base leading-[22px] text-[#474747]">
           {panel.intro}
         </p>
       </div>
@@ -24,7 +24,7 @@ function Panel({ panel, visual }: { panel: CaseStudyPanel; visual: StaticImageDa
           {panel.points.map((point) => (
             <li key={point} className="flex items-start gap-3">
               <Image src={Tick} alt="" className="mt-1 size-[18px] shrink-0" />
-              <span className="font-helvetica-now-display text-base leading-[22px] text-[#474747]">
+              <span className="text-base leading-[22px] text-[#474747]">
                 {point}
               </span>
             </li>
@@ -48,15 +48,15 @@ function Panel({ panel, visual }: { panel: CaseStudyPanel; visual: StaticImageDa
 
 function ProblemSolution() {
   return (
-    <section className="mx-auto max-w-7xl px-6 py-16 md:px-10 lg:py-24">
+    <section className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-0 py-16 lg:py-24 z-30 relative">
       <SectionBadge label="Customer Success Story" />
 
-      <h2 className="font-helvetica-now-display mt-5 max-w-[766px] text-4xl leading-[1.2] text-[#080e19] md:text-[40px]">
+      <h2 className="mt-5 max-w-[766px] text-4xl leading-[1.2] text-[#080e19] md:text-[40px]">
         How Virtuosoft Helped Tarabut Scale Secure{" "}
         <span className="font-bold text-[#0051e4]">Open Banking Across MENA</span>
       </h2>
 
-      <p className="font-helvetica-now-display mt-3 max-w-[730px] text-base leading-[22px] text-[#474747]">
+      <p className="mt-3 max-w-[730px] text-base leading-[22px] text-[#474747]">
         Virtuosoft partnered with Tarabut, the MENA region&rsquo;s leading open banking platform, to
         scale engineering, QA and DevOps teams for faster delivery and secure financial
         infrastructure.

@@ -119,10 +119,10 @@ export default function SectionD1() {
               className="flex min-h-[149px] flex-col rounded-[22px] border border-[#eef1f7] bg-gradient-to-br from-white to-[#fbfcfe] p-[18px] shadow-[0px_0px_29px_0px_rgba(52,67,122,0.09)]"
             >
               <IndustryIcon industry={industry} />
-              <h3 className="font-helvetica-now-display mt-[14px] text-sm font-bold leading-5 text-[#13161b]">
+              <h3 className="mt-[14px] text-sm font-bold leading-5 text-[#13161b]">
                 {industry.title}
               </h3>
-              <p className="font-helvetica-now-display mt-[6px] text-xs leading-4 text-[#4a5261]">
+              <p className="mt-[6px] text-xs leading-4 text-[#4a5261]">
                 {industry.body}
               </p>
             </article>

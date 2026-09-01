@@ -28,13 +28,13 @@ function WhyChooseUs() {
       <div className="relative max-w-7xl mx-auto px-6 md:px-12 lg:px-0">
         <div className="inline-flex items-center gap-2 rounded-full border border-primary bg-[#F8FAFF] px-4 py-2">
           <Image src={BadgeIcon} alt="" className="size-3.5" />
-          <span className="text-xs font-bold text-primary font-helvetica-now-display">The intelligence layer</span>
+          <span className="text-xs font-bold text-primary">The intelligence layer</span>
         </div>
-        <h2 className="font-helvetica-now-display mt-5 max-w-2xl text-4xl leading-[1.4] text-[#050f21] md:text-[40px] whitespace-pre-line">
+        <h2 className="mt-5 max-w-2xl text-4xl leading-[1.4] text-[#050f21] md:text-[40px] whitespace-pre-line">
           Why Choose Us? {"\n"}<span className="text-primary font-bold">Technology With Purpose</span>
         </h2>
         {" "}
-        <p className="mt-3 text-base leading-[1.4] text-[#474747] max-w-xl font-helvetica-now-display">
+        <p className="mt-3 text-base leading-[1.4] text-[#474747] max-w-xl">
           We combine innovation, industry expertise and proven execution to deliver scalable technology solutions that create measurable business value.
         </p>
 
@@ -62,15 +62,15 @@ function WhyChooseUs() {
                     height={60}
                     className="size-15 object-contain"
                   />
-                  <span className="text-sm leading-6 text-[#0051e4]/40 font-helvetica-now-display">
+                  <span className="text-sm leading-6 text-[#0051e4]/40">
                     {card.index}
                   </span>
                 </div>
-                <h3 className="mt-6 text-xl font-bold text-[#050f21] font-helvetica-now-display">
+                <h3 className="mt-6 text-xl font-bold text-[#050f21]">
                   {card.title}
                 </h3>
                 <div className="mt-2 h-[3px] w-[34px] rounded-full bg-primary" />
-                <p className="mt-4 text-sm leading-6 text-[#5c6169] font-helvetica-now-display">
+                <p className="mt-4 text-sm leading-6 text-[#5c6169]">
                   {card.description}
                 </p>
               </div>

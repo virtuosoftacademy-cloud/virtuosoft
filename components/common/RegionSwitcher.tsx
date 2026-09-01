@@ -11,10 +11,11 @@ import GlobeIcon from "@/public/assets/Images/nav/globe-icon.svg"
 import GlobeIconWhite from "@/public/assets/Images/nav/globe-icon-white.svg"
 
 // Global's canonical URL is the site root; UK/KSA live under /home/<region>.
+// Order matches the design: Global, UK, KSA.
 const REGION_OPTIONS = [
-  { code: "ksa", label: "KSA", href: "/home/ksa" },
-  { code: "uk", label: "UK", href: "/home/uk" },
   { code: "global", label: "Global", href: "/" },
+  { code: "uk", label: "UK", href: "/home/uk" },
+  { code: "ksa", label: "KSA", href: "/home/ksa" },
 ] as const
 
 // "/" is a prefix of every path, so the root option can only be matched
@@ -113,7 +114,7 @@ export default function RegionSwitcher({ variant = "desktop", onNavigate }: Regi
                     onNavigate?.()
                   }}
                   className={cn(
-                    "font-helvetica-now-display text-base transition-colors hover:text-primary",
+                    "text-base transition-colors hover:text-primary",
                     activeRegion === region.code ? "text-white font-semibold" : "text-accent"
                   )}
                 >
@@ -137,15 +138,17 @@ export default function RegionSwitcher({ variant = "desktop", onNavigate }: Regi
         aria-haspopup="menu"
         aria-expanded={open}
       >
+        {/* GlobeIcon is the primary-blue mark: used on light pages, and
+            whenever the dropdown is open so the trigger reads as active. */}
         <Image
-          src={isLightBackground ? GlobeIcon : GlobeIconWhite}
+          src={isLightBackground || open ? GlobeIcon : GlobeIconWhite}
           alt=""
           className="size-5"
         />
       </button>
 
       {open && (
-        <div className="absolute right-0 top-[calc(100%+10px)] z-50 flex w-[79px] flex-col items-center gap-1 rounded-lg bg-white p-2 shadow-[0_4px_2px_rgba(0,0,0,0.15)]">
+        <div className="absolute right-0 top-[calc(100%+10px)] z-50 flex w-19.75 flex-col items-start gap-1 rounded-lg bg-white p-2 shadow-[0_4px_2px_rgba(0,0,0,0.15)]">
           {REGION_OPTIONS.map((region, index) => (
             <div key={region.code} className="w-full">
               {index > 0 && <div className="my-1 h-px w-full bg-black/10" />}
@@ -153,7 +156,7 @@ export default function RegionSwitcher({ variant = "desktop", onNavigate }: Regi
                 href={region.href}
                 onClick={() => setOpen(false)}
                 className={cn(
-                  "font-helvetica-now-display block w-full text-center text-sm leading-6 text-[#050F21] hover:font-medium",
+                  "block w-full text-left text-sm leading-6 text-[#050F21] hover:font-medium",
                   activeRegion === region.code && "font-semibold"
                 )}
               >

@@ -36,7 +36,7 @@ function StatIcon({ icon }: { icon: "institutions" | "users" | "funding" }) {
 function Hero() {
   return (
     <section
-      className="relative overflow-hidden"
+      className="relative overflow-hidden -mt-20"
       style={{
         backgroundImage:
           "linear-gradient(108.88deg, rgb(6,11,25) 9.52%, rgb(4,26,87) 57.14%, rgb(13,51,143) 104.76%)",
@@ -67,19 +67,19 @@ function Hero() {
         }}
       />
 
-      <div className="relative mx-auto max-w-7xl px-6 pt-16 pb-10 md:px-10 lg:pt-24">
+      <div className="relative mx-auto max-w-7xl pb-4 pt-16 px-6 sm:px-10 lg:px-0 lg:pt-24">
         <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-8">
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border-[0.85px] border-white/25 bg-white/10 px-3 py-1.5">
-              <span className="size-[5px] rounded-full bg-[#0051e4]" />
+              <span className="size-[5px] rounded-full bg-primary" />
               <span className="text-[11px] font-semibold text-white">Case Study</span>
             </span>
 
-            <h1 className="font-helvetica-now-display mt-4 max-w-[601px] text-4xl font-bold leading-[1.17] text-white md:text-5xl">
+            <h1 className="mt-4 max-w-[601px] text-4xl font-bold leading-[1.17] text-white md:text-5xl">
               Powering Secure Open Banking Innovation
             </h1>
 
-            <p className="font-helvetica-now-display mt-6 max-w-[644px] text-base leading-6 text-white/90">
+            <p className="mt-6 max-w-[644px] text-base leading-6 text-white/90">
               Virtuosoft has been partnering with Tarabut&rsquo;s Riyadh subsidiary for over 1.6
               years as a software development and security controls implementation partner. As the
               MENA region&rsquo;s leading open banking and embedded finance platform, Tarabut
@@ -93,7 +93,7 @@ function Hero() {
               {caseStudies_HeroTags.map((tag) => (
                 <span
                   key={tag}
-                  className="font-helvetica-now-display inline-flex items-center rounded-full border-[0.85px] border-white/20 bg-white/8 px-3 py-1.5 text-sm font-bold leading-5 text-white/85"
+                  className="inline-flex items-center rounded-full border-[0.85px] border-white/20 bg-white/8 px-3 py-1.5 text-sm font-bold leading-5 text-white/85"
                 >
                   {tag}
                 </span>
@@ -102,7 +102,7 @@ function Hero() {
                 href="https://www.tarabut.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-helvetica-now-display ml-1 inline-flex items-center gap-1.5 text-sm font-bold leading-5 text-white transition-opacity hover:opacity-80"
+                className="ml-1 inline-flex items-center gap-1.5 text-sm font-bold leading-5 text-white transition-opacity hover:opacity-80"
               >
                 View Live Site
                 <span aria-hidden className="text-xs font-semibold">
@@ -144,18 +144,18 @@ function Hero() {
         </div>
 
         {/* Floating stat row */}
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3">
+        <div className="relative top-10 z-20 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {caseStudies_HeroStats.map((stat) => (
             <div
               key={stat.value}
-              className="flex items-start gap-4 rounded-[13px] border-[0.74px] border-[#ebedf2]/60 bg-white/10 px-4 py-5"
+              className="flex items-start gap-4 rounded-[13px] border-[0.74px] border-[#ebedf2]/60 bg-white/10 backdrop-blur-lg px-4 py-5"
             >
               <StatIcon icon={stat.icon} />
               <span className="flex flex-col gap-0.5">
-                <span className="font-helvetica-now-display text-xl font-medium leading-7 text-white">
+                <span className="text-xl font-medium leading-7 text-white">
                   {stat.value}
                 </span>
-                <span className="font-helvetica-now-display text-base leading-[22px] text-white">
+                <span className="text-base leading-[22px] text-white">
                   {stat.label}
                 </span>
               </span>

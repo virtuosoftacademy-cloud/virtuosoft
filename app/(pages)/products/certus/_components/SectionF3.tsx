@@ -87,7 +87,7 @@ export default function SectionF3() {
 
             <Link
               href="/contact"
-              className="font-helvetica-now-display inline-flex h-[59px] w-[270px] items-center justify-center rounded-[90px] border border-[#0051e4] bg-white text-base font-bold text-[#0051e4] transition-colors hover:bg-[#f8faff]"
+              className="inline-flex h-[59px] w-[270px] items-center justify-center rounded-[90px] border border-[#0051e4] bg-white text-base font-bold text-[#0051e4] transition-colors hover:bg-[#f8faff]"
             >
               Start Your Free POC
             </Link>

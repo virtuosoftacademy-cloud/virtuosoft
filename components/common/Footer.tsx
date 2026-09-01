@@ -1,10 +1,11 @@
-' use client'
+'use client'
 import { FooterData, socialLinks } from '@/app/_constant';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import dmca from '@/public/assets/Images/dmca.svg'
 import Logo from '@/public/logo-light.png'
+import NewsletterForm from './NewsletterForm'
 
 interface AddressItem {
   flagimg: string;
@@ -127,59 +128,50 @@ Karachi, Pakistan`,
             </div>
           </div>
 
-          {/* <div>
-            <h4 className="text-white uppercase text-xs tracking-wide font-semibold mb-4">
-              Subscribe to Newsletter
-            </h4>
-            <form className="flex flex-col sm:flex-row gap-3">
-              <input
-                type="email"
-                placeholder="Get news by email"
-                className="flex-1 bg-transparent border border-[#8A94A4] rounded-lg px-4 py-3 text-white placeholder-[#8A94A4] focus:outline-none focus:border-[#0755E9] text-sm"
-              />
-              <Button
-                // type="submit"
-                className="px-6 py-3"
-              >
-                Subscribe
-              </Button>
-            </form>
-          </div> */}
+          <div className="flex flex-col gap-8">
 
-          <div className="flex flex-col shrink-0">
-            <h4 className="text-white uppercase text-xs tracking-wide font-semibold mb-4">Follow Us</h4>
-            <div className="flex gap-6 mt-1">
-              {socialLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={link.name}
-                  className='border border-accent/20 rounded p-2'
-                >
-                  <Image
-                    src={link.src}
-                    alt={link.name}
-                    width={20}
-                    height={20}
-                    className="w-6 h-6 hover:opacity-70 transition-opacity"
-                  />
-                </Link>
-              ))}
+            <div className="flex flex-col">
+              <h4 className="text-white uppercase text-xs tracking-wide font-semibold mb-4">
+                Subscribe to Newsletter
+              </h4>
+              <NewsletterForm />
+            </div>
+
+            <div className="flex flex-col shrink-0">
+              <h4 className="text-white uppercase text-xs tracking-wide font-semibold mb-4">Follow Us</h4>
+              <div className="flex gap-6 mt-1">
+                {socialLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={link.name}
+                    className='border border-accent/20 rounded p-2'
+                  >
+                    <Image
+                      src={link.src}
+                      alt={link.name}
+                      width={20}
+                      height={20}
+                      className="w-6 h-6 hover:opacity-70 transition-opacity"
+                    />
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         </div>
 
         {/* ROW 4: Brand + Copyright */}
         <div className="flex flex-col justify-between sm:flex-row items-start sm:items-center gap-6 pt-8 border-t border-foreground">
-          <div className='flex gap-8'>
+          <div className='flex gap-8 items-center'>
             <Image
               height={200}
               width={200}
               src={Logo}
               alt="VirtuoSoft Logo"
-              className="w-40 h-8"
+              className="w-40"
             />
             <Image
               src={dmca}

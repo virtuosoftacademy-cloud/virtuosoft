@@ -14,7 +14,7 @@ function ArrowLink({ href, label }: { href: string; label: string }) {
   return (
     <Link
       href={href}
-      className="font-helvetica-now-display inline-flex items-center gap-2 text-sm font-bold leading-5 text-[#0051e4] hover:underline"
+      className="inline-flex items-center gap-2 text-sm font-bold leading-5 text-[#0051e4] hover:underline"
     >
       {label}
       <span aria-hidden="true">&rarr;</span>
@@ -24,11 +24,11 @@ function ArrowLink({ href, label }: { href: string; label: string }) {
 
 function ContactInfoPanel() {
   return (
-    <div className="rounded-[41px] rounded-bl-[25px] border border-[#f3f4f6] bg-white p-8 shadow-[0_1px_1px_rgba(0,0,0,0.05)] md:p-10">
+    <div className="rounded-4xl border border-[#f3f4f6] bg-white p-8 shadow-[0_1px_1px_rgba(0,0,0,0.05)] md:p-10">
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
         <div className="flex flex-col gap-3">
           <Image src={IconCareer} alt="" className="size-6" />
-          <h3 className="font-helvetica-now-display text-lg font-medium leading-7 text-[#050f21]">
+          <h3 className="text-lg font-bold leading-7 tracking-[-1px] text-[#050f21]">
             Looking for career?
           </h3>
           <ArrowLink href="/careers" label="Apply for a job" />
@@ -36,7 +36,7 @@ function ContactInfoPanel() {
 
         <div className="flex flex-col gap-3">
           <Image src={IconQuestion} alt="" className="size-6" />
-          <h3 className="font-helvetica-now-display text-lg font-medium leading-7 text-[#050f21]">
+          <h3 className="text-lg font-bold leading-7 tracking-[-1px] text-[#050f21]">
             Have a general question?
           </h3>
           <ArrowLink href="/#faq" label="See our FAQs" />
@@ -47,12 +47,12 @@ function ContactInfoPanel() {
 
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
         <div className="flex flex-col gap-4">
-          <h3 className="font-helvetica-now-display text-lg font-medium leading-7 text-[#050f21]">
+          <h3 className="text-lg font-bold leading-7 tracking-[-1px] text-[#050f21]">
             Sales Inquiries
           </h3>
           <a
             href="tel:+923001324657"
-            className="font-helvetica-now-display text-base leading-[22px] text-[#474747] hover:text-primary"
+            className="text-base leading-[22px] text-[#474747] hover:text-primary"
           >
             +92 (300) 1324657
           </a>
@@ -72,12 +72,12 @@ function ContactInfoPanel() {
         </div>
 
         <div className="flex flex-col gap-4">
-          <h3 className="font-helvetica-now-display text-lg font-medium leading-7 text-[#050f21]">
+          <h3 className="text-lg font-bold leading-7 tracking-[-1px] text-[#050f21]">
             Customer Support
           </h3>
           <a
             href="mailto:support@virtuosoft.com"
-            className="font-helvetica-now-display text-base leading-[22px] text-[#474747] hover:text-primary"
+            className="text-base leading-[22px] text-[#474747] hover:text-primary"
           >
             support@virtuosoft.com
           </a>
@@ -90,8 +90,8 @@ function ContactInfoPanel() {
         </div>
       </div>
 
-      <div className="mt-10">
-        <h3 className="font-helvetica-now-display text-lg font-medium leading-7 text-[#050f21]">
+      <div className="mt-60">
+        <h3 className="text-lg font-bold leading-7 tracking-[-1px] text-[#050f21]">
           So what happens next?
         </h3>
         <div className="relative mt-4 aspect-[698/380] w-full overflow-hidden rounded-2xl shadow-[0_10px_25px_-5px_rgba(0,0,0,0.1),0_8px_10px_-6px_rgba(0,0,0,0.1)]">

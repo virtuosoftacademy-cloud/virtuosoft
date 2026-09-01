@@ -14,7 +14,7 @@ function RelatedBlogs({ posts }: RelatedBlogsProps) {
 
     return (
         <section className="flex flex-col gap-7">
-            <h2 className="font-helvetica-now-display text-2xl font-bold leading-10 text-[#1B1B1F] md:text-[32px]">
+            <h2 className="text-2xl font-bold leading-10 text-[#1B1B1F] md:text-[32px]">
                 Related Blogs
             </h2>
 

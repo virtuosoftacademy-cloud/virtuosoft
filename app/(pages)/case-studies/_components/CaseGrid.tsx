@@ -174,15 +174,15 @@ function CaseCardItem({ card }: { card: CaseCard }) {
       <div className="px-4">
         <span aria-hidden className="mt-10 block h-px w-full bg-[#f3f6ff]" />
 
-        <h3 className="font-helvetica-now-display mt-5 text-2xl font-bold leading-8 text-[#050f21]">
+        <h3 className="mt-5 text-2xl font-bold leading-8 text-[#050f21]">
           {card.title}
         </h3>
 
-        <p className="font-helvetica-now-display mt-6 text-sm font-bold leading-5 text-[#050f21]">
+        <p className="mt-6 text-sm font-bold leading-5 text-[#050f21]">
           DESCRIPTION
         </p>
 
-        <p className="font-helvetica-now-display mb-7 mt-1 text-sm leading-6 text-[#474747]">
+        <p className="mb-7 mt-1 text-sm leading-6 text-[#474747]">
           {card.description}
         </p>
       </div>
@@ -207,7 +207,7 @@ function CaseGrid() {
           <button
             type="button"
             onClick={() => setShowAll(true)}
-            className="font-helvetica-now-display inline-flex h-12 w-[200px] items-center justify-center rounded-[50px] border-[1.5px] border-[#0051e4] text-base font-bold leading-6 text-[#0051e4] transition-colors hover:bg-[#0051e4] hover:text-white"
+            className="inline-flex h-12 w-[200px] items-center justify-center rounded-[50px] border-[1.5px] border-[#0051e4] text-base font-bold leading-6 text-[#0051e4] transition-colors hover:bg-[#0051e4] hover:text-white"
           >
             Load More
           </button>

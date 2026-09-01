@@ -36,26 +36,26 @@ const networkNodes = [
 function Industries() {
   return (
     <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-0 my-16 lg:my-24">
-      <div className="flex justify-between items-center">
+      <div className="flex items-center">
         <div>
 
           <div className="inline-flex items-center gap-2 rounded-full border border-primary bg-[#F8FAFF] px-4 py-2">
             <Image src={BadgeIcon} alt="" className="size-3.5" />
-            <span className="text-xs font-bold text-primary font-helvetica-now-display">Our Products</span>
+            <span className="text-xs font-bold text-primary">Our Products</span>
           </div>
-          <h2 className="font-helvetica-now-display mt-5 max-w-2xl text-4xl leading-[1.2] text-[#080e19] md:text-[40px]">
+          <h2 className="mt-5 max-w-2xl text-4xl leading-[1.2] text-[#080e19] md:text-[40px]">
             Purpose-Built Technology for <span className="text-primary font-bold">Complex Industries</span>
           </h2>
-          <p className="mt-4 text-base leading-[1.4] text-[#474747] max-w-xl font-helvetica-now-display">
+          <p className="mt-4 text-base leading-[1.4] text-[#474747] max-w-xl">
             From intelligent document processing to AI-powered medical imaging, Virtuosoft builds specialized platforms that turn complex workflows into smarter, scalable digital experiences.
           </p>
         </div>
-        <Link
+        {/* <Link
           href="/services"
           className="relative mt-8 hidden lg:inline-flex items-center rounded-full border-2 border-primary px-4 py-2 text-lg font-semibold text-primary hover:bg-primary hover:text-white transition-colors"
         >
           View All Services
-        </Link>
+        </Link> */}
       </div>
 
       {/* Product tab selector — each product now has its own page */}
@@ -64,7 +64,7 @@ function Industries() {
           <Link
             key={tab.id}
             href={tab.href}
-            className={`flex h-10 items-center justify-center rounded-full px-4 md:px-6 text-xs font-bold font-helvetica-now-display transition-colors ${i === 0
+            className={`flex h-10 items-center justify-center rounded-full px-4 md:px-6 text-xs font-bold transition-colors ${i === 0
               ? "bg-primary text-white hover:bg-primary/90"
               : "border border-primary text-primary hover:bg-primary/5"
               }`}
@@ -83,21 +83,21 @@ function Industries() {
             <Image src={CertusCardIcon} alt="Certus" className="size-14" />
           </div>
           <h3 className="relative mt-4 text-xl font-bold text-foreground">Certus</h3>
-          <p className="relative mt-3 text-xs text-neutral-500 leading-relaxed font-helvetica-now-display">
-            AI-native document intelligence for enterprise finance teams. Certus reads, validates and posts invoices and purchase orders in seconds — combining OCR, LLMs and Agentic AI in a single platform.
+          <p className="relative mt-3 text-xs text-neutral-500 leading-relaxed">
+            AI-native document intelligence for enterprise finance teams. Certus reads, validates and posts invoices and purchase orders in seconds, combining OCR, LLMs and Agentic AI in a single platform.
           </p>
           <div className="relative mt-6 grid grid-cols-3 gap-4 border-t border-[#E5E8ED] pt-5">
             <div>
               <p className="font-semibold text-foreground text-sm">6 sec</p>
-              <p className="text-xs text-neutral-500 mt-1 font-helvetica-now-display">per document, start to post</p>
+              <p className="text-xs text-neutral-500 mt-1">per document, start to post</p>
             </div>
             <div>
               <p className="font-semibold text-foreground text-sm">3×</p>
-              <p className="text-xs text-neutral-500 mt-1 font-helvetica-now-display">self-verification passes</p>
+              <p className="text-xs text-neutral-500 mt-1">self-verification passes</p>
             </div>
             <div>
               <p className="font-semibold text-foreground text-sm">99.9%</p>
-              <p className="text-xs text-neutral-500 mt-1 font-helvetica-now-display">posting accuracy</p>
+              <p className="text-xs text-neutral-500 mt-1">posting accuracy</p>
             </div>
           </div>
           <Link
@@ -111,9 +111,9 @@ function Industries() {
         {/* Middle column: Tagline + Glass Icon panels */}
         <div className="flex flex-col gap-4">
           <div className="rounded-3xl border border-white bg-[#E3E8FA] shadow-[0_0_29px_0_rgba(52,67,122,0.09)] p-7 text-center">
-            <p className="font-bold text-foreground text-lg font-helvetica-now-display">Documents, understood.</p>
-            <p className="mt-2 text-xs text-neutral-500 font-helvetica-now-display">
-              Every invoice read, verified against your business rules, and posted — never guessed.
+            <p className="font-bold text-foreground text-lg">Documents, understood.</p>
+            <p className="mt-2 text-xs text-neutral-500">
+              Every invoice read, verified against your business rules, and posted. Never guessed.
             </p>
           </div>
           <div className="relative flex-1 min-h-[220px] overflow-hidden rounded-3xl">
@@ -123,7 +123,7 @@ function Industries() {
                 <Image src={GlassPanelEllipse} alt="" fill className="object-contain" />
                 <Image src={GlassPanelIcon} alt="" className="absolute inset-0 m-auto size-8" />
               </div>
-              <p className="mt-4 text-xs text-white/85 font-helvetica-now-display">Posts only what it can verify.</p>
+              <p className="mt-4 text-xs text-white/85">Posts only what it can verify.</p>
             </div>
           </div>
         </div>
@@ -139,17 +139,17 @@ function Industries() {
                 style={{ left: node.left, top: node.top, width: node.size, aspectRatio: "1 / 1" }}
               >
                 <Image src={node.active ? NetworkNodeDotActive : NetworkNodeDot} alt="" className="size-2.5" />
-                <span className="text-[10px] font-medium text-foreground font-helvetica-now-display">{node.label}</span>
+                <span className="text-[10px] font-medium text-foreground">{node.label}</span>
               </div>
             ))}
           </div>
           <div className="rounded-3xl border border-white bg-gradient-to-br from-white/92 to-white/62 shadow-[0_0_29px_0_rgba(52,67,122,0.09)] px-6 py-5 text-center">
-            <p className="text-[9px] font-medium tracking-wide text-primary font-helvetica-now-display">Who It Serves</p>
+            <p className="text-[9px] font-medium tracking-wide text-primary">Who It Serves</p>
             <div className="mt-3 flex flex-col items-center gap-2">
               {whoItServes.map((pill) => (
                 <span
                   key={pill.label}
-                  className={`rounded-full px-4 py-2 text-[11px] font-medium font-helvetica-now-display ${pill.active ? "bg-primary text-white" : "bg-[#F6F7F9] text-foreground"
+                  className={`rounded-full px-4 py-2 text-[11px] font-medium ${pill.active ? "bg-primary text-white" : "bg-[#F6F7F9] text-foreground"
                     }`}
                 >
                   {pill.label}

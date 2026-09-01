@@ -63,10 +63,10 @@ export default function SectionB2() {
                   className="size-[34px]"
                 />
               </div>
-              <p className="font-helvetica-now-display text-base font-bold leading-6 text-[#13161b]">
+              <p className="text-base font-bold leading-6 text-[#13161b]">
                 {source.title}
               </p>
-              <p className="font-helvetica-now-display text-sm leading-6 text-[#4a5261]">
+              <p className="text-sm leading-6 text-[#4a5261]">
                 {source.body}
               </p>
             </div>

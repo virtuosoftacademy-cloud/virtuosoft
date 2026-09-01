@@ -51,17 +51,11 @@
 }
 
 body{
-  font-family: var(--font-host-grotesk-sans),sans-serif;
-}
-h1,h2,h3{
-  font-family: var(--font-sofia-condensed-sans),sans-serif;
-}
-.font-public-sans{
   font-family: "Public Sans",sans-serif;
 }
-.font-helvetica-now-display{
-  font-family: var(--font-helvetica-now-display),sans-serif;
-}
+/* h1,h2,h3{
+  font-family: var(--font-sofia-condensed-sans),sans-serif;
+} */
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);

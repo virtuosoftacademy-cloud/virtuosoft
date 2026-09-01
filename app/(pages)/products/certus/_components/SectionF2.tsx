@@ -96,16 +96,16 @@ function CaseStudyCard({ card }: { card: CaseCard }) {
       <div className="px-2 pb-4 pt-10 sm:px-4 sm:pt-14">
         <div className="h-px w-full bg-[#f3f6ff]" />
 
-        <h3 className="font-helvetica-now-display mt-[18px] text-xl font-bold leading-8 text-[#050f21] sm:text-2xl">
+        <h3 className="mt-[18px] text-xl font-bold leading-8 text-[#050f21] sm:text-2xl">
           {card.title}
         </h3>
 
         <div className="mt-1 flex items-start justify-between gap-6">
           <div className="min-w-0 max-w-[675px]">
-            <p className="font-helvetica-now-display text-sm font-bold leading-5 text-[#050f21]">
+            <p className="text-sm font-bold leading-5 text-[#050f21]">
               DESCRIPTION
             </p>
-            <p className="font-helvetica-now-display mt-[5px] text-sm leading-6 text-[#050f21]">
+            <p className="mt-[5px] text-sm leading-6 text-[#050f21]">
               {card.description}
             </p>
           </div>

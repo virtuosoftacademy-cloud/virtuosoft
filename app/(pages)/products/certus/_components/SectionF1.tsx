@@ -36,10 +36,10 @@ export default function SectionF1() {
                 value={faq.value}
                 className="rounded-xl border border-[rgba(90,140,242,0.2)] bg-white px-6 shadow-[0px_8px_10px_rgba(64,78,133,0.1)] last:border-b"
               >
-                <AccordionTrigger className="font-helvetica-now-display items-center rounded-none py-5 text-left text-lg font-medium leading-7 text-[#050f21] hover:no-underline data-[state=open]:text-[#0051e4] md:text-xl [&>svg]:size-4 [&>svg]:translate-y-0 [&>svg]:rounded-none [&>svg]:border-0 [&>svg]:p-0 [&>svg]:text-[#050f21] data-[state=open]:[&>svg]:text-[#0051e4]">
+                <AccordionTrigger className="items-center rounded-none py-5 text-left text-lg font-medium leading-7 text-[#050f21] hover:no-underline data-[state=open]:text-[#0051e4] md:text-xl [&>svg]:size-4 [&>svg]:translate-y-0 [&>svg]:rounded-none [&>svg]:border-0 [&>svg]:p-0 [&>svg]:text-[#050f21] data-[state=open]:[&>svg]:text-[#0051e4]">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="font-helvetica-now-display pb-5 pt-0 text-base leading-[22px] text-[#474747]">
+                <AccordionContent className="pb-5 pt-0 text-base leading-[22px] text-[#474747]">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
@@ -48,7 +48,7 @@ export default function SectionF1() {
 
           <button
             type="button"
-            className="font-helvetica-now-display inline-flex h-12 w-[200px] items-center justify-center rounded-full border-[1.5px] border-[#0051e4] bg-white text-base font-bold text-[#0051e4] transition-colors hover:bg-[#f8faff]"
+            className="inline-flex h-12 w-[200px] items-center justify-center rounded-full border-[1.5px] border-[#0051e4] bg-white text-base font-bold text-[#0051e4] transition-colors hover:bg-[#f8faff]"
           >
             Load More
           </button>

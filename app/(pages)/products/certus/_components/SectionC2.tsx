@@ -87,7 +87,7 @@ export default function SectionC2() {
         </div>
 
         <div className="mt-8 overflow-x-auto rounded-xl border border-[rgba(226,232,240,0.6)] bg-white/70 shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.05),0px_8px_10px_-6px_rgba(0,0,0,0.05)] backdrop-blur-[6px]">
-          <div className="font-helvetica-now-display min-w-[1024px]">
+          <div className="min-w-[1024px]">
             {/* Header row */}
             <div className="flex items-stretch border-b border-[rgba(226,232,240,0.6)]">
               <div className="flex flex-1 flex-col px-8 pb-[40.5px] pt-[55px]">

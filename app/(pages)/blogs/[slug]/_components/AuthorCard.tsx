@@ -51,7 +51,7 @@ function AuthorCard({ post }: AuthorCardProps) {
                                 className="object-cover"
                             />
                         ) : (
-                            <span className="font-helvetica-now-display flex size-full items-center justify-center text-2xl font-bold text-primary">
+                            <span className="flex size-full items-center justify-center text-2xl font-bold text-primary">
                                 {initialsOf(author)}
                             </span>
                         )}

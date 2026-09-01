@@ -28,16 +28,16 @@ function FeaturedPost({ post }: FeaturedPostProps) {
             <div className="absolute inset-x-0 bottom-0 bg-black/10 px-5 py-6 backdrop-blur-[17.5px]">
                 <span className="inline-flex items-center gap-2 rounded-full border border-primary bg-[#F8FAFF] px-4 py-2">
                     <Image src={BadgeIcon} alt="" className="size-3.5" />
-                    <span className="font-helvetica-now-display text-xs font-bold leading-4 text-primary">
+                    <span className="text-xs font-bold leading-4 text-primary">
                         {category}
                     </span>
                 </span>
 
-                <h3 className="font-helvetica-now-display mt-2.5 text-xl font-bold leading-7 text-white md:text-[32px] md:leading-10">
+                <h3 className="mt-2.5 text-xl font-bold leading-7 text-white md:text-[32px] md:leading-10">
                     {title}
                 </h3>
 
-                <div className="font-helvetica-now-display mt-2.5 flex items-center gap-5 text-sm leading-6 text-white">
+                <div className="mt-2.5 flex items-center gap-5 text-sm leading-6 text-white">
                     <span>{date}</span>
                     <span className="flex items-center gap-2">
                         <span aria-hidden="true" className="size-1 rounded-full bg-white" />

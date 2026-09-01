@@ -117,10 +117,10 @@ export default function SectionA2() {
                   className="size-[21px]"
                 />
               </span>
-              <h3 className="font-helvetica-now-display mt-4 text-base font-bold leading-[1.24] tracking-[-0.064px] text-[#13161b]">
+              <h3 className="mt-4 text-base font-bold leading-[1.24] tracking-[-0.064px] text-[#13161b]">
                 {c.title}
               </h3>
-              <p className="font-helvetica-now-display mt-[7px] text-xs leading-[1.52] text-[#4a5261]">
+              <p className="mt-[7px] text-xs leading-[1.52] text-[#4a5261]">
                 {c.body}
               </p>
             </article>

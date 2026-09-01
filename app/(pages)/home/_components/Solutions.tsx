@@ -8,30 +8,37 @@ import { global_Solutions } from "@/app/_constant"
 import BadgeIcon from "@/public/assets/Images/home/global/badge-sparkle.svg"
 import SolutionsPhoto from "@/public/assets/Images/home/global/solutions-photo.png"
 import CardGlow from "@/public/assets/Images/home/global/solutions-card-glow.svg"
+import Link from "next/link"
 
 function Solutions() {
   const [openId, setOpenId] = useState<string | undefined>(global_Solutions[0]?.id)
 
   return (
-    <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-0 my-16 lg:my-24">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+    <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-0 my-16 lg:my-36">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-primary bg-[#F8FAFF] px-4 py-2">
             <Image src={BadgeIcon} alt="" className="size-3.5" />
-            <span className="font-helvetica-now-display text-xs font-bold text-primary">
+            <span className="text-xs font-bold text-primary">
               Purpose-Built Solutions
             </span>
           </div>
-          <h2 className="font-helvetica-now-display mt-5 text-4xl md:text-[40px] leading-[1.2] text-[#050f21]">
+          <h2 className="mt-5 text-4xl md:text-[40px] leading-[1.2] text-[#050f21]">
             Innovative Solution <span className="text-primary font-bold">Real Results</span>
           </h2>
-          <p className="font-helvetica-now-display mt-4 text-base leading-[1.4] text-[#474747] max-w-md">
+          <p className="mt-4 text-base leading-[1.4] text-[#474747] max-w-md">
             From powerful web applications to enterprise systems, we transform your ideas into high-performance digital products.
           </p>
 
-          <div className="relative mt-8 h-[232px] w-full max-w-[419px] overflow-hidden rounded-2xl border border-white shadow-[0_16px_36px_-10px_rgba(15,23,51,0.16)]">
+            <Link
+              href="/services"
+              className="relative mt-8 hidden lg:inline-flex items-center rounded-full border-2 border-primary px-4 py-2 text-lg font-semibold text-primary hover:bg-primary hover:text-white transition-colors"
+            >
+              View All Services
+            </Link>
+          {/* <div className="relative mt-8 h-[232px] w-full max-w-[419px] overflow-hidden rounded-2xl border border-white shadow-[0_16px_36px_-10px_rgba(15,23,51,0.16)]">
             <Image src={SolutionsPhoto} alt="" fill className="object-cover" />
-          </div>
+          </div> */}
         </div>
 
         <div className="flex flex-col gap-3">
@@ -60,7 +67,7 @@ function Solutions() {
                 >
                   <span
                     className={cn(
-                      "font-helvetica-now-display font-semibold text-[#13161b]",
+                      "font-semibold text-[#13161b]",
                       isOpen ? "text-2xl md:text-[26px]" : "text-lg md:text-xl"
                     )}
                   >
@@ -82,7 +89,7 @@ function Solutions() {
                 {isOpen && (item.description || item.tags) && (
                   <div className="relative z-10 mt-4 space-y-4">
                     {item.description && (
-                      <p className="font-helvetica-now-display text-sm text-[#141518]">
+                      <p className="text-sm text-[#141518]">
                         {item.description}
                       </p>
                     )}
@@ -91,7 +98,7 @@ function Solutions() {
                         {item.tags.map((tag) => (
                           <span
                             key={tag}
-                            className="font-helvetica-now-display rounded-full border border-white/60 bg-white/40 px-3.5 py-2 text-xs font-medium text-[#0c0e11]"
+                            className="rounded-full border border-white/60 bg-white/40 px-2.5 py-2 text-xs font-medium text-[#0c0e11]"
                           >
                             {tag}
                           </span>

@@ -10,6 +10,12 @@ export interface LogoItem {
    * be masked rather than drawn directly or it disappears on the dark hero.
    */
   masked?: boolean;
+  /**
+   * A second masked piece drawn beside `src` in the same marquee cell — Eagle
+   * Hills is a mark plus a separate wordmark export, which Figma composes into
+   * one 130px cell rather than two logos.
+   */
+  companion?: string;
 }
 
 export interface NavLink {
@@ -29,6 +35,11 @@ export interface MegaMenuLink {
   label: string;
   href?: string;
   comingSoon?: boolean;
+  /**
+   * Panel image shown beside the list while this row is hovered. Only the
+   * Solutions menu has per-item art; menus without it keep one static panel.
+   */
+  image?: string;
 }
 
 export interface ServiceButton {
@@ -132,45 +143,48 @@ export interface SocialLink {
   src: string;
 }
 
-// Client Logos — white-filled exports from Figma's hero marquee. These are
-// designed to sit over the dark hero band; they are invisible on a light
-// background, so keep the marquee on a dark surface.
-const logoIcon = '/assets/Images/ClientLogo/marquee'
+// Client Logos — the white marquee row exported cell-by-cell from Figma
+// 2436:17135, in the designs left-to-right order (logo-01 is the first cell).
+// These exports are already filled white, so they are drawn directly; nothing
+// here needs the alpha-mask treatment that the coloured artwork required.
+// They still assume a dark surface behind them.
+const logoIcon = "/assets/Images/ClientLogo/marquee"
 export const logos: LogoItem[] = [
-  { src: `${logoIcon}/tarabut.png`, alt: "Tarabut" },
-  { src: `${logoIcon}/neogies.png`, alt: "Neogies", masked: true },
-  { src: `${logoIcon}/amax.png`, alt: "AMAX", masked: true },
-  { src: `${logoIcon}/eyecare.png`, alt: "Eye Care Professional", masked: true },
-  { src: `${logoIcon}/client-frame1217.svg`, alt: "Client logo" },
-  { src: `${logoIcon}/client-419.png`, alt: "Client logo", masked: true },
-  { src: `${logoIcon}/eaglehills-mark.png`, alt: "Eagle Hills Properties", masked: true },
-  { src: `${logoIcon}/client-424.png`, alt: "Client logo", masked: true },
-  { src: `${logoIcon}/client-423.png`, alt: "Client logo", masked: true },
-  { src: `${logoIcon}/gasco.png`, alt: "GASCO", masked: true },
-  { src: `${logoIcon}/client-426.png`, alt: "Client logo", masked: true },
-  { src: `${logoIcon}/tawal.png`, alt: "Tawal", masked: true },
-  { src: `${logoIcon}/client-422.png`, alt: "Client logo", masked: true },
-  { src: `${logoIcon}/client-425.png`, alt: "Client logo" },
-  { src: `${logoIcon}/client-32.png`, alt: "Client logo" },
-  { src: `${logoIcon}/client-427.png`, alt: "Client logo" },
-  { src: `${logoIcon}/client-unnamed.png`, alt: "Client logo" },
-  { src: `${logoIcon}/client-229.png`, alt: "Client logo" },
-  { src: `${logoIcon}/client-535.png`, alt: "Client logo" },
-  { src: `${logoIcon}/client-534.png`, alt: "Client logo" },
+  { src: `${logoIcon}/logo-01.png`, alt: "Tarabut" },
+  { src: `${logoIcon}/logo-02.png`, alt: "Neogies" },
+  { src: `${logoIcon}/logo-03.png`, alt: "AMAX" },
+  { src: `${logoIcon}/logo-04.png`, alt: "Client logo" },
+  { src: `${logoIcon}/logo-05.png`, alt: "Client logo" },
+  { src: `${logoIcon}/logo-06.png`, alt: "Client logo" },
+  { src: `${logoIcon}/logo-07.png`, alt: "Eagle Hills Properties" },
+  { src: `${logoIcon}/logo-08.png`, alt: "Client logo" },
+  { src: `${logoIcon}/logo-09.png`, alt: "Client logo" },
+  { src: `${logoIcon}/logo-10.png`, alt: "GASCO" },
+  { src: `${logoIcon}/logo-11.png`, alt: "Client logo" },
+  { src: `${logoIcon}/logo-12.png`, alt: "Tawal" },
+  { src: `${logoIcon}/logo-13.png`, alt: "Client logo" },
+  { src: `${logoIcon}/logo-14.png`, alt: "GoTel" },
+  { src: `${logoIcon}/logo-15.png`, alt: "Client logo" },
+  { src: `${logoIcon}/logo-16.png`, alt: "MyCo" },
+  { src: `${logoIcon}/logo-17.png`, alt: "Client logo" },
+  { src: `${logoIcon}/logo-18.png`, alt: "Client logo" },
 ];
 //Navbar
-export function getSpotlightVideo(title: string): string {
-  // Keys must match services_Nav titles exactly.
-  const videoMap: Record<string, string> = {
-    "Advisory": "/2.png",
-    "Artificial Intelligence": "/3.png",
-    "Software Engineering": "/4.png",
-    "Cybersecurity": "/8.png",
-    "Data Engineering": "/5.png",
-    "Solutions": "/6.png",
-    "Expertise": "/7.png",
+// Spotlight image shown beside the sub-services in the Services mega menu.
+// Keys must match services_Nav titles exactly — a mismatch silently falls
+// back to the Advisory image rather than erroring.
+const servicesNavImages = "/assets/Images/nav/services";
+export function getSpotlightImage(title: string): string {
+  const imageMap: Record<string, string> = {
+    "Advisory": `${servicesNavImages}/advisory.png`,
+    "Artificial Intelligence": `${servicesNavImages}/artificial-intelligence.png`,
+    "Software Engineering": `${servicesNavImages}/software-engineering.png`,
+    "Data Engineering": `${servicesNavImages}/data-engineering.png`,
+    "Cybersecurity": `${servicesNavImages}/cybersecurity.png`,
+    "Policy & Governance": `${servicesNavImages}/policy-governance.png`,
+    "Expertise": `${servicesNavImages}/policy-governance.png`,
   };
-  return videoMap[title] || "/assets/Images/nav/services-panel.png";
+  return imageMap[title] || `${servicesNavImages}/advisory.png`;
 }
 export const services_Nav: NavItem[] = [
   {
@@ -211,13 +225,13 @@ export const services_Nav: NavItem[] = [
     ],
   },
   {
-    title:"Cybersecurity",
-    subPages:[
-      {label:"Solution Deployment and Management",href:"/services/cybersecurity/solution-deployment"},
-      {label:"Governance and Compliance",href:"/services/cybersecurity/governance-and-compliance"},
-      {label:"Cyber Assessments",href:"/services/cybersecurity/cyber-assessments"},
-      {label:"Managed Cybersecurity Service",href:"/services/cybersecurity/managed-cybersecurity-service"},
-      {label:"Risk Management & Governance",href:"/services/cybersecurity/risk-management"}
+    title: "Cybersecurity",
+    subPages: [
+      { label: "Solution Deployment and Management", href: "/services/cybersecurity/solution-deployment" },
+      { label: "Governance and Compliance", href: "/services/cybersecurity/governance-and-compliance" },
+      { label: "Cyber Assessments", href: "/services/cybersecurity/cyber-assessments" },
+      { label: "Managed Cybersecurity Service", href: "/services/cybersecurity/managed-cybersecurity-service" },
+      { label: "Risk Management & Governance", href: "/services/cybersecurity/risk-management" }
     ]
   },
   {
@@ -230,10 +244,10 @@ export const services_Nav: NavItem[] = [
     ],
   },
   {
-    title:"Expertise",
-    subPages:[
-      {label:"RPA",href:"/services/Expertise/rpa"},
-      {label:"DevOps",href:"/services/Expertise/devops"},
+    title: "Expertise",
+    subPages: [
+      { label: "RPA", href: "/services/Expertise/rpa" },
+      { label: "DevOps", href: "/services/Expertise/devops" },
     ]
   }
   // {
@@ -257,12 +271,39 @@ export const services_Nav: NavItem[] = [
   // },
 ];
 
+/**
+ * Flat list of every real service page, derived from services_Nav's
+ * sub-pages. Consumed by the case-study "related services" picker and the
+ * contact form's enquiry dropdown, so both stay resolvable to a route that
+ * actually exists instead of maintaining a second, driftable list.
+ */
+export const serviceItems: { title: string; href: string }[] = services_Nav.flatMap((category) =>
+  category.subPages.map((sub) => ({ title: sub.label, href: sub.href }))
+);
+
 // "Solutions" top-nav dropdown (separate from services_Nav's categories)
-export const solutions_Nav: NavLink[] = [
-  { label: "ERP Solutions", href: "/services/solutions/erp" },
-  { label: "BMC Helix", href: "/services/solutions/bmc-helix" },
-  { label: "Microsoft Dynamics 365", href: "/services/solutions/microsoft-360" },
-  { label: "Manage Engine", href: "/services/solutions/manage-engine" },
+const solutionsNavImages = "/assets/Images/nav/solutions";
+export const solutions_Nav: MegaMenuLink[] = [
+  {
+    label: "ERP Solutions",
+    href: "/services/solutions/erp",
+    image: `${solutionsNavImages}/erp-solutions.png`,
+  },
+  {
+    label: "BMC Helix",
+    href: "/services/solutions/bmc-helix",
+    image: `${solutionsNavImages}/bmc-helix.png`,
+  },
+  {
+    label: "Microsoft Dynamics 365",
+    href: "/services/solutions/microsoft-360",
+    image: `${solutionsNavImages}/microsoft-dynamics-365.png`,
+  },
+  {
+    label: "Manage Engine",
+    href: "/services/solutions/manage-engine",
+    image: `${solutionsNavImages}/manage-engine.png`,
+  },
 ];
 
 // "Products" top-nav dropdown — items without an `href` render as "Soon".
@@ -270,20 +311,21 @@ export const solutions_Nav: NavLink[] = [
 // real product pages are built.
 export const products_Nav: MegaMenuLink[] = [
   { label: "Certus", href: "/products/certus" },
-  { label: "Cortex Radiology",  comingSoon: true },
-  { label: "Catalyst.ai",  comingSoon: true },
+  { label: "Cortex Radiology", comingSoon: true },
+  { label: "Catalyst.ai", comingSoon: true },
 ];
 
 // "About Us" top-nav dropdown — items without an `href` render as "Soon"
+const aboutNavImages = "/assets/Images/nav/about";
 export const aboutUs_Nav: MegaMenuLink[] = [
-  { label: "About Us", href: "/about-us" },
-  { label: "Our Team", href: "/team" },
+  { label: "About Us", href: "/about-us", image: `${aboutNavImages}/about.png` },
+  { label: "Our Team", href: "/team", image: `${aboutNavImages}/team.png`},
   // The blog is the Insights hub — its hero reads "Insights, Ideas & Industry Trends".
-  { label: "Insights", href: "/blogs" },
+  { label: "Insights", href: "/blogs", image: `${aboutNavImages}/blogs.png`},
   { label: "News & Article" },
-  { label: "Case Study", href: "/case-studies" },
-  { label: "White Paper", href: "/white-paper" },
-  { label: "Careers", href: "/careers" },
+  { label: "Case Study", href: "/case-studies", image: `${aboutNavImages}/case-studies.png`},
+  { label: "White Paper", href: "/white-paper", image: `${aboutNavImages}/white-paper.png`},
+  { label: "Careers", href: "/careers", image: `${aboutNavImages}/careers.png`},
 ];
 
 // Footer Links and Data
@@ -326,13 +368,13 @@ export const FooterData: NavItem[] = [
     ],
   },
   {
-    title:"Cybersecurity",
-    subPages:[
-      {label:"Solution Deployment and Management",href:"/services/cybersecurity/solution-deployment"},
-      {label:"Governance and Compliance",href:"/services/cybersecurity/governance-and-compliance"},
-      {label:"Cyber Assessments",href:"/services/cybersecurity/cyber-assessments"},
-      {label:"Managed Cybersecurity Service",href:"/services/cybersecurity/managed-cybersecurity-service"},
-      {label:"Risk Management & Governance",href:"/services/cybersecurity/risk-management"}
+    title: "Cybersecurity",
+    subPages: [
+      { label: "Solution Deployment and Management", href: "/services/cybersecurity/solution-deployment" },
+      { label: "Governance and Compliance", href: "/services/cybersecurity/governance-and-compliance" },
+      { label: "Cyber Assessments", href: "/services/cybersecurity/cyber-assessments" },
+      { label: "Managed Cybersecurity Service", href: "/services/cybersecurity/managed-cybersecurity-service" },
+      { label: "Risk Management & Governance", href: "/services/cybersecurity/risk-management" }
     ]
   },
   {
@@ -346,31 +388,31 @@ export const FooterData: NavItem[] = [
   {
     title: 'IT Governance',
     subPages: [
-      { label: 'Regulatory Compliance', href:"/services/itgovernance/regulatory-compliance" },
-      { label: 'Governance Framework Development', href:"/services/itgovernance/governance-framework-development" },
+      { label: 'Regulatory Compliance', href: "/services/itgovernance/regulatory-compliance" },
+      { label: 'Governance Framework Development', href: "/services/itgovernance/governance-framework-development" },
       // { label: 'ITIL', href:"/services/itgovernance/itil" },
-      { label: 'Resource Augmentation', href:"/services/itgovernance/resource-augmentation" },
+      { label: 'Resource Augmentation', href: "/services/itgovernance/resource-augmentation" },
     ],
   },
-   {
+  {
     title: 'Solutions',
     subPages: [
-      { label: 'ERP Solutions', href:"/services/solutions/erp" },
-      { label: 'BMC Hleix', href:"/services/solutions/bmc-helix" },
-      { label: 'Microsoft Dynamics 365', href:"/services/solutions/microsoft-360" },
-      { label: 'Manage Engine', href:"/services/solutions/manage-engine" },
-      { label: 'IBM', href:"/services/solutions/ibm" },
+      { label: 'ERP Solutions', href: "/services/solutions/erp" },
+      { label: 'BMC Hleix', href: "/services/solutions/bmc-helix" },
+      { label: 'Microsoft Dynamics 365', href: "/services/solutions/microsoft-360" },
+      { label: 'Manage Engine', href: "/services/solutions/manage-engine" },
+      { label: 'IBM', href: "/services/solutions/ibm" },
     ],
   },
-    {
+  {
     title: 'Expertise',
     subPages: [
-      { label: 'RPA', href:"/services/Expertise/rpa" },
-      { label: 'DevOps', href:"/services/Expertise/devops" },
+      { label: 'RPA', href: "/services/Expertise/rpa" },
+      { label: 'DevOps', href: "/services/Expertise/devops" },
     ],
   },
-  
-  
+
+
   // {
   //   title: 'Digital Marketing',
   //   items: [
@@ -550,8 +592,8 @@ export const teamMembers: TeamMember[] = [
   {
     name: "Shoaib Ur Rehman",
     role: "Chief Executive Officer",
-    description: 
-    "Shoaib ur Rehman is a seasoned technology leader and enterprise innovator with over 20 years of experience delivering large-scale digital solutions across Pakistan, the UAE, MENA and global markets. As Chief Executive Officer of Virtuosoft, he leads the firm’s strategic vision, technology roadmap and delivery operations, guiding organizations through cloud modernization, data-driven transformation and human-centered system design.",
+    description:
+      "Shoaib ur Rehman is a seasoned technology leader and enterprise innovator with over 20 years of experience delivering large-scale digital solutions across Pakistan, the UAE, MENA and global markets. As Chief Executive Officer of Virtuosoft, he leads the firm’s strategic vision, technology roadmap and delivery operations, guiding organizations through cloud modernization, data-driven transformation and human-centered system design.",
     image: `/${imageBaseUrl}/ceo.png`,
     linkedin: "https://www.linkedin.com/in/shoaib-rehman-226b621a"
   },
@@ -565,8 +607,8 @@ export const teamMembers: TeamMember[] = [
   {
     name: "Azhar Rizvi",
     role: "Chief Operating Officer",
-    description: 
-    "Azhar Rizvi brings 15 years of leadership experience across the Middle East, West Africa and Asia, specializing in growth operations, market expansion and trade marketing. As COO, he oversees operational strategy, client delivery and organizational performance, helping Virtuosoft scale sustainably across regional markets.",
+    description:
+      "Azhar Rizvi brings 15 years of leadership experience across the Middle East, West Africa and Asia, specializing in growth operations, market expansion and trade marketing. As COO, he oversees operational strategy, client delivery and organizational performance, helping Virtuosoft scale sustainably across regional markets.",
     image: `/${imageBaseUrl}/azhar-2.png`,
     linkedin: "https://www.linkedin.com/in/azher-rizvi"
 
@@ -575,7 +617,7 @@ export const teamMembers: TeamMember[] = [
     name: "Usman Ur Rehman",
     role: "Director of IT Governance",
     description:
-    "Usman is a seasoned technology leader with more than 6 years of experience in IT Governance, elevating service quality and transforming operations in enterprise environments. His background spans software quality assurance, DevOps practices, service optimization and governance frameworks, enabling him to guide organizations toward reliable, scalable and well governed technology ecosystems.",
+      "Usman is a seasoned technology leader with more than 6 years of experience in IT Governance, elevating service quality and transforming operations in enterprise environments. His background spans software quality assurance, DevOps practices, service optimization and governance frameworks, enabling him to guide organizations toward reliable, scalable and well governed technology ecosystems.",
     image: `/${imageBaseUrl}/Usman-Ur-Rehman.png`,
     linkedin: "https://www.linkedin.com/in/usman-ur-rehman-64b67223/"
   },
@@ -594,20 +636,20 @@ export const teamMembers: TeamMember[] = [
     linkedin: "https://www.linkedin.com/in/asiya-nazeer"
   },
   // {
-    //   name: "Muhammad Rehan",
-    //   role: "Head of Tecnology",
+  //   name: "Muhammad Rehan",
+  //   role: "Head of Tecnology",
   //   description: "Muhammad Rehan is a Lead Full Stack Engineer at Virtuosoft with nearly 8 years of hands-on experience in software development. He has grown through multiple roles from Python Developer to Senior Engineer and now leads full stack development initiatives. His expertise includes backend systems, cloud infrastructure and scalable web applications using technologies such as Python, Node.js, AWS, Django and modern JavaScript frameworks. He plays a key role in building reliable, high-performance solutions for clients across different industries.",
   //   image: `/${imageBaseUrl}/m_rehan.png`,
   //   linkedin: "https://www.linkedin.com/in/rehan010/"
   // },
   // {
-    //   name: "Aumare javed",
-    //   role: "Business Development Consultant , Europe",
-    //   description: "Currently contributing to Caansoft, a sister concern of Virtuosoft, with over a decade of expertise in delivering cutting-edge software solutions. With a strong focus on user-centric design, they excel in enhancing efficiency and quality. Skilled in leading teams to craft solutions tailored to diverse business needs, they prioritize exceptional user experiences and aesthetic excellence, ensuring alignment with organizational goals",
-    //   image: `/${imageBaseUrl}/aumair_javed.png`,
-    //   linkedin: "#"
-    // },
-    // {
+  //   name: "Aumare javed",
+  //   role: "Business Development Consultant , Europe",
+  //   description: "Currently contributing to Caansoft, a sister concern of Virtuosoft, with over a decade of expertise in delivering cutting-edge software solutions. With a strong focus on user-centric design, they excel in enhancing efficiency and quality. Skilled in leading teams to craft solutions tailored to diverse business needs, they prioritize exceptional user experiences and aesthetic excellence, ensuring alignment with organizational goals",
+  //   image: `/${imageBaseUrl}/aumair_javed.png`,
+  //   linkedin: "#"
+  // },
+  // {
   //   name: "Ahmed Nawaz",
   //   role: "Sr. Business Development Manager",
   //   description: "Ahmed Nawaz is a Senior Manager of Business Operations at Virtuosoft with over 12 years of experience in business management and operations. He specializes in aligning strategy with execution, improving internal processes and managing cross-functional teams. Ahmed oversees core business functions including operations, administration, vendor management and compliance. Known for his practical approach and strong leadership, he helps drive efficiency, stability and long-term growth across the organization.",
@@ -622,33 +664,33 @@ export const teamMembers: TeamMember[] = [
   //   linkedin: "https://www.linkedin.com/in/adnanmalikinfo/"
   // },
   // {
-    //   name: "Wasif Shariq",
-    //   role: "Head of Growth",
-    //   description: "Wasif Shariq leads strategic planning, internal operations, client relationships and external partnerships. His core focus is helping founders and businesses build strong development teams within 48–72 hours, modernize their technology stacks and scale with confidence. With hands-on experience in software development, SaaS and team building, Wasif works closely with clients to turn ideas into practical, growth-ready solutions.",
-    //   image: `/${imageBaseUrl}/wasif_shariq.png`,
-    //   linkedin: "https://www.linkedin.com/in/mwasifshariq/"
-    // },
-    {
-      name: "Tahir aziz",
-      role: "Business Development Consultant, USA",
-      description: "Data Engineering and Analytics Expert with over 14 years of experience in designing, developing, and implementing complex data warehousing and big data solutions. Proficient in ETL, data modeling, and data mining techniques using industry-leading tools like Teradata, Informatica, and Hadoop. Skilled in cloud technologies like AWS and Snowflake. Passionate about leveraging data to drive business insights and improve decision-making.",
-      image: `/${imageBaseUrl}/tahir.png`,
-      linkedin: "https://www.linkedin.com/in/mrtaz/"
-    },
-    {
-      name: "Saad Athar",
-      role: "Head Of Business Development, Middle East",
-      description: "Saad Athar, a seasoned Chartered Accountant, serves as the Business Development Head for the Middle East. With over 15 years of experience in the MENA region and a career spanning nine countries, Saad brings unparalleled expertise in business development, strategy, and organizational growth. His specializations include systems and process optimization, budgeting, cost recovery models, project management, and ERP implementation. Proficient in English, Arabic, and Urdu, Saad is adept at fostering cross-border collaborations and negotiating contracts. An alumnus of the University of East London and Warwick Business School, with certifications from the International Council of Shopping Centres and Covey Labs, Saad embodies a commitment to excellence. His multicultural insights and strategic vision have been instrumental in expanding operations and driving success for the organization in the Middle East region.",
-      image: `/${imageBaseUrl}/saad.png`,
-      linkedin: "https://www.linkedin.com/in/saadathar-strategist/"
-    },
-    {
-      name: "Sohail malik",
-      role: "Head of Financial BPO",
-      description: "Sohail Imdad is an Associate Chartered Accountant from ICAR he has more than ten years of working experience. During the course of employment in PwC, he gained valuable experience of audit and Assurance, Taxation and Accounting & Book Keeping of multiple industries. He has also served in fastest growing pharmaceutical of Pakistan as a Lead Treasury and also in the the top FMCG of Pakistan as the Head of Taxation.",
-      image: `/${imageBaseUrl}/sohail_malik.png`,
-      linkedin: "https://www.linkedin.com/in/suhail-imdad/"
-    },
+  //   name: "Wasif Shariq",
+  //   role: "Head of Growth",
+  //   description: "Wasif Shariq leads strategic planning, internal operations, client relationships and external partnerships. His core focus is helping founders and businesses build strong development teams within 48–72 hours, modernize their technology stacks and scale with confidence. With hands-on experience in software development, SaaS and team building, Wasif works closely with clients to turn ideas into practical, growth-ready solutions.",
+  //   image: `/${imageBaseUrl}/wasif_shariq.png`,
+  //   linkedin: "https://www.linkedin.com/in/mwasifshariq/"
+  // },
+  {
+    name: "Tahir aziz",
+    role: "Business Development Consultant, USA",
+    description: "Data Engineering and Analytics Expert with over 14 years of experience in designing, developing, and implementing complex data warehousing and big data solutions. Proficient in ETL, data modeling, and data mining techniques using industry-leading tools like Teradata, Informatica, and Hadoop. Skilled in cloud technologies like AWS and Snowflake. Passionate about leveraging data to drive business insights and improve decision-making.",
+    image: `/${imageBaseUrl}/tahir.png`,
+    linkedin: "https://www.linkedin.com/in/mrtaz/"
+  },
+  {
+    name: "Saad Athar",
+    role: "Head Of Business Development, Middle East",
+    description: "Saad Athar, a seasoned Chartered Accountant, serves as the Business Development Head for the Middle East. With over 15 years of experience in the MENA region and a career spanning nine countries, Saad brings unparalleled expertise in business development, strategy, and organizational growth. His specializations include systems and process optimization, budgeting, cost recovery models, project management, and ERP implementation. Proficient in English, Arabic, and Urdu, Saad is adept at fostering cross-border collaborations and negotiating contracts. An alumnus of the University of East London and Warwick Business School, with certifications from the International Council of Shopping Centres and Covey Labs, Saad embodies a commitment to excellence. His multicultural insights and strategic vision have been instrumental in expanding operations and driving success for the organization in the Middle East region.",
+    image: `/${imageBaseUrl}/saad.png`,
+    linkedin: "https://www.linkedin.com/in/saadathar-strategist/"
+  },
+  {
+    name: "Sohail malik",
+    role: "Head of Financial BPO",
+    description: "Sohail Imdad is an Associate Chartered Accountant from ICAR he has more than ten years of working experience. During the course of employment in PwC, he gained valuable experience of audit and Assurance, Taxation and Accounting & Book Keeping of multiple industries. He has also served in fastest growing pharmaceutical of Pakistan as a Lead Treasury and also in the the top FMCG of Pakistan as the Head of Taxation.",
+    image: `/${imageBaseUrl}/sohail_malik.png`,
+    linkedin: "https://www.linkedin.com/in/suhail-imdad/"
+  },
 ]
 
 
@@ -662,20 +704,23 @@ export const aiCategory: ServiceCategory = {
   textColor: 'text-white',
   accentImage: `/${accentImg}/ai_data_service.png`,
   imagePosition: "-top-6 -right-4",
-  href:"/services/ai/",
+  href: "/services/ai/",
   services: [
-    { label: 'AI Agent', description: "Intelligent AI agents automating workflows, enhancing customer experiences and enabling real-time decisions for operational efficiency.", slug:'ai-agent'},
-    { label: 'Generative AI', description: "Advanced generative AI services enabling intelligent automation, personalized experiences and rapid prototyping for business transformation.",slug:'generative-ai' },
-    { label: 'Data Science & MLOps', description: "Comprehensive machine learning operations delivering faster deployments, improved accuracy and long-term operational excellence.",slug:'data-science' },
-    { label: 'Conversational AI', description: "We design and deploy conversational systems that understand context, intent, and user behavior. Our solutions automate support workflows, enhance customer engagement, and provide real time insights through intelligent dialog models tailored to your business processes.",
-      slug:"conversational-intelligence"
-     },
-    { label: 'Computer Vision', description: "We build computer vision solutions that analyze images and video to detect objects, identities, behaviors, and anomalies. These systems enable real-time monitoring, compliance enforcement, automation, and data-driven decision-making across physical and digital environments.",
-      slug:"computer-vision"
-     },
-    { label: 'Optical character recognition', description: "We implement OCR engines that accurately extract, classify, and structure data from scanned documents, images, and unstructured inputs. This enables automated workflows, reduces manual data entry, and improves data accuracy across enterprise operations.",
-      slug:"optical-character-recognition"
-     },
+    { label: 'AI Agent', description: "Intelligent AI agents automating workflows, enhancing customer experiences and enabling real-time decisions for operational efficiency.", slug: 'ai-agent' },
+    { label: 'Generative AI', description: "Advanced generative AI services enabling intelligent automation, personalized experiences and rapid prototyping for business transformation.", slug: 'generative-ai' },
+    { label: 'Data Science & MLOps', description: "Comprehensive machine learning operations delivering faster deployments, improved accuracy and long-term operational excellence.", slug: 'data-science' },
+    {
+      label: 'Conversational AI', description: "We design and deploy conversational systems that understand context, intent, and user behavior. Our solutions automate support workflows, enhance customer engagement, and provide real time insights through intelligent dialog models tailored to your business processes.",
+      slug: "conversational-intelligence"
+    },
+    {
+      label: 'Computer Vision', description: "We build computer vision solutions that analyze images and video to detect objects, identities, behaviors, and anomalies. These systems enable real-time monitoring, compliance enforcement, automation, and data-driven decision-making across physical and digital environments.",
+      slug: "computer-vision"
+    },
+    {
+      label: 'Optical character recognition', description: "We implement OCR engines that accurately extract, classify, and structure data from scanned documents, images, and unstructured inputs. This enables automated workflows, reduces manual data entry, and improves data accuracy across enterprise operations.",
+      slug: "optical-character-recognition"
+    },
   ]
 }
 
@@ -687,11 +732,11 @@ export const itCategory: ServiceCategory = {
   textColor: 'text-white',
   accentImage: `/${accentImg}/ai_data_service.png`,
   imagePosition: "-top-6 -right-4",
-  href:"/services/itgovernance/",
+  href: "/services/itgovernance/",
   services: [
-    { label: 'Regulatory Compliance', description: "Ensure Business Operations Meet Industry Regulations, Standard And Legal Requirements To Maintain Trust And Avoid Penalties", slug:'regulatory-compliance'},
-    { label: 'Governance Framework Development', description: "Design And Implement Structured It Governance Frameworks To Align Technology Strategy with Business Objectives Efficiently",slug:'governance-framework-development' },
-    { label: 'Resource Augmentation', description: "Provide Skilled IT Professionals And Expertise To Support Projects, Optimize Performance And Achieve Business Goals.",slug:'resource-augmentation' },
+    { label: 'Regulatory Compliance', description: "Ensure Business Operations Meet Industry Regulations, Standard And Legal Requirements To Maintain Trust And Avoid Penalties", slug: 'regulatory-compliance' },
+    { label: 'Governance Framework Development', description: "Design And Implement Structured It Governance Frameworks To Align Technology Strategy with Business Objectives Efficiently", slug: 'governance-framework-development' },
+    { label: 'Resource Augmentation', description: "Provide Skilled IT Professionals And Expertise To Support Projects, Optimize Performance And Achieve Business Goals.", slug: 'resource-augmentation' },
   ]
 }
 export const dataServicesCategory: ServiceCategory = {
@@ -702,23 +747,23 @@ export const dataServicesCategory: ServiceCategory = {
   textColor: 'text-white',
   bgColor: 'bg-linear-to-br from-[#084387] to-[#021021]',
   imagePosition: "top-0 right-0",
-  href:"/services/dataservices/",
+  href: "/services/dataservices/",
   services: [
     {
       label: "Data Strategy Consulting",
       description: "Develop actionable data strategies that align with business goals, maximize value and drive informed decision-making.",
-      slug:"data-strategy"
-    }, 
+      slug: "data-strategy"
+    },
     {
       label: "Data Warehouse",
       description: "Design and manage centralized data storage solutions to enable efficient access, integration and reporting.",
-      slug:"data-warehouse"
+      slug: "data-warehouse"
     },
     {
       label: "Data Analytics and BI",
       description: "Transform raw data into insights through analytics and business intelligence for smarter, data-driven decisions.",
-      slug:"data-analytics"
-    }, 
+      slug: "data-analytics"
+    },
   ],
 }
 
@@ -762,7 +807,7 @@ export const advisoryCategory: ServiceCategory = {
   textColor: 'text-white',
   bgColor: 'bg-linear-to-br from-[#084387] to-[#021021]',
   imagePosition: "top-0 right-0",
-  href:"/services/advisory/",
+  href: "/services/advisory/",
   services: [
     // {
     //   label: 'Discovery Workshops',
@@ -775,12 +820,12 @@ export const advisoryCategory: ServiceCategory = {
     {
       label: "Product Strategy & Roadmapping",
       description: "Turn your product vision into a detailed, achievable plan with defined milestones and measurable outcomes.",
-      slug:"product-strategy"
-    }, 
+      slug: "product-strategy"
+    },
     {
       label: "Digital Transformation Consulting",
       description: "Reimagine your organization with strategies that connect technology, people and processes for long-term growth.",
-      slug:"digital-transformation"
+      slug: "digital-transformation"
     },
     // {
     //   label: "UX / UI Consulting",
@@ -797,32 +842,32 @@ export const engineeringCategory: ServiceCategory = {
   textColor: 'text-white',
   bgColor: 'bg-linear-to-br from-[#0E3043] to-[#485861]',
   imagePosition: "top-0 right-0",
-  href:"/services/softengineering/",
+  href: "/services/softengineering/",
   services: [
     {
       label: "Custom Software Development",
       description: "Purpose-built software solutions designed around your business workflows, delivering scalability, reliability, and long-term competitive advantage.",
-      slug:"custom-software-development"
+      slug: "custom-software-development"
     },
     {
       label: 'App Development (Mobile & Web)',
       description: "High-performance web and mobile applications engineered for usability, security, and seamless user experiences across platforms.",
-      slug:"app-development"
+      slug: "app-development"
     },
     {
       label: "App Modernization",
       description: "Upgrading legacy applications through refactoring, re-architecture, and technology upgrades to improve performance, security, and maintainability.",
-      slug:"app-modernization"
+      slug: "app-modernization"
     },
     {
       label: "Database Migration",
       description: "Secure and structured migration of data across platforms, ensuring data integrity, minimal downtime, and improved performance at scale.",
-      slug:"database-migration"
+      slug: "database-migration"
     },
     {
       label: "Third-Party Integrations",
       description: "Seamless integration of external systems, APIs, and platforms to unify data, automate processes, and extend application capabilities.",
-      slug:"third-party"
+      slug: "third-party"
     }
   ],
 }
@@ -834,33 +879,33 @@ export const cyberCategory: ServiceCategory = {
   textColor: 'text-white',
   bgColor: 'bg-linear-to-br from-[#0E3043] to-[#485861]',
   imagePosition: "top-0 right-0",
-  href:"/services/cybersecurity/",
+  href: "/services/cybersecurity/",
   services: [
     {
       label: "Solution Deployment and Management",
       description: "Implement and manage security solutions to protect systems, networks and data from evolving cyber threats.",
-      slug:"solution-deployment"
+      slug: "solution-deployment"
     },
     {
       label: 'Governance and Compliance',
       description: "Establish policies and controls ensuring IT security practices meet regulatory standards and organizational requirements.",
-      slug:"governance-and-compliance"
+      slug: "governance-and-compliance"
     },
     {
       label: "Cyber Assessments",
       description: "Conduct comprehensive evaluations of systems, networks and processes to identify vulnerabilities and strengthen defenses.",
-      slug:"cyber-assessments"
+      slug: "cyber-assessments"
     },
     {
       label: "Managed Cybersecurity Service",
       description: "Provide continuous monitoring, threat detection and incident response to safeguard digital assets and maintain resilience.",
-      slug:"managed-cybersecurity-service"
+      slug: "managed-cybersecurity-service"
     },
     {
       label: "Risk Management & Governance",
-      description: 
-      " A structured approach to identifying, prioritizing and mitigating cyber risks with the governance frameworks, policies and oversight needed to keep security aligned with business goals.",
-      slug:"risk-management"
+      description:
+        " A structured approach to identifying, prioritizing and mitigating cyber risks with the governance frameworks, policies and oversight needed to keep security aligned with business goals.",
+      slug: "risk-management"
     }
   ],
 }
@@ -926,7 +971,7 @@ export const Faq_Home: FaqItem[] = [
   {
     value: "item-1",
     question: "What makes Virtuosoft different from other agencies?",
-    answer:"We combine deep technical expertise with business acumen, acting as your strategic partner to ensure measurable outcomes rather than just delivering technical solutions."
+    answer: "We combine deep technical expertise with business acumen, acting as your strategic partner to ensure measurable outcomes rather than just delivering technical solutions."
   },
   {
     value: "item-2",
@@ -946,7 +991,8 @@ export const Faq_Home: FaqItem[] = [
   {
     value: "item-5",
     question: "What is your software development methodology?",
-    answer: "We use agile development with 2-week sprints, regular demos and transparent communication to ensure we're building exactly what you need while maintaining high code quality."},
+    answer: "We use agile development with 2-week sprints, regular demos and transparent communication to ensure we're building exactly what you need while maintaining high code quality."
+  },
   {
     value: "item-6",
     question: "How do you ensure your project's security?",
@@ -958,19 +1004,19 @@ export const Faq_Home: FaqItem[] = [
     answer: "We offer 24/7 monitoring, emergency support with guaranteed response times and regular maintenance to keep your systems running optimally."
   },
   {
-    value:"item-8",
-    question:"How long do typical projects take to complete?",
-    answer:"Most projects deliver initial results within 2-4 weeks, with full implementation typically completing in 8-16 weeks depending on complexity and requirements."
+    value: "item-8",
+    question: "How long do typical projects take to complete?",
+    answer: "Most projects deliver initial results within 2-4 weeks, with full implementation typically completing in 8-16 weeks depending on complexity and requirements."
   },
   {
-    value:"item-9",
-    question:"How do you handle data privacy and compliance?",
-    answer:"We build compliance into every project, following global standards like GDPR and HIPAA, with robust data protection protocols tailored to your industry." 
+    value: "item-9",
+    question: "How do you handle data privacy and compliance?",
+    answer: "We build compliance into every project, following global standards like GDPR and HIPAA, with robust data protection protocols tailored to your industry."
   },
   {
-    value:"item-10",
-    question:"How do we get started working with Virtuosoft?",
-    answer:"Begin with a complimentary discovery session where we analyze your needs and create a tailored proposal with clear timeline and investment details.",
+    value: "item-10",
+    question: "How do we get started working with Virtuosoft?",
+    answer: "Begin with a complimentary discovery session where we analyze your needs and create a tailored proposal with clear timeline and investment details.",
   }
 ];
 
@@ -3022,122 +3068,122 @@ export const Faq_Ibm: FaqItem[] = [
 // Add/Update this in /app/_constant/index.js
 
 export const careersHeader: CareersHeader = {
-    title: "Opportunities At",
-    company: "Virtuosoft",
+  title: "Opportunities At",
+  company: "Virtuosoft",
 };
 
 export const jobListings: JobListing[] = [
-    {
-        id: "junior-data-engineer",
-        title: "Junior Data Engineer",
-        department: "Data Science",
-        type: "Full-time",
-        location: "On-Site",
-        fullDescription: "We are looking for a Junior Data Engineer with strong logical thinking and fast query-writing ability to support the development of data pipelines, ETL processes and reporting systems. This role is ideal for someone passionate about data engineering, SQL optimization and cloud-based data platforms.",
-        requirements: [
-            "6 to 18 months of experience in Data Engineering or a related role",
-            "Fast and efficient SQL query writing ability",
-            "Basic to intermediate Python programming skills",
-            "Understanding of data warehousing principles",
-            "Knowledge of ETL/ELT processes and data pipelines",
-            "Familiarity with Power BI for reporting and dashboards",
-            "Basic knowledge of AWS services (EC2, Lambda, Redshift) or GCP"
-        ],
-        benefits: ["Market Competitive Salary", "Growth Opportunities", "Data Systems Training", "9:30 AM to 6:30 PM shift"]
-    },
-    {
-        id: "frontend-developer-angularjs",
-        title: "Frontend Developer (Angular-JS)",
-        department: "Engineering",
-        type: "Evening Shift",
-        location: "Remote",
-        fullDescription: "We are looking for a skilled Frontend Developer with strong expertise in AngularJS (1.x) to develop and maintain dynamic web applications. The ideal candidate has deep JavaScript knowledge, strong UI development skills, and the ability to optimize performance across browsers and devices.",
-        requirements: [
-            "4+ years of relevant professional experience required",
-            "Strong hands-on experience with AngularJS (1.x)",
-            "Proficiency in JavaScript, jQuery, HTML5, CSS3, JSON",
-            "Experience with responsive frameworks like Bootstrap",
-            "Effective use of $httpProvider, promises, and deferred objects",
-            "Strong understanding of frontend security and session handling",
-            "Ability to work in an evening shift"
-        ],
-        benefits: ["Remote Work Mode", "Evening Shift", "Market Competitive Salary", "Scalable Product Environment"]
-    },
-    {
-        id: "creative-graphic-designer",
-        title: "Creative Graphic Designer",
-        department: "Creative & Design",
-        type: "Full-time",
-        location: "On-Site",
-        fullDescription: "We are looking for a proactive Creative Generalist who can design for brands, build UX-focused web layouts and support video production workflows. This role blends visual design, UX/UI thinking and video editing support, with a strong emphasis on ownership and delivery discipline.",
-        requirements: [
-            "2 to 3 years of relevant professional experience",
-            "Ability to design across multiple brands and platforms",
-            "Experience in UX/UI thinking for web layouts",
-            "Support for video production and editing workflows",
-            "Strong emphasis on ownership and communication",
-            "Design, Media or related degree preferred"
-        ],
-        benefits: ["Market Competitive Salary", "Professional Creative Team", "On-site Perks", "9:30 AM to 6:30 PM shift"]
-    },
-    {
-        id: "microsoft-dynamics-365-crm",
-        title: "Microsoft Dynamics 365 CRM",
-        department: "IT Services",
-        type: "Full-time (EST Shift)",
-        location: "Remote",
-        fullDescription: "We are looking for a skilled Microsoft Dynamics 365 CRM & Power Apps Developer to design, customize and implement high-impact CRM solutions. The ideal candidate excels in Dynamics 365 integrations, Power Platform tools and scalable enterprise solutions.",
-        requirements: [
-            "Strong experience in Dynamics 365 CRM customization and integration",
-            "Proficiency in .NET, C#, JavaScript and Microsoft technologies",
-            "Hands-on expertise with Power Platform tools (Power Automate, Power BI)",
-            "Experience in data migration (SSIS, KingswaySoft or equivalent)",
-            "Understanding of Azure services, APIs and cloud integrations",
-            "Willingness to work in EST Time Zone (6 PM to 2:30 AM)"
-        ],
-        benefits: ["Remote Work", "Cutting-edge Microsoft Tech", "Enterprise IT exposure", "Competitive Salary"]
-    },
-    {
-        id: "devops-engineer",
-        title: "DevOps Engineer",
-        department: "IT Services",
-        type: "Full-time",
-        location: "On-site",
-        fullDescription: "As a DevOps Engineer at Virtuosoft, you'll design, deploy and maintain robust cloud infrastructure using modern DevOps practices. You'll collaborate with development teams to implement secure, scalable and highly available systems.",
-        requirements: [
-            "3+ years of professional experience in DevOps",
-            "Architect and manage AWS/OCI infrastructure using Terraform",
-            "Manage Kubernetes, Docker and CI/CD pipelines (GitHub Actions)",
-            "Configure networking, VPNs and security settings",
-            "Monitor systems using Prometheus, Datadog and ELK Stack",
-            "Automation skills with Bash/Python"
-        ],
-        benefits: ["Market Competitive Salary", "Kubernetes Environment", "Security Hardening exposure", "Cloud Certifications support"]
-    },
-    {
-        id: "dotnet-developer",
-        title: ".NET Developer",
-        department: "Engineering",
-        type: "Contract (1 Year)",
-        location: "Karachi (Remote/On-site)",
-        fullDescription: "As a .NET Developer at Virtuosoft, you’ll design, develop and maintain enterprise-grade applications using modern Microsoft technologies. You’ll collaborate with cross-functional teams to deliver secure, scalable and high-quality software solutions.",
-        requirements: [
-            "5+ years of relevant professional experience",
-            "Expertise in .NET / .NET Core, ASP.NET, C#, MVC, and MVVM",
-            "Build and integrate RESTful APIs and OData services",
-            "Design and optimize SQL Server queries and stored procedures",
-            "Implement Identity Management using Active Directory/ADFS",
-            "Source control management using TFS"
-        ],
-        benefits: ["1 Year Renewable Contract", "Enterprise-level projects", "Evening Shift (6 PM – 2:30 AM)", "Modern Microsoft Stack"]
-    }
+  {
+    id: "junior-data-engineer",
+    title: "Junior Data Engineer",
+    department: "Data Science",
+    type: "Full-time",
+    location: "On-Site",
+    fullDescription: "We are looking for a Junior Data Engineer with strong logical thinking and fast query-writing ability to support the development of data pipelines, ETL processes and reporting systems. This role is ideal for someone passionate about data engineering, SQL optimization and cloud-based data platforms.",
+    requirements: [
+      "6 to 18 months of experience in Data Engineering or a related role",
+      "Fast and efficient SQL query writing ability",
+      "Basic to intermediate Python programming skills",
+      "Understanding of data warehousing principles",
+      "Knowledge of ETL/ELT processes and data pipelines",
+      "Familiarity with Power BI for reporting and dashboards",
+      "Basic knowledge of AWS services (EC2, Lambda, Redshift) or GCP"
+    ],
+    benefits: ["Market Competitive Salary", "Growth Opportunities", "Data Systems Training", "9:30 AM to 6:30 PM shift"]
+  },
+  {
+    id: "frontend-developer-angularjs",
+    title: "Frontend Developer (Angular-JS)",
+    department: "Engineering",
+    type: "Evening Shift",
+    location: "Remote",
+    fullDescription: "We are looking for a skilled Frontend Developer with strong expertise in AngularJS (1.x) to develop and maintain dynamic web applications. The ideal candidate has deep JavaScript knowledge, strong UI development skills, and the ability to optimize performance across browsers and devices.",
+    requirements: [
+      "4+ years of relevant professional experience required",
+      "Strong hands-on experience with AngularJS (1.x)",
+      "Proficiency in JavaScript, jQuery, HTML5, CSS3, JSON",
+      "Experience with responsive frameworks like Bootstrap",
+      "Effective use of $httpProvider, promises, and deferred objects",
+      "Strong understanding of frontend security and session handling",
+      "Ability to work in an evening shift"
+    ],
+    benefits: ["Remote Work Mode", "Evening Shift", "Market Competitive Salary", "Scalable Product Environment"]
+  },
+  {
+    id: "creative-graphic-designer",
+    title: "Creative Graphic Designer",
+    department: "Creative & Design",
+    type: "Full-time",
+    location: "On-Site",
+    fullDescription: "We are looking for a proactive Creative Generalist who can design for brands, build UX-focused web layouts and support video production workflows. This role blends visual design, UX/UI thinking and video editing support, with a strong emphasis on ownership and delivery discipline.",
+    requirements: [
+      "2 to 3 years of relevant professional experience",
+      "Ability to design across multiple brands and platforms",
+      "Experience in UX/UI thinking for web layouts",
+      "Support for video production and editing workflows",
+      "Strong emphasis on ownership and communication",
+      "Design, Media or related degree preferred"
+    ],
+    benefits: ["Market Competitive Salary", "Professional Creative Team", "On-site Perks", "9:30 AM to 6:30 PM shift"]
+  },
+  {
+    id: "microsoft-dynamics-365-crm",
+    title: "Microsoft Dynamics 365 CRM",
+    department: "IT Services",
+    type: "Full-time (EST Shift)",
+    location: "Remote",
+    fullDescription: "We are looking for a skilled Microsoft Dynamics 365 CRM & Power Apps Developer to design, customize and implement high-impact CRM solutions. The ideal candidate excels in Dynamics 365 integrations, Power Platform tools and scalable enterprise solutions.",
+    requirements: [
+      "Strong experience in Dynamics 365 CRM customization and integration",
+      "Proficiency in .NET, C#, JavaScript and Microsoft technologies",
+      "Hands-on expertise with Power Platform tools (Power Automate, Power BI)",
+      "Experience in data migration (SSIS, KingswaySoft or equivalent)",
+      "Understanding of Azure services, APIs and cloud integrations",
+      "Willingness to work in EST Time Zone (6 PM to 2:30 AM)"
+    ],
+    benefits: ["Remote Work", "Cutting-edge Microsoft Tech", "Enterprise IT exposure", "Competitive Salary"]
+  },
+  {
+    id: "devops-engineer",
+    title: "DevOps Engineer",
+    department: "IT Services",
+    type: "Full-time",
+    location: "On-site",
+    fullDescription: "As a DevOps Engineer at Virtuosoft, you'll design, deploy and maintain robust cloud infrastructure using modern DevOps practices. You'll collaborate with development teams to implement secure, scalable and highly available systems.",
+    requirements: [
+      "3+ years of professional experience in DevOps",
+      "Architect and manage AWS/OCI infrastructure using Terraform",
+      "Manage Kubernetes, Docker and CI/CD pipelines (GitHub Actions)",
+      "Configure networking, VPNs and security settings",
+      "Monitor systems using Prometheus, Datadog and ELK Stack",
+      "Automation skills with Bash/Python"
+    ],
+    benefits: ["Market Competitive Salary", "Kubernetes Environment", "Security Hardening exposure", "Cloud Certifications support"]
+  },
+  {
+    id: "dotnet-developer",
+    title: ".NET Developer",
+    department: "Engineering",
+    type: "Contract (1 Year)",
+    location: "Karachi (Remote/On-site)",
+    fullDescription: "As a .NET Developer at Virtuosoft, you’ll design, develop and maintain enterprise-grade applications using modern Microsoft technologies. You’ll collaborate with cross-functional teams to deliver secure, scalable and high-quality software solutions.",
+    requirements: [
+      "5+ years of relevant professional experience",
+      "Expertise in .NET / .NET Core, ASP.NET, C#, MVC, and MVVM",
+      "Build and integrate RESTful APIs and OData services",
+      "Design and optimize SQL Server queries and stored procedures",
+      "Implement Identity Management using Active Directory/ADFS",
+      "Source control management using TFS"
+    ],
+    benefits: ["1 Year Renewable Contract", "Enterprise-level projects", "Evening Shift (6 PM – 2:30 AM)", "Modern Microsoft Stack"]
+  }
 ];
 
 export const openApp: OpenApplication = {
-    title: "Open application",
-    type: "Full-time",
-    location: "Karachi",
-    shortDesc: "Don't see your role available? Apply for an open application!"
+  title: "Open application",
+  type: "Full-time",
+  location: "Karachi",
+  shortDesc: "Don't see your role available? Apply for an open application!"
 };
 
 export const Faq_Products_Certus: FaqItem[] = [
@@ -3195,16 +3241,22 @@ export const global_Solutions: GlobalSolutionItem[] = [
     id: "software-engineering",
     index: "02",
     title: "Software Engineering",
+    description: "Building Robust And Future Ready Digital Solution.",
+    tags: ["App development", "App Modernization", "PoC Development", "Cloud Engineering"],
   },
   {
-    id: "data-engineering",
+    id: "advisory-strategy",
     index: "03",
-    title: "Data Engineering",
+    title: "Advisory & Strategy",
+    description:"Expert guidance to drive digital growth.",
+    tags:["Discovery Workshop", "Technical Feasibility", "UI/UX Consulting", "Digital Transformation"]
   },
   {
-    id: "cyber-security",
+    id: "it-governance",
     index: "04",
-    title: "Cyber Security",
+    title: "IT Governance",
+    description:"Structured Governance That Strengthens Control And Accountability.",
+    tags:["Regulatory Compliance","Risk Management", "Resource Augmentation", "ITIL"]
   },
 ];
 
@@ -3359,7 +3411,7 @@ export const ksa_WhyChooseUs: KsaWhyChooseUsItem[] = [
   {
     index: "04",
     title: "Reliability",
-    description: "We stand for consistency, precision and accountability — from the smallest task to the most complex project, every time.",
+    description: "We stand for consistency, precision and accountability, from the smallest task to the most complex project, every time.",
     icon: "/assets/Images/home/ksa/icon-reliability.svg",
   },
 ];
@@ -3399,7 +3451,7 @@ export const global_WhyChooseUs: GlobalWhyChooseUsItem[] = [
     index: "04",
     title: "Reliability",
     description:
-      "We stand for consistency, precision and accountability — from the smallest task to the most complex project, every time.",
+      "We stand for consistency, precision and accountability, from the smallest task to the most complex project, every time.",
     imageSrc: "/assets/Images/home/global/whychoose-icon-reliability.svg",
   },
 ];
@@ -3417,7 +3469,7 @@ export const whitePaper_Translations: WhitePaperTranslation[] = [
   {
     language: "English (Original)",
     linkLabel: "Download Paper",
-    href: "/contact",
+    href: "#",
   },
 ];
 

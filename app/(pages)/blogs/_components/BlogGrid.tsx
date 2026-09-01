@@ -32,7 +32,7 @@ function BlogGrid({ posts }: BlogGridProps) {
                     <button
                         type="button"
                         onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}
-                        className="font-helvetica-now-display inline-flex h-12 w-[200px] items-center justify-center rounded-full border-[1.5px] border-primary text-base font-bold leading-6 text-primary transition-colors hover:bg-primary hover:text-white"
+                        className="inline-flex h-12 w-[200px] items-center justify-center rounded-full border-[1.5px] border-primary text-base font-bold leading-6 text-primary transition-colors hover:bg-primary hover:text-white"
                     >
                         Load More
                     </button>

@@ -35,12 +35,12 @@ function PostCard({ post }: PostCardProps) {
             </div>
 
             <div className="flex flex-1 flex-col gap-3 rounded-b-[20px] border-x border-b border-primary/20 bg-white p-5">
-                <p className="font-helvetica-now-display text-base font-bold leading-6 text-primary">
+                <p className="text-base font-bold leading-6 text-primary">
                     {date}
                 </p>
 
                 <div className="flex items-start gap-4">
-                    <h3 className="font-helvetica-now-display line-clamp-2 flex-1 text-xl font-medium leading-7 text-[#1a1a1a]">
+                    <h3 className="line-clamp-2 flex-1 text-xl font-medium leading-7 text-[#1a1a1a]">
                         {title}
                     </h3>
                     <span className="shrink-0 pt-1">
@@ -52,7 +52,7 @@ function PostCard({ post }: PostCardProps) {
                     </span>
                 </div>
 
-                <p className="font-helvetica-now-display line-clamp-2 text-base leading-[22px] text-[#667085]">
+                <p className="line-clamp-2 text-base leading-[22px] text-[#667085]">
                     {excerpt}
                 </p>
             </div>

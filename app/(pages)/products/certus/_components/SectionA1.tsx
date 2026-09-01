@@ -57,7 +57,7 @@ function OutcomeCard({
       >
         <Image src={icon} alt="" width={24} height={24} className="size-6" />
       </span>
-      <span className="font-helvetica-now-display flex min-w-0 flex-col gap-[2px]">
+      <span className="flex min-w-0 flex-col gap-[2px]">
         <span
           className={`text-sm font-bold leading-5 ${
             success ? "text-[#166534]" : "text-[#9a3412]"
@@ -88,11 +88,11 @@ function FunnelCaption({ className }: { className?: string }) {
           height={24}
           className="size-5 shrink-0 md:size-6"
         />
-        <span className="font-helvetica-now-display text-sm font-medium leading-7 text-[#004acf] sm:text-base md:text-xl">
+        <span className="text-sm font-medium leading-7 text-[#004acf] sm:text-base md:text-xl">
           However it arrives, we take it
         </span>
       </span>
-      <p className="font-helvetica-now-display max-w-[234px] text-center text-[11px] leading-4 text-[#0051e4] md:text-sm">
+      <p className="max-w-[234px] text-center text-[11px] leading-4 text-[#0051e4] md:text-sm">
         Cleaned up automatically, no manual re-typing or re-scanning
       </p>
     </div>
@@ -155,7 +155,7 @@ export default function SectionA1() {
                       )}
                     </div>
                   </div>
-                  <span className="font-helvetica-now-display pt-2 text-center text-sm leading-6 text-[#475569]">
+                  <span className="pt-2 text-center text-sm leading-6 text-[#475569]">
                     {s.label}
                   </span>
                 </div>
@@ -188,7 +188,7 @@ export default function SectionA1() {
                     className="size-5"
                   />
                 </span>
-                <h3 className="font-helvetica-now-display text-lg font-medium leading-7 text-[#050f21] md:text-xl">
+                <h3 className="text-lg font-medium leading-7 text-[#050f21] md:text-xl">
                   Read Three Ways Before It&apos;s Trusted
                 </h3>
               </div>
@@ -207,7 +207,7 @@ export default function SectionA1() {
                         className="size-6"
                       />
                     </span>
-                    <span className="font-helvetica-now-display flex min-w-0 flex-col">
+                    <span className="flex min-w-0 flex-col">
                       <span className="text-sm font-bold leading-5 text-[#1e3a8a]">
                         {l.title}
                       </span>
@@ -234,11 +234,11 @@ export default function SectionA1() {
                     height={24}
                     className="mr-2 size-6 shrink-0"
                   />
-                  <span className="font-helvetica-now-display text-lg font-medium leading-7 text-[#050f21] md:text-xl">
+                  <span className="text-lg font-medium leading-7 text-[#050f21] md:text-xl">
                     Certus Decides: Post It, or Flag It
                   </span>
                 </span>
-                <p className="font-helvetica-now-display max-w-[170px] text-center text-xs leading-4 text-[#686766]">
+                <p className="max-w-[170px] text-center text-xs leading-4 text-[#686766]">
                   Based on all three checks above
                 </p>
               </div>

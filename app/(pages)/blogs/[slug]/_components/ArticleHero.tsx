@@ -25,13 +25,13 @@ function ArticleHero({ post }: ArticleHeroProps) {
                 {category && (
                     <span className="inline-flex w-fit items-center gap-2 rounded-[20px] bg-[#F1ECFF] px-2 py-[5px]">
                         <span className="size-4 shrink-0 rounded-full bg-primary" />
-                        <span className="font-helvetica-now-display text-sm font-bold leading-5 text-primary">
+                        <span className="text-sm font-bold leading-5 text-primary">
                             {category}
                         </span>
                     </span>
                 )}
 
-                <h1 className="font-helvetica-now-display text-xl font-bold leading-tight text-white md:text-[32px] md:leading-10">
+                <h1 className="text-xl font-bold leading-tight text-white md:text-[32px] md:leading-10">
                     {title}
                 </h1>
 

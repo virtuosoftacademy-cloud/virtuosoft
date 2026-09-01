@@ -43,7 +43,7 @@ export default function SectionB1() {
                   </>
                 }
               />
-              <p className="font-helvetica-now-display text-base leading-[22px] text-[#f9f8f5]">
+              <p className="text-base leading-[22px] text-[#f9f8f5]">
                 These figures come from a live enterprise deployment in the GCC, not a
                 lab, not a pilot with hand-picked clean data. Every one of the 106
                 flagged documents was caught by the three-layer engine and safely routed
@@ -56,10 +56,10 @@ export default function SectionB1() {
           <dl className="grid grid-cols-1 gap-x-[68px] gap-y-8 sm:grid-cols-2 md:gap-y-11 lg:grid-cols-3">
             {STATS.map((stat) => (
               <div key={stat.label} className="flex flex-col">
-                <dt className="font-helvetica-now-display text-[40px] font-bold leading-[48px] text-white md:text-[48px] md:leading-[56px]">
+                <dt className="text-[40px] font-bold leading-[48px] text-white md:text-[48px] md:leading-[56px]">
                   {stat.value}
                 </dt>
-                <dd className="font-helvetica-now-display text-sm font-bold leading-5 text-white">
+                <dd className="text-sm font-bold leading-5 text-white">
                   {stat.label}
                 </dd>
               </div>

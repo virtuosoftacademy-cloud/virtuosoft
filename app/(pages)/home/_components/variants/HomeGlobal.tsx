@@ -7,7 +7,7 @@ function HomeGlobal() {
   return (
     <ReactLenis root>
       <div className="mx-auto">
-        <CommonComponents />
+        <CommonComponents region="global" />
       </div>
     </ReactLenis>
   )

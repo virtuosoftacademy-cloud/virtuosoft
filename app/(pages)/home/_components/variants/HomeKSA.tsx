@@ -7,7 +7,7 @@ function HomeKSA() {
   return (
     <ReactLenis root>
       <div className="mx-auto">
-        <CommonComponents />
+        <CommonComponents region="ksa" />
       </div>
     </ReactLenis>
   )

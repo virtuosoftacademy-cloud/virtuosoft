@@ -33,10 +33,10 @@ function ContactBody() {
         <Image src={HeroBg} alt="" fill className="object-cover" priority />
       </div>
 
-      <div className="mx-auto max-w-7xl px-6 pt-28 md:px-10 lg:pt-42">
+      <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-0 pt-28 lg:pt-42">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,564px)_minmax(0,1fr)] lg:gap-14">
           <EnquiryForm />
-          <div className="lg:pt-6">
+          <div className="lg:pt-2">
             <ContactInfoPanel />
           </div>
         </div>

@@ -76,7 +76,7 @@ function LogoTile({ logo }: { logo: Logo }) {
           />
         </span>
         {logo.label && (
-          <span className="font-helvetica-now-display text-xl font-bold leading-7 text-[#91c044]">
+          <span className="text-xl font-bold leading-7 text-[#91c044]">
             {logo.label}
           </span>
         )}
@@ -116,7 +116,7 @@ export default function SectionD2() {
         <div className="mt-10 flex flex-col gap-10">
           {LOGO_GROUPS.map((group) => (
             <div key={group.heading} className="flex flex-col gap-5">
-              <h3 className="font-helvetica-now-display text-2xl font-bold leading-8 text-[#050f21]">
+              <h3 className="text-2xl font-bold leading-8 text-[#050f21]">
                 {group.heading}
               </h3>
               <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">

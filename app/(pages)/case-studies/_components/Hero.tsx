@@ -24,11 +24,11 @@ function Hero() {
       <div className={`${SHELL} pt-32 pb-16 md:pt-[172px] md:pb-[115px]`}>
         <Eyebrow>Case Study</Eyebrow>
 
-        <h1 className="font-helvetica-now-display mt-2 text-4xl leading-[1.17] text-white md:text-5xl">
+        <h1 className="mt-2 text-4xl leading-[1.17] text-white md:text-5xl">
           Our Success <span className="font-bold">Stories</span>
         </h1>
 
-        <p className="font-helvetica-now-display mt-3 max-w-[452px] text-base leading-[22px] text-white">
+        <p className="mt-3 max-w-[452px] text-base leading-[22px] text-white">
           Explore how we&rsquo;ve helped businesses transform through innovative custom software
           solutions
         </p>

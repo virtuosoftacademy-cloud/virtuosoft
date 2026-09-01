@@ -87,10 +87,10 @@ export default function SectionE2() {
                   "linear-gradient(137.68deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.62) 71.43%)",
               }}
             >
-              <h3 className="font-helvetica-now-display w-full text-[23.66px] leading-[31.545px] font-bold text-[#0051e4]">
+              <h3 className="w-full text-[23.66px] leading-[31.545px] font-bold text-[#0051e4]">
                 {card.title}
               </h3>
-              <p className="font-helvetica-now-display w-full text-[15.89px] leading-[21.843px] text-[#474747]">
+              <p className="w-full text-[15.89px] leading-[21.843px] text-[#474747]">
                 {card.body}
               </p>
             </div>

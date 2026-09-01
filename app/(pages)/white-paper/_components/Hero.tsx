@@ -20,16 +20,16 @@ function Hero() {
           <span className="relative block size-[14px] shrink-0">
             <Image src={BadgeSparkle} alt="" fill className="size-full" />
           </span>
-          <span className="font-helvetica-now-display text-[12px] font-bold leading-[16px] text-[#0051e4]">
+          <span className="text-[12px] font-bold leading-[16px] text-[#0051e4]">
             Resources
           </span>
         </span>
 
-        <h1 className="font-helvetica-now-display mt-2 text-4xl font-normal leading-[1.2] text-white md:text-[48px] md:leading-[56px]">
+        <h1 className="mt-2 text-4xl font-normal leading-[1.2] text-white md:text-[48px] md:leading-[56px]">
           White Papers
         </h1>
 
-        <p className="font-helvetica-now-display mt-3 max-w-[553px] text-[16px] leading-[22px] text-white">
+        <p className="mt-3 max-w-[553px] text-[16px] leading-[22px] text-white">
           Discover in-depth research and expert perspectives on AI, digital
           transformation, emerging technologies, and the trends shaping modern
           businesses.

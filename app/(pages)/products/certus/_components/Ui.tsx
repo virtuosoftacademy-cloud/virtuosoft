@@ -24,10 +24,10 @@ export function Eyebrow({
   return (
     <span
       className={cn(
-        "font-helvetica-now-display inline-flex items-center gap-2 rounded-full border text-[12px] font-bold leading-4",
+        "inline-flex items-center gap-2 rounded-full border text-[12px] font-bold leading-4",
         isDark
           ? "border-white bg-white/30 px-4 py-2 text-white"
-          : "border-[#0051e4] bg-[#f8faff] px-[17px] py-[9px] text-[#0051e4]",
+          : "border-primary bg-[#f8faff] px-[17px] py-[9px] text-primary",
         className
       )}
     >
@@ -66,7 +66,7 @@ export function SectionTitle({
   return (
     <h2
       className={cn(
-        "font-helvetica-now-display text-4xl md:text-[40px] leading-[1.2]",
+        "text-4xl md:text-[40px] leading-[1.2]",
         className
       )}
     >
@@ -91,7 +91,7 @@ export function SectionBody({
   return (
     <p
       className={cn(
-        "font-helvetica-now-display text-base leading-[22px] text-[#474747]",
+        "text-base leading-[22px] text-[#474747]",
         className
       )}
     >
@@ -102,7 +102,7 @@ export function SectionBody({
 
 /** Primary pill button styling used throughout the design (48px tall, fully round). */
 export const PRIMARY_BTN =
-  "font-helvetica-now-display inline-flex h-12 items-center justify-center rounded-full bg-[#0051e4] px-6 text-base font-bold text-white transition-colors hover:bg-[#0044c0]"
+  "inline-flex h-12 items-center justify-center rounded-full bg-[#0051e4] px-6 text-base font-bold text-white transition-colors hover:bg-[#0044c0]"
 
 export const SECONDARY_BTN =
-  "font-helvetica-now-display inline-flex h-12 items-center justify-center rounded-full border border-white px-6 text-base font-bold text-white transition-colors hover:bg-white/10"
+  "inline-flex h-12 items-center justify-center rounded-full border border-white px-6 text-base font-bold text-white transition-colors hover:bg-white/10"

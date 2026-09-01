@@ -16,7 +16,7 @@ function ArticleToc({ sections, thumbnail, thumbnailAlt }: ArticleTocProps) {
 
     return (
         <nav aria-label="In this article" className="flex flex-col gap-[19px]">
-            <p className="font-helvetica-now-display text-2xl font-bold leading-8 text-[#050F21]">
+            <p className="text-2xl font-bold leading-8 text-[#050F21]">
                 In this article
             </p>
 
@@ -27,7 +27,7 @@ function ArticleToc({ sections, thumbnail, thumbnailAlt }: ArticleTocProps) {
                             href={`#${section.id}`}
                             className="group flex min-h-[97px] items-center justify-between gap-4 rounded-lg bg-[#F7F9FB] p-[12.8px] transition-colors hover:bg-[#EFF3F8]"
                         >
-                            <span className="font-helvetica-now-display line-clamp-3 flex-1 text-base font-bold leading-6 text-[#050F21]">
+                            <span className="line-clamp-3 flex-1 text-base font-bold leading-6 text-[#050F21]">
                                 {section.title}
                             </span>
 

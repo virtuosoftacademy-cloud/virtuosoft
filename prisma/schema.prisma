@@ -1,0 +1,254 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+// ─────────────────────────── Blog ───────────────────────────
+
+model BlogCategory {
+  id     Int        @id @default(autoincrement())
+  label  String
+  accent String
+  posts  BlogPost[]
+}
+
+model BlogPost {
+  id         String        @id @default(cuid())
+  slug       String        @unique
+  title      String
+  accent     String
+  excerpt    String        @db.Text
+  image      String
+
+  /// Shown on post cards in the listings. The form requires it, but the column
+  /// stays nullable for rows created before it existed — cards fall back to
+  /// image for those.
+  thumbnailImage String?
+
+  timeAgo    String
+  date       String
+  content    String        @db.LongText
+  href       String
+  isFeatured Boolean       @default(false)
+  isSidebar  Boolean       @default(false)
+  categoryId Int?
+  category   BlogCategory? @relation(fields: [categoryId], references: [id])
+
+  authorId String?
+  author   User?   @relation(fields: [authorId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+model Industry {
+  id          Int         @id @default(autoincrement())
+  label       String      @unique
+  caseStudies CaseStudy[]
+}
+
+model ServiceArea {
+  id          Int         @id @default(autoincrement())
+  label       String      @unique
+  caseStudies CaseStudy[] // implicit many-to-many
+}
+
+model CaseStudy {
+  id           String @id @default(cuid())
+  slug         String @unique
+  heroTitle    String
+  heroSubtitle String @db.Text
+  heroImage    String
+
+  /// Shown on the case study card in the listing grid. The form requires it,
+  /// but the column stays nullable for rows created before it existed — cards
+  /// fall back to heroImage for those.
+  thumbnailImage String?
+
+  industryId Int?
+  industry   Industry? @relation(fields: [industryId], references: [id])
+
+  serviceAreas ServiceArea[] // implicit many-to-many
+
+  summary String @db.LongText // paragraphs separated by blank lines
+
+  situationParagraphs String  @db.LongText // paragraphs separated by blank lines
+  situationQuestions  String  @db.Text // one per line
+  situationClosing    String? @db.Text
+
+  challenge     String @db.LongText // paragraphs separated by blank lines
+  approachIntro String @db.LongText // paragraphs separated by blank lines
+  outcome       String @db.LongText // paragraphs separated by blank lines
+  keyResults    String @db.Text // one per line
+
+  calloutHeading     String?
+  calloutText        String? @db.Text
+  calloutButtonHref  String?
+  calloutButtonLabel String?
+
+  approachCards   ApproachCard[]
+  timeline        TimelinePhase[]
+  relatedServices RelatedService[]
+
+  authorId String?
+  author   User?   @relation(fields: [authorId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ApproachCard {
+  id          Int    @id @default(autoincrement())
+  title       String
+  description String @db.Text
+  order       Int    @default(0)
+
+  caseStudyId String
+  caseStudy   CaseStudy @relation(fields: [caseStudyId], references: [id], onDelete: Cascade)
+}
+
+model TimelinePhase {
+  id       Int    @id @default(autoincrement())
+  phase    String
+  duration String
+  order    Int    @default(0)
+
+  caseStudyId String
+  caseStudy   CaseStudy @relation(fields: [caseStudyId], references: [id], onDelete: Cascade)
+}
+
+model RelatedService {
+  id    Int    @id @default(autoincrement())
+  label String
+  href  String
+  order Int    @default(0)
+
+  caseStudyId String
+  caseStudy   CaseStudy @relation(fields: [caseStudyId], references: [id], onDelete: Cascade)
+}
+
+// ─────────────────────────── Newsletter ───────────────────────────
+
+model NewsletterSubscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+}
+
+/// An enquiry sent from the contact page form.
+model ContactMessage {
+  id           String  @id @default(cuid())
+  name         String
+  email        String
+  phone        String?
+  company      String?
+  /// Comma-joined list of the checked interest topics.
+  interestedIn String
+  description  String  @db.Text
+
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([isRead, createdAt])
+}
+
+// ─────────────────────────── Auth.js ───────────────────────────
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+
+  password String? // bcrypt hash; null for OAuth-only users
+  role     Role    @default(USER)
+
+  accounts    Account[]
+  sessions    Session[]
+  posts       BlogPost[]
+  caseStudies CaseStudy[]
+  devices     Device[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+/// A browser that has attempted to sign in, identified by a random id held in
+/// a signed httpOnly cookie — not a fingerprint, which breaks on browser
+/// updates and is trivial to spoof.
+///
+/// `approved = false` is the pending state: the credentials were correct but
+/// the device is unrecognised, so sign-in was refused and it awaits an admin
+/// decision. There is no separate request table; a pending device IS the request.
+model Device {
+  id       String @id @default(cuid())
+  /// Value stored in the client cookie. Unique per user rather than globally,
+  /// so two accounts can each trust the same shared browser.
+  deviceId String
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  /// Supplied by the person signing in, so an admin knows what they're approving.
+  label     String?
+  userAgent String? @db.Text
+  ip        String?
+
+  approved   Boolean   @default(false)
+  approvedAt DateTime?
+  /// Null for the bootstrap device (first sign-in self-approves).
+  approvedBy String?
+
+  lastSeenAt DateTime @default(now())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([userId, deviceId])
+  @@index([userId, approved])
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}

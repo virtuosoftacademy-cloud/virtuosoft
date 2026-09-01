@@ -63,7 +63,7 @@ export default function SectionC1() {
             {METRICS.map((metric) => (
               <article
                 key={metric.title}
-                className="font-helvetica-now-display flex flex-col rounded-[22.562px] border-[0.97px] border-white/95 bg-[linear-gradient(152.49deg,rgba(255,255,255,0.92)_0%,rgba(255,255,255,0.62)_71.429%)] p-[33px] shadow-[0px_0px_29.115px_0px_rgba(52,67,122,0.09)]"
+                className="flex flex-col rounded-[22.562px] border-[0.97px] border-white/95 bg-[linear-gradient(152.49deg,rgba(255,255,255,0.92)_0%,rgba(255,255,255,0.62)_71.429%)] p-[33px] shadow-[0px_0px_29.115px_0px_rgba(52,67,122,0.09)]"
               >
                 <div className="flex flex-col gap-2 pb-2">
                   <p className="text-[12px] leading-4 text-[#737688]">

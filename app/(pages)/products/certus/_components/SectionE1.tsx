@@ -37,7 +37,7 @@ function StatusBadge({
         className="size-[13.65px] shrink-0"
       />
       <span
-        className="font-helvetica-now-display text-[11.7px] font-bold whitespace-nowrap"
+        className="text-[11.7px] font-bold whitespace-nowrap"
         style={{ color: tone }}
       >
         {label}
@@ -87,7 +87,7 @@ export default function SectionE1() {
             />
             <SectionBody>
               From a handwritten supplier invoice captured on a scanner to a digitally
-              generated one arriving by email, LedgerLine brings them into the same
+              generated one arriving by email, Certus brings them into the same
               pipeline and is honest about which ones need a person to look.
             </SectionBody>
           </div>
@@ -106,7 +106,7 @@ export default function SectionE1() {
               />
             }
           >
-            <div className="font-helvetica-now-display relative flex h-[195px] w-full flex-col items-start gap-[11.7px] overflow-clip rounded-[7.8px] border-[0.975px] border-[#e3dcb8] bg-[#faf5e6] p-[15.6px] shadow-[0px_3.9px_11.7px_0px_rgba(0,0,0,0.04)]">
+            <div className="relative flex h-[195px] w-full flex-col items-start gap-[11.7px] overflow-clip rounded-[7.8px] border-[0.975px] border-[#e3dcb8] bg-[#faf5e6] p-[15.6px] shadow-[0px_3.9px_11.7px_0px_rgba(0,0,0,0.04)]">
               <Image
                 src={`${IMG}/e-pipeline-coffee-stain.svg`}
                 alt=""
@@ -155,7 +155,7 @@ export default function SectionE1() {
               />
             }
           >
-            <div className="font-helvetica-now-display flex h-[195px] w-full flex-col items-start gap-[11.7px] overflow-clip rounded-[7.8px] border-[0.975px] border-[#d1d5db] bg-[#f3f4f6] p-[15.6px] shadow-[0px_3.9px_7.8px_0px_rgba(0,0,0,0.03)]">
+            <div className="flex h-[195px] w-full flex-col items-start gap-[11.7px] overflow-clip rounded-[7.8px] border-[0.975px] border-[#d1d5db] bg-[#f3f4f6] p-[15.6px] shadow-[0px_3.9px_7.8px_0px_rgba(0,0,0,0.03)]">
               <div className="relative h-[3.9px] w-full shrink-0">
                 <Image
                   src={`${IMG}/e-pipeline-scan-topline.png`}
@@ -208,7 +208,7 @@ export default function SectionE1() {
               />
             }
           >
-            <div className="font-helvetica-now-display flex h-[195px] w-full flex-col items-start gap-[11.7px] rounded-[7.8px] border-[0.975px] border-[#e5e7eb] bg-white p-[15.6px] drop-shadow-[0px_3.9px_3.9px_rgba(0,0,0,0.03)]">
+            <div className="flex h-[195px] w-full flex-col items-start gap-[11.7px] rounded-[7.8px] border-[0.975px] border-[#e5e7eb] bg-white p-[15.6px] drop-shadow-[0px_3.9px_3.9px_rgba(0,0,0,0.03)]">
               <div className="flex w-full items-start justify-between">
                 <div className="flex flex-col items-start gap-[1.95px] whitespace-nowrap">
                   <p className="text-[12.675px] font-bold text-[#090e1a]">
@@ -247,7 +247,7 @@ export default function SectionE1() {
           <FlowArrow src={`${IMG}/e-pipeline-arrow-right-3.svg`} />
 
           {/* Extraction_Pipeline_Card */}
-          <div className="font-helvetica-now-display mx-auto flex h-[195px] w-full max-w-[253.5px] shrink-0 flex-col items-center justify-center gap-[15.6px] rounded-[15.6px] border-[0.975px] border-[#eff6ff] bg-white p-[23.4px] drop-shadow-[0px_9.75px_11.7px_rgba(0,0,0,0.06)] lg:mx-0 lg:w-[234px]">
+          <div className="mx-auto flex h-[195px] w-full max-w-[253.5px] shrink-0 flex-col items-center justify-center gap-[15.6px] rounded-[15.6px] border-[0.975px] border-[#eff6ff] bg-white p-[23.4px] drop-shadow-[0px_9.75px_11.7px_rgba(0,0,0,0.06)] lg:mx-0 lg:w-[234px]">
             <div className="flex size-[46.8px] shrink-0 items-center justify-center rounded-[11.7px] bg-[#eff6ff]">
               <Image
                 src={`${IMG}/e-pipeline-cpu.svg`}

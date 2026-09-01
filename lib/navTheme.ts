@@ -7,7 +7,7 @@
  * Shared by Nav and RegionSwitcher — keep it in one place so the two can't
  * disagree about which pages are light.
  */
-export const LIGHT_BACKGROUND_ROUTES = ["/services", "/about-us", "/team"]
+export const LIGHT_BACKGROUND_ROUTES = ["/services", "/about-us", "/team","/careers"]
 
 export function isLightBackgroundRoute(pathname: string | null | undefined): boolean {
   if (!pathname) return false

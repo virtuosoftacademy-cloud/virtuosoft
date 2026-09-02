@@ -3,11 +3,12 @@ import Cta from '@/components/common/Cta'
 import BlogGrid from './_components/BlogGrid'
 import BlogHero from './_components/BlogHero'
 import FeaturedPost from './_components/FeaturedPost'
-import { blogPosts } from './_components'
+import { getAllBlogPosts } from '@/app/api/lib/blog-actions/blogActions'
 
 // Figma: Blog page frame 1971:24031
-function Blogs(): React.JSX.Element {
-    const [featuredPost] = blogPosts
+async function Blogs(): Promise<React.JSX.Element> {
+    const posts = await getAllBlogPosts()
+    const [featuredPost] = posts
 
     return (
         <>
@@ -25,7 +26,7 @@ function Blogs(): React.JSX.Element {
                 )}
 
                 <div className="mt-14 md:mt-16">
-                    <BlogGrid posts={blogPosts} />
+                    <BlogGrid posts={posts} />
                 </div>
             </section>
 

@@ -7,6 +7,28 @@ datasource db {
   provider = "mysql"
 }
 
+// ─────────────────────────── Authors ───────────────────────────
+
+/// A byline shown on a post or case study's author card — independent of
+/// the admin login system (User below): an author is a person being
+/// credited, not an account that can sign in. One author can be reused
+/// across many posts/case studies, and doesn't need to match whichever
+/// admin happened to write the content in.
+model Author {
+  id       String  @id @default(cuid())
+  name     String
+  jobTitle String?
+  bio      String? @db.Text
+  image    String?
+  linkedIn String?
+
+  posts       BlogPost[]
+  caseStudies CaseStudy[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 // ─────────────────────────── Blog ───────────────────────────
 
 model BlogCategory {
@@ -30,6 +52,10 @@ model BlogPost {
   thumbnailImage String?
 
   timeAgo    String
+  /// Auto-computed from `content`'s word count at save time (e.g. "8 min
+  /// read") — the public article hero and card both display it, so it's
+  /// stored rather than recomputed on every render.
+  readTime   String        @default("")
   date       String
   content    String        @db.LongText
   href       String
@@ -39,7 +65,7 @@ model BlogPost {
   category   BlogCategory? @relation(fields: [categoryId], references: [id])
 
   authorId String?
-  author   User?   @relation(fields: [authorId], references: [id])
+  author   Author? @relation(fields: [authorId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -96,7 +122,7 @@ model CaseStudy {
   relatedServices RelatedService[]
 
   authorId String?
-  author   User?   @relation(fields: [authorId], references: [id])
+  author   Author? @relation(fields: [authorId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -130,6 +156,25 @@ model RelatedService {
 
   caseStudyId String
   caseStudy   CaseStudy @relation(fields: [caseStudyId], references: [id], onDelete: Cascade)
+}
+
+// ─────────────────────────── Testimonials ───────────────────────────
+
+/// A client quote shown in the "Client Success Stories" carousel on the
+/// home page. Rating is a star count (1-5); `order` controls display order
+/// (ascending), ties broken by newest first.
+model Testimonial {
+  id     String @id @default(cuid())
+  name   String
+  role   String
+  quote  String @db.Text
+  rating Int    @default(5)
+  order  Int    @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([order])
 }
 
 // ─────────────────────────── Newsletter ───────────────────────────
@@ -174,11 +219,9 @@ model User {
   password String? // bcrypt hash; null for OAuth-only users
   role     Role    @default(USER)
 
-  accounts    Account[]
-  sessions    Session[]
-  posts       BlogPost[]
-  caseStudies CaseStudy[]
-  devices     Device[]
+  accounts Account[]
+  sessions Session[]
+  devices  Device[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

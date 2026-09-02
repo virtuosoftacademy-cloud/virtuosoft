@@ -1,5 +1,5 @@
 export interface BlogPost {
-  id: number;
+  id: string;
   slug: string;
   title: string;
   content: string;
@@ -20,7 +20,7 @@ const blogImg = "/assets/Images/blog/";
 
 export const blogPosts: BlogPost[] = [
   {
-    id: 1,
+    id: "1",
     slug: "accounting-and-finance",
     title: "Accounting and Finance: The Backbone Most Businesses Ignore Until It Breaks",
     content: `
@@ -80,7 +80,7 @@ export const blogPosts: BlogPost[] = [
   },
 
   {
-    id: 2,
+    id: "2",
     slug: "ai-agents",
     title: "AI Agents: The Shift From Tools to Digital Teammates",
     content: `
@@ -135,7 +135,7 @@ export const blogPosts: BlogPost[] = [
   },
 
   {
-    id: 3,
+    id: "3",
     slug: "workflow-automation",
     title: "Workflow Automation: How Modern Businesses Remove Friction and Regain Control",
     content: `

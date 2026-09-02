@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react"
 import { usePathname } from "next/navigation"
 import { ChevronUp } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { isLightBackgroundRoute } from "@/lib/navTheme"
+import { isLightBackgroundRoute } from "@/app/api/lib/navTheme"
 import GlobeIcon from "@/public/assets/Images/nav/globe-icon.svg"
 import GlobeIconWhite from "@/public/assets/Images/nav/globe-icon-white.svg"
 

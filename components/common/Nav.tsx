@@ -26,7 +26,7 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
-import { isLightBackgroundRoute } from "@/lib/navTheme";
+import { isLightBackgroundRoute } from "@/app/api/lib/navTheme";
 import {
   getSpotlightImage,
   services_Nav as servicesNavRaw,

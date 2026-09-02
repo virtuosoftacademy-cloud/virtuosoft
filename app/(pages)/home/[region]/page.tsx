@@ -1,14 +1,15 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
-import type { ComponentType } from "react"
+import type { ComponentType, ReactNode } from "react"
 import HomeGlobal from "../_components/variants/HomeGlobal"
 import HomeUK from "../_components/variants/HomeUK"
 import HomeKSA from "../_components/variants/HomeKSA"
+import CommonComponents from "../_components/common"
 
 const REGIONS = ["global", "uk", "ksa"] as const
 type Region = (typeof REGIONS)[number]
 
-const variants: Record<Region, ComponentType> = {
+const variants: Record<Region, ComponentType<{ children: ReactNode }>> = {
   global: HomeGlobal,
   uk: HomeUK,
   ksa: HomeKSA,
@@ -50,5 +51,9 @@ export default async function Page({
   if (!isRegion(region)) notFound()
 
   const Variant = variants[region]
-  return <Variant />
+  return (
+    <Variant>
+      <CommonComponents region={region} />
+    </Variant>
+  )
 }

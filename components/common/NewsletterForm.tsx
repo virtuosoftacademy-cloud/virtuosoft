@@ -1,14 +1,19 @@
 "use client"
 
-import { useActionState } from "react"
-import { AlertCircle, CheckCircle2 } from "lucide-react"
-import { subscribe, type NewsletterState } from "@/lib/lib-backend/newsletter/actions"
+import { useActionState, useEffect } from "react"
+import { toast } from "sonner"
+import { subscribe, type NewsletterState } from "@/app/api/lib/newsletter/actions"
 import { Button } from "@/components/ui/button"
 
 const initialState: NewsletterState = {}
 
 function NewsletterForm() {
   const [state, formAction, isPending] = useActionState(subscribe, initialState)
+
+  useEffect(() => {
+    if (state.success) toast.success(state.success)
+    if (state.error) toast.error(state.error)
+  }, [state])
 
   return (
     <form action={formAction} className="flex flex-col gap-3">
@@ -39,17 +44,6 @@ function NewsletterForm() {
         <input type="checkbox" name="consent" value="yes" required className="size-3.5 accent-primary" />
         I agree to receive updates per the Privacy Notice.
       </label>
-
-      {state.error && (
-        <p className="flex items-center gap-1.5 text-xs font-semibold text-red-400">
-          <AlertCircle className="size-3.5 shrink-0" /> {state.error}
-        </p>
-      )}
-      {state.success && (
-        <p className="flex items-center gap-1.5 text-xs font-semibold text-green-400">
-          <CheckCircle2 className="size-3.5 shrink-0" /> {state.success}
-        </p>
-      )}
     </form>
   )
 }

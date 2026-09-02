@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Footer from "@/components/common/Footer"
 import Nav from "@/components/common/Nav"
 import BackToTop from "@/components/ui/backtotop"
+import { Toaster } from "@/components/ui/sonner"
 import { Lenis } from "lenis/react";
 
 export const metadata: Metadata = {
@@ -23,6 +24,7 @@ function LayoutPages({ children }: LayoutPagesProps) {
       </Lenis>
       <BackToTop />
       <Footer />
+      <Toaster richColors position="top-right" closeButton />
     </div>
   )
 }

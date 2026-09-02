@@ -4,7 +4,8 @@ import Image from "next/image"
 import ReactLenis from "lenis/react"
 import HeroBg from "@/public/assets/Images/blog/hero-bg.svg"
 import Cta from "@/components/common/Cta"
-import { blogPosts, type BlogPost } from "../_components"
+import { getAllBlogPosts, getBlogPostBySlug } from "@/app/api/lib/blog-actions/blogActions"
+import type { BlogPost } from "../_components"
 import ArticleHero from "./_components/ArticleHero"
 import AuthorCard from "./_components/AuthorCard"
 import ShareCard from "./_components/ShareCard"
@@ -21,17 +22,13 @@ interface StaticParam {
   slug: string;
 }
 
-// Helper function
-function getPostBySlug(slug: string): BlogPost | undefined {
-  return blogPosts.find((post) => post.slug === slug);
-}
-
-function getRelatedPosts(slug: string): BlogPost[] {
-  return blogPosts.filter((post) => post.slug !== slug).slice(0, 3);
+function getRelatedPosts(posts: BlogPost[], slug: string): BlogPost[] {
+  return posts.filter((post) => post.slug !== slug).slice(0, 3);
 }
 
 export async function generateStaticParams(): Promise<StaticParam[]> {
-  return blogPosts.map((post) => ({
+  const posts = await getAllBlogPosts();
+  return posts.map((post) => ({
     slug: post.slug, // key matches the dynamic segment [slug]
   }));
 }
@@ -39,7 +36,10 @@ export async function generateStaticParams(): Promise<StaticParam[]> {
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
 
-  const post = getPostBySlug(slug);
+  const [post, allPosts] = await Promise.all([
+    getBlogPostBySlug(slug),
+    getAllBlogPosts(),
+  ]);
 
   if (!post) {
     return (
@@ -52,7 +52,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const { title, content } = post;
   const { html, sections } = prepareArticle(content || "<p>No content available.</p>");
-  const relatedPosts = getRelatedPosts(slug);
+  const relatedPosts = getRelatedPosts(allPosts, slug);
 
   return (
     <ReactLenis root>

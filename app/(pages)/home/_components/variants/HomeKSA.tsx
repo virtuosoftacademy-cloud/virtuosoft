@@ -1,14 +1,14 @@
 'use client'
 
 import { ReactLenis } from 'lenis/react'
-import CommonComponents from '../common'
+import type { ReactNode } from 'react'
 
-function HomeKSA() {
+// See HomeGlobal.tsx for why this takes children instead of importing
+// CommonComponents directly.
+function HomeKSA({ children }: { children: ReactNode }) {
   return (
     <ReactLenis root>
-      <div className="mx-auto">
-        <CommonComponents region="ksa" />
-      </div>
+      <div className="mx-auto">{children}</div>
     </ReactLenis>
   )
 }

@@ -1,7 +1,7 @@
 import Image from "next/image"
 import { SHELL, SectionBadge } from "../../_components/Ui"
-import type { CaseStudyDetailProps } from "@/lib/lib-backend/case-study/types"
-import { toSafeHtml } from "@/lib/rich-text-html"
+import type { CaseStudyDetailProps } from "@/app/api/lib/case-study/types"
+import { toSafeHtml } from "@/app/api/lib/rich-text-html"
 import Tick from "@/public/assets/Images/casestudies/tick.svg"
 
 function Situation({ caseStudy }: { caseStudy: CaseStudyDetailProps }) {

@@ -52,9 +52,3 @@ package-lock.json
 
 AGENTS.md
 CLAUDE.md
-
-
-app/api
-app/(admin)
-app/(pages)/case-studies/[slug]
-lib/lib-backend

@@ -1,6 +1,6 @@
 import { SHELL, SectionBadge } from "../../_components/Ui"
 import { CaseStudyCard } from "../../_components/ui/CaseStudyCard"
-import { getCaseStudyCards, toCard } from "@/lib/lib-backend/casestudy-actions/actions"
+import { getCaseStudyCards, toCard } from "@/app/api/lib/casestudy-actions/actions"
 
 async function MoreCaseStudies({ excludeSlug }: { excludeSlug: string }) {
   const rows = await getCaseStudyCards()

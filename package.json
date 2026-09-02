@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run db:reset && npm run db:sync && next build",
+    "build": "npm run db:sync && next build",
     "start": "next start",
     "lint": "eslint",
     "postinstall": "prisma generate",

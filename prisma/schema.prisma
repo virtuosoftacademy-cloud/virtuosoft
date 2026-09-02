@@ -158,6 +158,29 @@ model RelatedService {
   caseStudy   CaseStudy @relation(fields: [caseStudyId], references: [id], onDelete: Cascade)
 }
 
+// ─────────────────────── Tarabut case study (custom page) ───────────────────────
+
+/// Editable copy for the Problem/Solution panels on the bespoke
+/// /case-studies/tarabut page. That page isn't part of the generic
+/// CaseStudy model above — its layout is custom-built — so this is a
+/// singleton row (fixed id "tarabut") holding just the panel copy,
+/// editable from the admin without a code deploy.
+model TarabutProblemSolution {
+  id String @id @default(cuid())
+
+  problemTitleLead   String
+  problemTitleAccent String
+  problemIntro       String @db.Text
+  problemPoints      String @db.Text // one per line
+
+  solutionTitleLead   String
+  solutionTitleAccent String
+  solutionIntro       String @db.Text
+  solutionPoints      String @db.Text // one per line
+
+  updatedAt DateTime @updatedAt
+}
+
 // ─────────────────────────── Testimonials ───────────────────────────
 
 /// A client quote shown in the "Client Success Stories" carousel on the

@@ -14,7 +14,7 @@ import Image from "next/image";
 import {
     type ImageKind,
     validateImageForSlot,
-    isR2Url,
+    isOptimizableImageSrc,
 } from "@/app/api/lib/r2";
 
 type Props = {
@@ -91,7 +91,7 @@ export function ImageUploadField({ name, kind, label, defaultValue, error, help 
                             fill
                             sizes="80px"
                             className="object-cover"
-                            unoptimized={!isR2Url(value)}
+                            unoptimized={!isOptimizableImageSrc(value)}
                         />
                     </div>
                 )}

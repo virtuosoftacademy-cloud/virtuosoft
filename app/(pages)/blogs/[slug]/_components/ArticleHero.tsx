@@ -1,4 +1,5 @@
 import Image from "next/image"
+import { isOptimizableImageSrc } from "@/app/api/lib/r2"
 import type { BlogPost } from "../../_components"
 
 interface ArticleHeroProps {
@@ -19,6 +20,7 @@ function ArticleHero({ post }: ArticleHeroProps) {
                 priority
                 sizes="(max-width: 1024px) 100vw, 824px"
                 className="object-cover"
+                unoptimized={!isOptimizableImageSrc(Src)}
             />
 
             <div className="absolute inset-x-0 bottom-0 flex flex-col gap-2.5 bg-black/10 p-5 backdrop-blur-[17.5px]">

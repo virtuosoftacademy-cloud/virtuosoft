@@ -32,6 +32,7 @@ import {
     MonitorSmartphone,
     Quote,
     Users,
+    FileEdit,
 } from "lucide-react";
 import type { ReactNode } from "react";
 
@@ -69,6 +70,7 @@ const caseStudyItems = [
     { href: "/admin/case-study/new-casestudy", label: "New case study", icon: FolderPlus },
     { href: "/admin/case-study/industries", label: "Industries", icon: Factory },
     { href: "/admin/case-study/service-areas", label: "Service areas", icon: Layers },
+    { href: "/admin/case-study/tarabut", label: "Tarabut: Problem & Solution", icon: FileEdit },
 ];
 
 export function AdminSidebar({

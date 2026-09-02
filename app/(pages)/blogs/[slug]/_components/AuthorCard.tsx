@@ -2,6 +2,7 @@ import Image from "next/image"
 import CardSwirl from "@/public/assets/Images/blog/card-swirl.svg"
 import CardSwirlSoft from "@/public/assets/Images/blog/card-swirl-2.svg"
 import LinkedInMark from "@/public/assets/Images/blog/author-linkedin.svg"
+import { isOptimizableImageSrc } from "@/app/api/lib/r2"
 import type { BlogPost } from "../../_components"
 
 interface AuthorCardProps {
@@ -49,6 +50,7 @@ function AuthorCard({ post }: AuthorCardProps) {
                                 fill
                                 sizes="100px"
                                 className="object-cover"
+                                unoptimized={!isOptimizableImageSrc(authorImage)}
                             />
                         ) : (
                             <span className="flex size-full items-center justify-center text-2xl font-bold text-primary">

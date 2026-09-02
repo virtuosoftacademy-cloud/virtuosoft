@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
+import { isOptimizableImageSrc } from "@/app/api/lib/r2"
 
 export type CaseStudyCardProps = {
     id: string
@@ -43,6 +44,7 @@ export function CaseStudyCard({
                     fill
                     sizes="(min-width: 1024px) 33vw, (min-width: 768px) 45vw, 92vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    unoptimized={!isOptimizableImageSrc(image)}
                 />
                 <span
                     aria-hidden

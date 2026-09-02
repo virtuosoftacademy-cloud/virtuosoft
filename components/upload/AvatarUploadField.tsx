@@ -11,7 +11,7 @@
 import { useRef, useState, type ChangeEvent } from "react";
 import Image from "next/image";
 import { Camera } from "lucide-react";
-import { validateImageForSlot, isR2Url } from "@/app/api/lib/r2";
+import { validateImageForSlot, isOptimizableImageSrc } from "@/app/api/lib/r2";
 
 type Props = {
     name: string;
@@ -78,7 +78,7 @@ export function AvatarUploadField({ name, label, defaultValue, error }: Props) {
                                 fill
                                 sizes="80px"
                                 className="object-cover"
-                                unoptimized={!isR2Url(value)}
+                                unoptimized={!isOptimizableImageSrc(value)}
                             />
                         ) : (
                             <span className="flex size-full items-center justify-center text-neutral-400">

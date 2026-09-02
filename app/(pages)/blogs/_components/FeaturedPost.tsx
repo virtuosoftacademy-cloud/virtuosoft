@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import BadgeIcon from "@/public/assets/Images/blog/badge-sparkle.svg"
+import { isOptimizableImageSrc } from "@/app/api/lib/r2"
 import type { BlogPost } from "./index"
 
 interface FeaturedPostProps {
@@ -23,6 +24,7 @@ function FeaturedPost({ post }: FeaturedPostProps) {
                 fill
                 sizes="(max-width: 1280px) 100vw, 1248px"
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
+                unoptimized={!isOptimizableImageSrc(Src)}
             />
 
             <div className="absolute inset-x-0 bottom-0 bg-black/10 px-5 py-6 backdrop-blur-[17.5px]">

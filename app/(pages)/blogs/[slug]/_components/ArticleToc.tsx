@@ -1,4 +1,5 @@
 import Image from "next/image"
+import { isOptimizableImageSrc } from "@/app/api/lib/r2"
 import type { ArticleSection } from "./articleContent"
 
 interface ArticleTocProps {
@@ -38,6 +39,7 @@ function ArticleToc({ sections, thumbnail, thumbnailAlt }: ArticleTocProps) {
                                     fill
                                     sizes="125px"
                                     className="object-cover"
+                                    unoptimized={!isOptimizableImageSrc(thumbnail)}
                                 />
                                 <span className="absolute inset-0 bg-black/20 transition-colors group-hover:bg-black/10" />
                             </span>

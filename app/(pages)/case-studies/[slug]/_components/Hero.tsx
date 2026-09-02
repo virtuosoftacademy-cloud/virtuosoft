@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { Eyebrow, SHELL } from "../../_components/Ui"
 import { isRenderableImageSrc, FALLBACK_POST_IMAGE } from "@/app/api/lib/blog-actions/blog-image"
+import { isOptimizableImageSrc } from "@/app/api/lib/r2"
 import type { CaseStudyDetailProps } from "@/app/api/lib/case-study/types"
 
 import HeroBg from "@/public/assets/Images/casestudies/detail/hero-bg.svg"
@@ -56,6 +57,7 @@ function Hero({ caseStudy }: { caseStudy: CaseStudyDetailProps }) {
             priority
             sizes="(max-width: 1024px) 100vw, 1152px"
             className="object-cover"
+            unoptimized={!isOptimizableImageSrc(image)}
           />
         </div>
       </div>

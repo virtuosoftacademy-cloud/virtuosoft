@@ -513,6 +513,45 @@ async function seedCaseStudies() {
     console.log(`Created case study: ${slug}`);
 }
 
+// Seeds the singleton row backing the Problem/Solution panels on the
+// bespoke /case-studies/tarabut page (see prisma/schema.prisma's
+// TarabutProblemSolution). Copy matches caseStudies_Problem/Solution in
+// app/_constant/index.ts exactly, so the page renders unchanged the moment
+// it switches from those constants to this row.
+async function seedTarabutProblemSolution() {
+    const id = "tarabut";
+
+    const existing = await prisma.tarabutProblemSolution.findUnique({ where: { id } });
+    if (existing) return;
+
+    await prisma.tarabutProblemSolution.create({
+        data: {
+            id,
+            problemTitleLead: "Problem",
+            problemTitleAccent: "Statement",
+            problemIntro:
+                "Tarabut faced rapid growth challenges with scaling its core platform while maintaining security and compliance across MENA markets. They needed:",
+            problemPoints: [
+                "Skilled backend and frontend engineers to build scalable microservices and responsive interfaces.",
+                "QA experts to automate testing and maintain stability in a highly regulated environment.",
+                "Cloud and DevOps specialists to streamline deployments and ensure high availability.",
+                "Faster development cycles to deliver new open banking APIs and stay competitive.",
+            ].join("\n"),
+            solutionTitleLead: "How Virtuosoft",
+            solutionTitleAccent: "Solved It",
+            solutionIntro:
+                "Virtuosoft strengthened Tarabut's engineering capabilities with dedicated experts, scalable architecture, and automated delivery processes.",
+            solutionPoints: [
+                "Embedded specialized backend and frontend engineers into Tarabut's product teams.",
+                "Automated QA processes with regression and compliance testing to improve release stability.",
+                "Managed cloud infrastructure, CI/CD pipelines, and site reliability to improve deployment speed and reduce downtime.",
+                "Delivered hands-on domain expertise in financial services, contributing to both technical execution and product evolution.",
+            ].join("\n"),
+        },
+    });
+    console.log("Created tarabut problem/solution copy");
+}
+
 async function main() {
     await seedAdmin();
     await seedAuthor();
@@ -522,6 +561,7 @@ async function main() {
     await seedTestimonials();
     await seedBlogPosts();
     await seedCaseStudies();
+    await seedTarabutProblemSolution();
 }
 
 main()

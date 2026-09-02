@@ -1,12 +1,16 @@
 import Image, { StaticImageData } from "next/image"
 import SectionBadge from "./SectionBadge"
-import { caseStudies_Problem, caseStudies_Solution, type CaseStudyPanel } from "@/app/_constant"
+import { caseStudies_Problem, caseStudies_Solution } from "@/app/_constant"
+import {
+  getTarabutProblemSolution,
+  type TarabutPanel,
+} from "@/app/api/lib/case-study/tarabut-problem-solution"
 
 import Tick from "@/public/assets/Images/casestudies/tick.svg"
 import ProblemVisual from "@/public/assets/Images/casestudies/problem-visual.png"
 import SolutionVisual from "@/public/assets/Images/casestudies/solution-visual.png"
 
-function Panel({ panel, visual }: { panel: CaseStudyPanel; visual: StaticImageData }) {
+function Panel({ panel, visual }: { panel: TarabutPanel; visual: StaticImageData }) {
   return (
     <div className="flex h-full flex-col drop-shadow-[0px_4px_4px_rgba(0,0,0,0.07)]">
       <div className="rounded-t-[20px] border border-[#dbeafe] bg-white px-6 py-5 md:px-8">
@@ -46,7 +50,13 @@ function Panel({ panel, visual }: { panel: CaseStudyPanel; visual: StaticImageDa
   )
 }
 
-function ProblemSolution() {
+async function ProblemSolution() {
+  // Falls back to the hardcoded copy if the admin hasn't saved a row yet
+  // (or the DB is unreachable), so the page never renders blank panels.
+  const content = await getTarabutProblemSolution()
+  const problem = content?.problem ?? caseStudies_Problem
+  const solution = content?.solution ?? caseStudies_Solution
+
   return (
     <section className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-0 py-16 lg:py-24 z-30 relative">
       <SectionBadge label="Customer Success Story" />
@@ -63,8 +73,8 @@ function ProblemSolution() {
       </p>
 
       <div className="mt-10 grid gap-6 lg:grid-cols-2">
-        <Panel panel={caseStudies_Problem} visual={ProblemVisual} />
-        <Panel panel={caseStudies_Solution} visual={SolutionVisual} />
+        <Panel panel={problem} visual={ProblemVisual} />
+        <Panel panel={solution} visual={SolutionVisual} />
       </div>
     </section>
   )

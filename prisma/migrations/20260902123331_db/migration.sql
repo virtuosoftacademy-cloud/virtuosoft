@@ -127,6 +127,22 @@ CREATE TABLE `RelatedService` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
+CREATE TABLE `TarabutProblemSolution` (
+    `id` VARCHAR(191) NOT NULL,
+    `problemTitleLead` VARCHAR(191) NOT NULL,
+    `problemTitleAccent` VARCHAR(191) NOT NULL,
+    `problemIntro` TEXT NOT NULL,
+    `problemPoints` TEXT NOT NULL,
+    `solutionTitleLead` VARCHAR(191) NOT NULL,
+    `solutionTitleAccent` VARCHAR(191) NOT NULL,
+    `solutionIntro` TEXT NOT NULL,
+    `solutionPoints` TEXT NOT NULL,
+    `updatedAt` DATETIME(3) NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
 CREATE TABLE `Testimonial` (
     `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,

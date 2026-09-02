@@ -46,6 +46,18 @@ export function isR2Url(url: string): boolean {
     );
 }
 
+/**
+ * Whether next/image can run its remote optimizer on this src without
+ * throwing. next.config.ts only whitelists the R2 host (via
+ * `remotePatterns`) — there's no blanket `images.unoptimized`, so any other
+ * absolute URL (an admin pasting an arbitrary external image link, say)
+ * needs `unoptimized` set explicitly or the page errors at render time.
+ * Root-relative paths (public/ assets) are same-origin and always safe.
+ */
+export function isOptimizableImageSrc(src: string): boolean {
+    return src.startsWith("/") || isR2Url(src);
+}
+
 /** Extract the object key from one of our R2 URLs (null if not ours). */
 export function extractObjectKey(url: string): string | null {
     try {

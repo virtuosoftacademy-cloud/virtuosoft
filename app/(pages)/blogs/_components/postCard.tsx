@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import ArrowUpRight from "@/public/assets/Images/blog/arrow-up-right.svg"
+import { isOptimizableImageSrc } from "@/app/api/lib/r2"
 import type { BlogPost } from "./index"
 
 interface PostCardProps {
@@ -28,6 +29,7 @@ function PostCard({ post }: PostCardProps) {
                     fill
                     sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 400px"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    unoptimized={!isOptimizableImageSrc(Src)}
                 />
                 <span className="absolute left-5 top-5 inline-flex items-center justify-center rounded-2xl bg-white/20 px-2.5 py-0.5 text-sm font-medium leading-5 text-white backdrop-blur-sm">
                     {category}

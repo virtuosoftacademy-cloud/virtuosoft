@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { prisma } from "@/app/api/lib/prisma";
 import { Button } from "@/components/ui/button";
+import { isOptimizableImageSrc } from "@/app/api/lib/r2";
 import { DeleteAuthorButton } from "./_components/delete-author-button";
 
 export const metadata = { title: "Authors" };
@@ -73,6 +74,7 @@ export default async function AuthorsPage() {
                                                             fill
                                                             sizes="36px"
                                                             className="object-cover"
+                                                            unoptimized={!isOptimizableImageSrc(author.image)}
                                                         />
                                                     ) : (
                                                         <span className="flex size-full items-center justify-center text-xs font-semibold text-neutral-500">

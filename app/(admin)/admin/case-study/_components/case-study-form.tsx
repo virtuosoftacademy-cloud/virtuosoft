@@ -1,28 +1,21 @@
 // ============================================================================
-// The single case-study form, shared by create and edit.
-// Purpose: The single case-study form used by create and edit. Scalar fields
-//          follow the blog form's conventions (paragraphs = blank-line
-//          separated, lists = one per line). The three repeatable groups
-//          (approach cards, timeline, related services) are React-state row
-//          editors serialized into hidden JSON inputs (cardsJson,
-//          timelineJson, servicesJson) that the server action parses.
+// The single case-study form, shared by create and edit. Scalar fields
+// follow the blog form's conventions (lists = one per line). The two
+// repeatable groups (hero stats, impact rows) are React-state row editors
+// serialized into hidden JSON inputs (heroStatsJson, impactRowsJson) that
+// the server action parses.
 // Type: Client Component ("use client")
 // ============================================================================
 "use client";
 
 import { useActionState, useState } from "react";
 import { ImageUploadField } from "@/components/upload/ImageUploadField";
-import { RichTextEditor } from "@/components/editor/RichTextEditor";
 import type {
     CaseStudyFormState,
-    CardRow,
-    TimelineRow,
-    ServiceRow,
+    HeroStatRow,
+    ImpactRowRow,
 } from "../_lib/parse-case-study-form";
 import { Button } from "@/components/ui/button";
-// Same source the navbar uses, so admin choices and public navigation
-// can never drift apart.
-import { serviceItems } from "@/app/_constant";
 
 const initialState: CaseStudyFormState = {};
 
@@ -74,18 +67,16 @@ function Area({
     );
 }
 
-// ── Generic repeatable-rows editor ─────────────────────────────────
-function RowsEditor<T extends Record<string, string>>({
-    title, rows, setRows, empty, fields, addLabel,
+// ── Hero stats: up to 3 floating stat cards under the laptop mockup ────
+const HERO_STAT_ICONS = ["institutions", "users", "funding"] as const;
+
+function HeroStatsEditor({
+    rows, setRows,
 }: {
-    title: string;
-    rows: T[];
-    setRows: (rows: T[]) => void;
-    empty: T;
-    fields: { key: keyof T & string; label: string; wide?: boolean }[];
-    addLabel: string;
+    rows: HeroStatRow[];
+    setRows: (rows: HeroStatRow[]) => void;
 }) {
-    const update = (i: number, key: keyof T & string, value: string) =>
+    const update = (i: number, key: keyof HeroStatRow, value: string) =>
         setRows(rows.map((r, idx) => (idx === i ? { ...r, [key]: value } : r)));
     const remove = (i: number) => setRows(rows.filter((_, idx) => idx !== i));
     const move = (i: number, dir: -1 | 1) => {
@@ -98,20 +89,34 @@ function RowsEditor<T extends Record<string, string>>({
 
     return (
         <fieldset className="rounded-lg border border-neutral-200 p-4">
-            <legend className="px-1 text-sm font-semibold text-neutral-800">{title}</legend>
+            <legend className="px-1 text-sm font-semibold text-neutral-800">
+                Hero stats (up to 3, shown as floating cards under the hero)
+            </legend>
             <div className="space-y-3">
                 {rows.map((row, i) => (
                     <div key={i} className="flex items-start gap-2">
-                        <div className="grid flex-1 gap-2 sm:grid-cols-2">
-                            {fields.map((f) => (
-                                <input
-                                    key={f.key}
-                                    value={row[f.key]}
-                                    onChange={(e) => update(i, f.key, e.target.value)}
-                                    placeholder={f.label}
-                                    className={`${inputClass} mt-0 ${f.wide ? "sm:col-span-2" : ""}`}
-                                />
-                            ))}
+                        <div className="grid flex-1 gap-2 sm:grid-cols-3">
+                            <select
+                                value={row.icon}
+                                onChange={(e) => update(i, "icon", e.target.value)}
+                                className={`${inputClass} mt-0`}
+                            >
+                                {HERO_STAT_ICONS.map((icon) => (
+                                    <option key={icon} value={icon}>{icon}</option>
+                                ))}
+                            </select>
+                            <input
+                                value={row.value}
+                                onChange={(e) => update(i, "value", e.target.value)}
+                                placeholder="Value (e.g. 50+)"
+                                className={`${inputClass} mt-0`}
+                            />
+                            <input
+                                value={row.label}
+                                onChange={(e) => update(i, "label", e.target.value)}
+                                placeholder="Label"
+                                className={`${inputClass} mt-0`}
+                            />
                         </div>
                         <div className="flex shrink-0 gap-1 pt-1">
                             <button type="button" onClick={() => move(i, -1)} title="Move up"
@@ -124,27 +129,27 @@ function RowsEditor<T extends Record<string, string>>({
                     </div>
                 ))}
             </div>
-            <button type="button" onClick={() => setRows([...rows, { ...empty }])}
-                className="mt-3 rounded-md border border-neutral-300 px-3 py-1.5 text-sm font-medium text-neutral-700 hover:bg-neutral-100">
-                {addLabel}
+            <button type="button"
+                onClick={() => setRows([...rows, { icon: "institutions", value: "", label: "" }])}
+                disabled={rows.length >= 3}
+                className="mt-3 rounded-md border border-neutral-300 px-3 py-1.5 text-sm font-medium text-neutral-700 hover:bg-neutral-100 disabled:opacity-50">
+                + Add stat
             </button>
         </fieldset>
     );
 }
 
-// ── Related services: pick from the real service pages ─────────────
-// Free-text links were easy to get wrong — every related service in the
-// seed pointed at a slug with no page behind it. The dropdown is fed by
-// the same serviceItems the navbar uses, so a chosen link always resolves.
-function RelatedServicesEditor({
-    rows,
-    setRows,
-    error,
+// ── Impact rows: the before/after table in the Business Impact section ──
+const IMPACT_ROW_ICONS = ["efficiency", "latency", "availability", "delivery"] as const;
+
+function ImpactRowsEditor({
+    rows, setRows,
 }: {
-    rows: ServiceRow[];
-    setRows: (rows: ServiceRow[]) => void;
-    error?: string;
+    rows: ImpactRowRow[];
+    setRows: (rows: ImpactRowRow[]) => void;
 }) {
+    const update = (i: number, key: keyof ImpactRowRow, value: string) =>
+        setRows(rows.map((r, idx) => (idx === i ? { ...r, [key]: value } : r)));
     const remove = (i: number) => setRows(rows.filter((_, idx) => idx !== i));
     const move = (i: number, dir: -1 | 1) => {
         const j = i + dir;
@@ -153,89 +158,58 @@ function RelatedServicesEditor({
         [next[i], next[j]] = [next[j], next[i]];
         setRows(next);
     };
-    // Title comes from the chosen service, so the label can't drift from the page.
-    const choose = (i: number, href: string) => {
-        const item = serviceItems.find((s) => s.href === href);
-        setRows(
-            rows.map((r, idx) =>
-                idx === i ? { label: item?.title ?? r.label, href } : r
-            )
-        );
-    };
 
     return (
         <fieldset className="rounded-lg border border-neutral-200 p-4">
-            <legend className="px-1 text-sm font-semibold text-neutral-800">
-                Related services
-            </legend>
+            <legend className="px-1 text-sm font-semibold text-neutral-800">Impact rows</legend>
             <div className="space-y-3">
-                {rows.map((row, i) => {
-                    // A link saved before this dropdown existed, or one whose page
-                    // has since gone. Kept selectable so editing doesn't drop it.
-                    const isLegacy =
-                        Boolean(row.href) &&
-                        !serviceItems.some((s) => s.href === row.href);
-
-                    return (
-                        <div key={i} className="flex items-start gap-2">
-                            <div className="flex-1">
-                                <select
-                                    value={row.href}
-                                    onChange={(e) => choose(i, e.target.value)}
-                                    className={`${inputClass} mt-0`}
-                                    aria-invalid={isLegacy || undefined}
-                                >
-                                    <option value="">Choose a service…</option>
-                                    {serviceItems.map((s) => (
-                                        <option
-                                            key={s.href}
-                                            value={s.href}
-                                            // Stop the same service being added twice.
-                                            disabled={
-                                                s.href !== row.href &&
-                                                rows.some((r) => r.href === s.href)
-                                            }
-                                        >
-                                            {s.title}
-                                        </option>
-                                    ))}
-                                    {isLegacy && (
-                                        <option value={row.href}>
-                                            {row.label || row.href} (no matching page)
-                                        </option>
-                                    )}
-                                </select>
-                                {row.href && (
-                                    <p className={hintClass}>
-                                        {isLegacy
-                                            ? `${row.href} — this link has no service page and will 404.`
-                                            : row.href}
-                                    </p>
-                                )}
-                            </div>
-                            <div className="flex shrink-0 gap-1 pt-1">
-                                <button type="button" onClick={() => move(i, -1)} title="Move up"
-                                    className="rounded px-2 py-1 text-xs text-neutral-500 hover:bg-neutral-100">↑</button>
-                                <button type="button" onClick={() => move(i, 1)} title="Move down"
-                                    className="rounded px-2 py-1 text-xs text-neutral-500 hover:bg-neutral-100">↓</button>
-                                <button type="button" onClick={() => remove(i)} title="Remove"
-                                    className="rounded px-2 py-1 text-xs text-red-600 hover:bg-red-50">✕</button>
-                            </div>
+                {rows.map((row, i) => (
+                    <div key={i} className="flex items-start gap-2">
+                        <div className="grid flex-1 gap-2 sm:grid-cols-2">
+                            <select
+                                value={row.icon}
+                                onChange={(e) => update(i, "icon", e.target.value)}
+                                className={`${inputClass} mt-0 sm:col-span-2`}
+                            >
+                                {IMPACT_ROW_ICONS.map((icon) => (
+                                    <option key={icon} value={icon}>{icon}</option>
+                                ))}
+                            </select>
+                            <input
+                                value={row.label}
+                                onChange={(e) => update(i, "label", e.target.value)}
+                                placeholder="Label (e.g. Efficiency)"
+                                className={`${inputClass} mt-0 sm:col-span-2`}
+                            />
+                            <input
+                                value={row.before}
+                                onChange={(e) => update(i, "before", e.target.value)}
+                                placeholder="Before"
+                                className={`${inputClass} mt-0`}
+                            />
+                            <input
+                                value={row.after}
+                                onChange={(e) => update(i, "after", e.target.value)}
+                                placeholder="After"
+                                className={`${inputClass} mt-0`}
+                            />
                         </div>
-                    );
-                })}
+                        <div className="flex shrink-0 gap-1 pt-1">
+                            <button type="button" onClick={() => move(i, -1)} title="Move up"
+                                className="rounded px-2 py-1 text-xs text-neutral-500 hover:bg-neutral-100">↑</button>
+                            <button type="button" onClick={() => move(i, 1)} title="Move down"
+                                className="rounded px-2 py-1 text-xs text-neutral-500 hover:bg-neutral-100">↓</button>
+                            <button type="button" onClick={() => remove(i)} title="Remove"
+                                className="rounded px-2 py-1 text-xs text-red-600 hover:bg-red-50">✕</button>
+                        </div>
+                    </div>
+                ))}
             </div>
-            <button
-                type="button"
-                onClick={() => setRows([...rows, { label: "", href: "" }])}
-                // Nothing left to pick once every service is on the list.
-                disabled={rows.length >= serviceItems.length}
-                className="mt-3 rounded-md border border-neutral-300 px-3 py-1.5 text-sm font-medium
-                           text-neutral-700 hover:bg-neutral-100 disabled:opacity-50"
-            >
-                + Add service
+            <button type="button"
+                onClick={() => setRows([...rows, { icon: "efficiency", label: "", before: "", after: "" }])}
+                className="mt-3 rounded-md border border-neutral-300 px-3 py-1.5 text-sm font-medium text-neutral-700 hover:bg-neutral-100">
+                + Add row
             </button>
-            <FieldError message={error} />
         </fieldset>
     );
 }
@@ -243,13 +217,14 @@ function RelatedServicesEditor({
 // ── Default values shape (edit page fills this from the row) ───────
 export type CaseStudyFormValues = {
     heroTitle?: string; heroSubtitle?: string; heroImage?: string;
-    thumbnailImage?: string | null;
-    industryId?: number | null; serviceAreaIds?: number[]; summary?: string;
-    situationParagraphs?: string; situationQuestions?: string; situationClosing?: string | null;
-    challenge?: string; approachIntro?: string; outcome?: string; keyResults?: string;
-    calloutHeading?: string | null; calloutText?: string | null;
-    calloutButtonHref?: string | null; calloutButtonLabel?: string | null;
-    cards?: CardRow[]; timeline?: TimelineRow[]; services?: ServiceRow[];
+    thumbnailImage?: string | null; logoImage?: string | null; liveSiteUrl?: string | null;
+    industryId?: number | null; serviceAreaIds?: number[];
+    heroTags?: string;
+    summaryHeadingLead?: string; summaryHeadingAccent?: string; summaryIntro?: string;
+    problemTitleLead?: string; problemTitleAccent?: string; problemIntro?: string; problemPoints?: string;
+    solutionTitleLead?: string; solutionTitleAccent?: string; solutionIntro?: string; solutionPoints?: string;
+    impactNote?: string;
+    heroStats?: HeroStatRow[]; impactRows?: ImpactRowRow[];
 };
 
 type Lookup = { id: number; label: string };
@@ -274,9 +249,8 @@ export function CaseStudyForm({
     // state, so they survive the reset on their own.
     const values: CaseStudyFormValues = state.values ?? defaultValues;
 
-    const [cards, setCards] = useState<CardRow[]>(defaultValues.cards ?? []);
-    const [timeline, setTimeline] = useState<TimelineRow[]>(defaultValues.timeline ?? []);
-    const [services, setServices] = useState<ServiceRow[]>(defaultValues.services ?? []);
+    const [heroStats, setHeroStats] = useState<HeroStatRow[]>(defaultValues.heroStats ?? []);
+    const [impactRows, setImpactRows] = useState<ImpactRowRow[]>(defaultValues.impactRows ?? []);
 
     return (
         <form action={formAction} className="space-y-6">
@@ -287,22 +261,22 @@ export function CaseStudyForm({
             )}
 
             {/* Repeatable groups travel as JSON */}
-            <input type="hidden" name="cardsJson" value={JSON.stringify(cards)} />
-            <input type="hidden" name="timelineJson" value={JSON.stringify(timeline)} />
-            <input type="hidden" name="servicesJson" value={JSON.stringify(services)} />
+            <input type="hidden" name="heroStatsJson" value={JSON.stringify(heroStats)} />
+            <input type="hidden" name="impactRowsJson" value={JSON.stringify(impactRows)} />
 
             {/* ── Hero ── */}
             <Text name="heroTitle" label="Hero title" error={errors.heroTitle}
                 defaultValue={values.heroTitle} />
             <Area name="heroSubtitle" label="Hero subtitle" rows={2} error={errors.heroSubtitle}
                 defaultValue={values.heroSubtitle} />
-            {/* ── Hero image: upload to R2 or paste URL/path ── */}
+            {/* ── Hero image: fills the laptop-mockup screen ── */}
             <ImageUploadField
                 name="heroImage"
                 kind="case-study"
                 label="Hero image"
                 defaultValue={values.heroImage}
                 error={errors.heroImage}
+                help="Shown inside the laptop mockup in the hero."
             />
             {/* ── Card thumbnail: optional, falls back to the hero image ── */}
             <ImageUploadField
@@ -311,8 +285,24 @@ export function CaseStudyForm({
                 label="Card thumbnail"
                 defaultValue={values.thumbnailImage ?? undefined}
                 error={errors.thumbnailImage}
-                help="Shown on the case study card in the listing grid."
+                help="Shown on the case study card in the listing grid and the 'More Case Studies' carousel."
             />
+            {/* ── Client logo: optional, shown on the carousel card ── */}
+            <ImageUploadField
+                name="logoImage"
+                kind="case-study-logo"
+                label="Client logo"
+                defaultValue={values.logoImage ?? undefined}
+                error={errors.logoImage}
+                help="Optional. Overlaid on the 'More Case Studies' carousel card; hidden when blank."
+            />
+            <Text name="liveSiteUrl" label="Live site link" required={false}
+                defaultValue={values.liveSiteUrl}
+                hint="Optional. Shown as 'View Live Site' in the hero." />
+            <Area name="heroTags" label="Hero tags" rows={2} required={false}
+                defaultValue={values.heroTags} hint="One tag per line" />
+
+            <HeroStatsEditor rows={heroStats} setRows={setHeroStats} />
 
             <div className="grid gap-6 sm:grid-cols-2">
                 <div>
@@ -352,82 +342,54 @@ export function CaseStudyForm({
                 )}
             </fieldset>
 
-            {/* ── Prose sections ── */}
-            <RichTextEditor
-                name="summary"
-                label="Executive summary"
-                defaultValue={values.summary}
-                error={errors.summary}
-                help="Case studies written before the editor existed open as plain paragraphs and can be formatted from here."
-            />
-            <Area name="situationParagraphs" label="The Situation — paragraphs" rows={5} required={false}
-                error={errors.situationParagraphs} defaultValue={values.situationParagraphs}
-                hint="Separate paragraphs with a blank line" />
-            <Area name="situationQuestions" label="The Situation — questions" rows={3} required={false}
-                error={errors.situationQuestions} defaultValue={values.situationQuestions}
-                hint="One question per line" />
-            <Area name="situationClosing" label="The Situation — closing line" rows={2} required={false}
-                defaultValue={values.situationClosing} hint="Optional" />
-            {/* Rich text: writes HTML into a hidden "challenge" input, so the
-                action and parser keep reading the same field name. */}
-            <RichTextEditor
-                name="challenge"
-                label="The Challenge"
-                defaultValue={values.challenge}
-                error={errors.challenge}
-                help="Case studies written before the editor existed open as plain paragraphs and can be formatted from here."
-            />
-            <Area name="approachIntro" label="Our Approach — intro" rows={3} required={false} error={errors.approachIntro}
-                defaultValue={values.approachIntro} hint="Separate paragraphs with a blank line" />
+            {/* ── "How Virtuosoft Helped..." heading above the panels ── */}
+            <div className="grid gap-4 sm:grid-cols-2">
+                <Text name="summaryHeadingLead" label="Summary heading (lead)" required={false}
+                    defaultValue={values.summaryHeadingLead} />
+                <Text name="summaryHeadingAccent" label="Summary heading (accent, bold/blue)" required={false}
+                    defaultValue={values.summaryHeadingAccent} />
+            </div>
+            <Area name="summaryIntro" label="Summary intro" rows={3} required={false}
+                defaultValue={values.summaryIntro} />
 
-            <RowsEditor
-                title="Our Approach — cards"
-                rows={cards} setRows={setCards}
-                empty={{ title: "", description: "" }}
-                fields={[{ key: "title", label: "Card title" }, { key: "description", label: "Card description", wide: true }]}
-                addLabel="+ Add card"
-            />
-
-            <RowsEditor
-                title="Engagement timeline"
-                rows={timeline} setRows={setTimeline}
-                empty={{ phase: "", duration: "" }}
-                fields={[{ key: "phase", label: "Phase" }, { key: "duration", label: "Duration (e.g. Weeks 1–2)" }]}
-                addLabel="+ Add phase"
-            />
-
-            <Area name="outcome" label="The Outcome" rows={5} required={false} error={errors.outcome}
-                defaultValue={values.outcome} hint="Separate paragraphs with a blank line" />
-            <Area name="keyResults" label="Key results" rows={4} required={false} error={errors.keyResults}
-                defaultValue={values.keyResults} hint="One result per line" />
-
-            <RelatedServicesEditor
-                rows={services}
-                setRows={setServices}
-                error={errors.services}
-            />
-
-            {/* ── Callout (optional) ── */}
+            {/* ── Problem panel ── */}
             <fieldset className="rounded-lg border border-neutral-200 p-4">
-                <legend className="px-1 text-sm font-semibold text-neutral-800">
-                    Callout (optional — shown when heading is filled)
-                </legend>
-                <div className="grid gap-4 sm:grid-cols-2">
-                    <Text name="calloutHeading" label="Heading" required={false}
-                        defaultValue={values.calloutHeading} />
-                    <Text name="calloutButtonLabel" label="Button label" required={false}
-                        defaultValue={values.calloutButtonLabel} />
-                    <div className="sm:col-span-2">
-                        <Area name="calloutText" label="Text" rows={2} required={false}
-                            defaultValue={values.calloutText} />
+                <legend className="px-1 text-sm font-semibold text-neutral-800">Problem panel</legend>
+                <div className="space-y-4">
+                    <div className="grid gap-4 sm:grid-cols-2">
+                        <Text name="problemTitleLead" label="Title (lead)" required={false}
+                            defaultValue={values.problemTitleLead} />
+                        <Text name="problemTitleAccent" label="Title (accent, bold/blue)" required={false}
+                            defaultValue={values.problemTitleAccent} />
                     </div>
-                    {/* Pre-filled: the callout button almost always points at
-                        the contact page, so type nothing and it still works. */}
-                    <Text name="calloutButtonHref" label="Button link" required={false}
-                        defaultValue={values.calloutButtonHref ?? "/contact"}
-                        hint="Defaults to /contact" />
+                    <Area name="problemIntro" label="Intro" rows={3} required={false}
+                        defaultValue={values.problemIntro} />
+                    <Area name="problemPoints" label="Points" rows={5} required={false}
+                        defaultValue={values.problemPoints} hint="One point per line" />
                 </div>
             </fieldset>
+
+            {/* ── Solution panel ── */}
+            <fieldset className="rounded-lg border border-neutral-200 p-4">
+                <legend className="px-1 text-sm font-semibold text-neutral-800">Solution panel</legend>
+                <div className="space-y-4">
+                    <div className="grid gap-4 sm:grid-cols-2">
+                        <Text name="solutionTitleLead" label="Title (lead)" required={false}
+                            defaultValue={values.solutionTitleLead} />
+                        <Text name="solutionTitleAccent" label="Title (accent, bold/blue)" required={false}
+                            defaultValue={values.solutionTitleAccent} />
+                    </div>
+                    <Area name="solutionIntro" label="Intro" rows={3} required={false}
+                        defaultValue={values.solutionIntro} />
+                    <Area name="solutionPoints" label="Points" rows={5} required={false}
+                        defaultValue={values.solutionPoints} hint="One point per line" />
+                </div>
+            </fieldset>
+
+            <ImpactRowsEditor rows={impactRows} setRows={setImpactRows} />
+            <Area name="impactNote" label="Impact note" rows={2} required={false}
+                defaultValue={values.impactNote}
+                hint="Shown under the Impact table" />
 
             <div className="flex items-center gap-3 border-t border-neutral-200 pt-6">
                 <Button type="submit" disabled={isPending}>

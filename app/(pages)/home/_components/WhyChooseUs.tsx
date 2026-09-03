@@ -8,24 +8,20 @@ import ConnectorWave from "@/public/assets/Images/home/global/whychoose-connecto
 
 function WhyChooseUs() {
   return (
-    <div
-      className="relative overflow-hidden py-16 lg:py-24"
-      style={{
-        backgroundImage: "linear-gradient(120.7deg, #F5FAFF 0.1%, #F6FBFF 101.2%)",
-      }}
-    >
+    <div className="relative overflow-hidden py-16 lg:pb-42 lg:pt-24 bg-linear-to-tr from-white to-primary/10">
+      <div className="absolute -right-6 blur-3xl bg-primary/40 size-36"/>
       <Image
         src={DotPattern}
         alt=""
-        className="pointer-events-none select-none absolute right-0 top-0 w-[260px] opacity-70"
+        className="pointer-events-none select-none absolute right-0 -top-2 w-[520px] opacity-90"
       />
       <Image
         src={DotPattern}
         alt=""
-        className="pointer-events-none select-none absolute left-0 bottom-0 w-[260px] rotate-180 opacity-70"
+        className="pointer-events-none select-none absolute left-0 -bottom-10 w-[520px] rotate-180 opacity-90"
       />
 
-      <div className="relative max-w-7xl mx-auto px-6 md:px-12 lg:px-0">
+      <div className="relative max-w-7xl mx-auto px-6 sm:px-10 lg:px-0">
         <div className="inline-flex items-center gap-2 rounded-full border border-primary bg-[#F8FAFF] px-4 py-2">
           <Image src={BadgeIcon} alt="" className="size-3.5" />
           <span className="text-xs font-bold text-primary">The intelligence layer</span>
@@ -50,7 +46,7 @@ function WhyChooseUs() {
             {global_WhyChooseUs.map((card, index) => (
               <div
                 key={card.title}
-                className={`rounded-[21px] bg-white border border-[#E8EBF2] shadow-[0_15px_32px_-8px_rgba(26,38,89,0.08)] p-7 transition ${
+                className={`rounded-[21px] bg-white border border-[#E8EBF2] shadow-[0_15px_32px_-8px_rgba(26,38,89,0.08)] px-8 pt-6 pb-18 transition ${
                   index % 2 === 1 ? "lg:translate-y-15" : ""
                 }`}
               >
@@ -60,17 +56,17 @@ function WhyChooseUs() {
                     alt={card.title}
                     width={60}
                     height={60}
-                    className="size-15 object-contain"
+                    className="size-22 object-contain -ml-5"
                   />
                   <span className="text-sm leading-6 text-[#0051e4]/40">
                     {card.index}
                   </span>
                 </div>
-                <h3 className="mt-6 text-xl font-bold text-[#050f21]">
+                <h3 className="text-xl font-bold text-[#050f21]">
                   {card.title}
                 </h3>
                 <div className="mt-2 h-[3px] w-[34px] rounded-full bg-primary" />
-                <p className="mt-4 text-sm leading-6 text-[#5c6169]">
+                <p className="mt-4 text-sm leading-6 text-[#5c6169] w-52">
                   {card.description}
                 </p>
               </div>

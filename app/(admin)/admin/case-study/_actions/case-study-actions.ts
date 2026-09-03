@@ -14,14 +14,11 @@ async function requireAdmin() {
 
 function childWrites(values: ReturnType<typeof parseCaseStudyForm>["values"]) {
     return {
-        approachCards: {
-            create: values.cards.map((c, i) => ({ ...c, order: i + 1 })),
+        heroStats: {
+            create: values.heroStats.map((s, i) => ({ ...s, order: i + 1 })),
         },
-        timeline: {
-            create: values.timeline.map((t, i) => ({ ...t, order: i + 1 })),
-        },
-        relatedServices: {
-            create: values.services.map((s, i) => ({ ...s, order: i + 1 })),
+        impactRows: {
+            create: values.impactRows.map((r, i) => ({ ...r, order: i + 1 })),
         },
     };
 }
@@ -60,8 +57,8 @@ export async function createCaseStudy(
     }
 
     // serviceAreaIds must NOT reach Prisma as a scalar — it becomes the
-    // m2m connect below. cards/timeline/services go through childWrites.
-    const { cards, timeline, services, serviceAreaIds, ...scalars } = values;
+    // m2m connect below. heroStats/impactRows go through childWrites.
+    const { heroStats, impactRows, serviceAreaIds, ...scalars } = values;
     try {
         await prisma.caseStudy.create({
             data: {
@@ -94,7 +91,7 @@ export async function updateCaseStudy(
     const { values, fieldErrors } = parseCaseStudyForm(formData);
     if (fieldErrors) return { fieldErrors, values };
 
-    const { cards, timeline, services, serviceAreaIds, ...scalars } = values;
+    const { heroStats, impactRows, serviceAreaIds, ...scalars } = values;
     try {
         await prisma.caseStudy.update({
             where: { slug },
@@ -102,9 +99,8 @@ export async function updateCaseStudy(
                 ...scalars,
                 // set replaces the whole m2m membership with the checked boxes
                 serviceAreas: { set: serviceAreaIds.map((id) => ({ id })) },
-                approachCards: { deleteMany: {}, create: values.cards.map((c, i) => ({ ...c, order: i + 1 })) },
-                timeline: { deleteMany: {}, create: values.timeline.map((t, i) => ({ ...t, order: i + 1 })) },
-                relatedServices: { deleteMany: {}, create: values.services.map((s, i) => ({ ...s, order: i + 1 })) },
+                heroStats: { deleteMany: {}, create: values.heroStats.map((s, i) => ({ ...s, order: i + 1 })) },
+                impactRows: { deleteMany: {}, create: values.impactRows.map((r, i) => ({ ...r, order: i + 1 })) },
             },
         });
     } catch (err) {

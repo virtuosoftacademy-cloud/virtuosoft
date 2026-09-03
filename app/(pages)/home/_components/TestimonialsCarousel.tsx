@@ -49,10 +49,11 @@ function TestimonialsCarousel({ testimonials }: { testimonials: GlobalTestimonia
                 className={cn(
                   "flex h-full flex-col gap-8 p-8 transition-all duration-300",
                   isActive
-                    ? "rounded-3xl border border-white/95 bg-gradient-to-br from-white/92 to-white/62 shadow-[0_0_14px_rgba(52,67,122,0.09)]"
-                    : "rounded-[20px] bg-white opacity-50 shadow-[0_2px_6px_rgba(31,45,61,0.1)]"
+                  ? "rounded-3xl border border-white/95 bg-linear-to-tr from-white to-primary/5 shadow-[0_0_30px_rgba(52,67,122,0.09)]"
+                  : "rounded-[20px] bg-white opacity-50 shadow-[0_2px_6px_rgba(31,45,61,0.1)]"
                 )}
               >
+                {/* <div className="relative top-10 size-20 -left-20 bg-primary blur-3xl rounded-3xl" /> */}
                 <div className="flex flex-col gap-4">
                   <div className="flex gap-1">
                     {Array.from({ length: 5 }).map((_, star) => (

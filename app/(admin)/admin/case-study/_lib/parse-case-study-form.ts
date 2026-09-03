@@ -2,7 +2,7 @@
 // FormData -> typed case-study values, with validation.
 // Purpose: Shared helpers for the case-study create + edit actions:
 //            - CaseStudyFormState: shape returned to useActionState
-//            - Row types for the three repeatable groups
+//            - Row types for the two repeatable groups (hero stats, impact rows)
 //            - parseCaseStudyForm(): reads FormData (scalar fields as-is,
 //              industryId from a select, serviceAreaIds from checkboxes,
 //              repeatable groups as JSON strings from hidden inputs),
@@ -11,7 +11,6 @@
 // ============================================================================
 
 import { isRenderableImageSrc } from "@/app/api/lib/blog-actions/blog-image";
-import { isEmptyRichText } from "@/app/api/lib/rich-text";
 
 export type CaseStudyFormState = {
     error?: string;
@@ -25,9 +24,8 @@ export type CaseStudyFormState = {
     values?: ParsedCaseStudy;
 };
 
-export type CardRow = { title: string; description: string };
-export type TimelineRow = { phase: string; duration: string };
-export type ServiceRow = { label: string; href: string };
+export type HeroStatRow = { icon: string; value: string; label: string };
+export type ImpactRowRow = { icon: string; label: string; before: string; after: string };
 
 export type ParsedCaseStudy = {
     heroTitle: string;
@@ -35,23 +33,26 @@ export type ParsedCaseStudy = {
     heroImage: string;
     /** Optional; the card falls back to heroImage when this is blank. */
     thumbnailImage: string | null;
+    /** Optional; the "More Case Studies" carousel card hides the logo when blank. */
+    logoImage: string | null;
+    liveSiteUrl: string | null;
     industryId: number | null;
     serviceAreaIds: number[];
-    summary: string;
-    situationParagraphs: string;
-    situationQuestions: string;
-    situationClosing: string | null;
-    challenge: string;
-    approachIntro: string;
-    outcome: string;
-    keyResults: string;
-    calloutHeading: string | null;
-    calloutText: string | null;
-    calloutButtonHref: string | null;
-    calloutButtonLabel: string | null;
-    cards: CardRow[];
-    timeline: TimelineRow[];
-    services: ServiceRow[];
+    heroTags: string;
+    heroStats: HeroStatRow[];
+    summaryHeadingLead: string;
+    summaryHeadingAccent: string;
+    summaryIntro: string;
+    problemTitleLead: string;
+    problemTitleAccent: string;
+    problemIntro: string;
+    problemPoints: string;
+    solutionTitleLead: string;
+    solutionTitleAccent: string;
+    solutionIntro: string;
+    solutionPoints: string;
+    impactRows: ImpactRowRow[];
+    impactNote: string;
 };
 
 // Only the hero is mandatory — it supplies the title (and therefore the slug),
@@ -87,31 +88,23 @@ export function parseCaseStudyForm(formData: FormData): {
         return v ? v : null;
     };
 
-    // Blank unless the editor actually holds something visible.
-    const richText = (k: string) => {
-        const v = get(k);
-        return v && !isEmptyRichText(v) ? v : "";
-    };
-
     const fieldErrors: Record<string, string> = {};
     for (const [key, label] of REQUIRED) {
         if (!get(key)) fieldErrors[key] = `${label} is required.`;
     }
 
     // Repeatable groups arrive as JSON from the form's hidden inputs.
-    const cards = json<CardRow[]>(formData.get("cardsJson"), []).filter(
-        (c) => c.title.trim() || c.description.trim()
+    const heroStats = json<HeroStatRow[]>(formData.get("heroStatsJson"), []).filter(
+        (s) => s.value.trim() || s.label.trim()
     );
-    const timeline = json<TimelineRow[]>(formData.get("timelineJson"), []).filter(
-        (t) => t.phase.trim() || t.duration.trim()
-    );
-    const services = json<ServiceRow[]>(formData.get("servicesJson"), []).filter(
-        (s) => s.label.trim() || s.href.trim()
+    const impactRows = json<ImpactRowRow[]>(formData.get("impactRowsJson"), []).filter(
+        (r) => r.label.trim() || r.before.trim() || r.after.trim()
     );
 
     // Images go through next/image on the card, which throws on anything that
     // isn't a path or an absolute URL — reject it here rather than on the
-    // public page. Blank thumbnail is fine; the card falls back to the hero.
+    // public page. Blank thumbnail/logo is fine; the card falls back to the
+    // hero image, and the carousel card just hides the logo overlay.
     const heroImage = get("heroImage");
     if (heroImage && !isRenderableImageSrc(heroImage)) {
         fieldErrors.heroImage =
@@ -122,13 +115,10 @@ export function parseCaseStudyForm(formData: FormData): {
         fieldErrors.thumbnailImage =
             "Card thumbnail must be a path starting with / or a full http(s) URL.";
     }
-
-    // A service with a label needs an internal href (guards javascript: etc.)
-    for (const s of services) {
-        if (s.href && !s.href.startsWith("/")) {
-            fieldErrors.services = "Service links must be internal paths starting with /.";
-            break;
-        }
+    const logo = get("logoImage");
+    if (logo && !isRenderableImageSrc(logo)) {
+        fieldErrors.logoImage =
+            "Logo image must be a path starting with / or a full http(s) URL.";
     }
 
     const industryIdRaw = get("industryId");
@@ -145,26 +135,34 @@ export function parseCaseStudyForm(formData: FormData): {
             heroSubtitle: get("heroSubtitle"),
             heroImage: get("heroImage"),
             thumbnailImage: opt("thumbnailImage"),
+            logoImage: opt("logoImage"),
+            liveSiteUrl: opt("liveSiteUrl"),
             industryId: industryIdRaw ? Number(industryIdRaw) : null,
             serviceAreaIds,
-            summary: richText("summary"),
-            situationParagraphs: get("situationParagraphs"),
-            situationQuestions: get("situationQuestions"),
-            situationClosing: opt("situationClosing"),
-            // Rich text: an untouched editor serialises as "<p></p>", which is
-            // truthy and would make an empty Challenge section render on the
-            // public page. Normalise it to a blank string.
-            challenge: richText("challenge"),
-            approachIntro: get("approachIntro"),
-            outcome: get("outcome"),
-            keyResults: get("keyResults"),
-            calloutHeading: opt("calloutHeading"),
-            calloutText: opt("calloutText"),
-            calloutButtonHref: opt("calloutButtonHref"),
-            calloutButtonLabel: opt("calloutButtonLabel"),
-            cards: cards.map((c) => ({ title: c.title.trim(), description: c.description.trim() })),
-            timeline: timeline.map((t) => ({ phase: t.phase.trim(), duration: t.duration.trim() })),
-            services: services.map((s) => ({ label: s.label.trim(), href: s.href.trim() })),
+            heroTags: get("heroTags"),
+            heroStats: heroStats.map((s) => ({
+                icon: s.icon.trim(),
+                value: s.value.trim(),
+                label: s.label.trim(),
+            })),
+            summaryHeadingLead: get("summaryHeadingLead"),
+            summaryHeadingAccent: get("summaryHeadingAccent"),
+            summaryIntro: get("summaryIntro"),
+            problemTitleLead: get("problemTitleLead"),
+            problemTitleAccent: get("problemTitleAccent"),
+            problemIntro: get("problemIntro"),
+            problemPoints: get("problemPoints"),
+            solutionTitleLead: get("solutionTitleLead"),
+            solutionTitleAccent: get("solutionTitleAccent"),
+            solutionIntro: get("solutionIntro"),
+            solutionPoints: get("solutionPoints"),
+            impactRows: impactRows.map((r) => ({
+                icon: r.icon.trim(),
+                label: r.label.trim(),
+                before: r.before.trim(),
+                after: r.after.trim(),
+            })),
+            impactNote: get("impactNote"),
         },
     };
 }

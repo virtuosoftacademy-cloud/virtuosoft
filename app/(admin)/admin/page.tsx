@@ -34,8 +34,8 @@ export default async function DashboardPage() {
         caseStudies,
         industryRows,
         serviceAreaRows,
-        cardTotal,
-        phaseTotal,
+        heroStatTotal,
+        impactRowTotal,
         subscriberCount,
         subscribersLast30,
         latestSubscriber,
@@ -65,8 +65,8 @@ export default async function DashboardPage() {
             orderBy: { label: "asc" },
             include: { _count: { select: { caseStudies: true } } },
         }),
-        prisma.approachCard.count(),
-        prisma.timelinePhase.count(),
+        prisma.caseStudyHeroStat.count(),
+        prisma.caseStudyImpactRow.count(),
         prisma.newsletterSubscriber.count(),
         prisma.newsletterSubscriber.count({
             where: { createdAt: { gte: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000) } },
@@ -244,8 +244,8 @@ export default async function DashboardPage() {
 
                     <div className="mt-5 grid grid-cols-3 gap-3">
                         <Stat value={caseStudies.length} label="Case studies" />
-                        <Stat value={cardTotal} label="Approach cards" />
-                        <Stat value={phaseTotal} label="Timeline phases" />
+                        <Stat value={heroStatTotal} label="Hero stats" />
+                        <Stat value={impactRowTotal} label="Impact rows" />
                     </div>
 
                     <div className="mt-5">

@@ -14,7 +14,7 @@ export interface R2UploadResult {
 }
 
 
-export type ImageKind = "post" | "post-thumb" | "case-study" | "case-study-thumb" | "avatar";
+export type ImageKind = "post" | "post-thumb" | "case-study" | "case-study-thumb" | "case-study-logo" | "avatar";
 
 /** Every valid ImageKind, so the upload route can validate without repeating the union. */
 export const IMAGE_KINDS = [
@@ -22,6 +22,7 @@ export const IMAGE_KINDS = [
     "post-thumb",
     "case-study",
     "case-study-thumb",
+    "case-study-logo",
     "avatar",
 ] as const;
 
@@ -89,6 +90,7 @@ export function objectKeyFor(kind: ImageKind, fileName: string): string {
         "post-thumb": "virtuosoft/posts/thumbnails",
         "case-study": "virtuosoft/case-studies",
         "case-study-thumb": "virtuosoft/case-studies/thumbnails",
+        "case-study-logo": "virtuosoft/case-studies/logos",
         avatar: "virtuosoft/avatars",
     }[kind];
     const ext = fileName.includes(".")
@@ -196,6 +198,14 @@ export const IMAGE_VALIDATION: Record<
         maxDimensions: { width: 4000, height: 4000 },
         recommended: { width: 1200, height: 800 },
         note: "Card thumbnails are cropped to fill a 3:2 box in the case studies grid.",
+    },
+    "case-study-logo": {
+        // Overlaid small on a dark background (see MoreCaseStudies carousel
+        // card) — a modest floor is enough since it never renders large.
+        minDimensions: { width: 120, height: 40 },
+        maxDimensions: { width: 4000, height: 4000 },
+        recommended: { width: 400, height: 120 },
+        note: "Shown as a small logo overlay on the 'More Case Studies' carousel card — a transparent PNG works best.",
     },
     avatar: {
         // Rendered as a small circle everywhere it appears (author card,

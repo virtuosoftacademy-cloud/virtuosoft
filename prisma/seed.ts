@@ -394,15 +394,14 @@ async function seedBlogPosts() {
     }
 }
 
-// The one case study with enough real design copy to fill every required
-// field honestly: Tarabut's Problem/Solution/Impact content from
-// app/_constant/index.ts (caseStudies_Problem/Solution/Impact), which
-// backs the bespoke /case-studies/tarabut page. Slugged
-// "tarabut-open-banking" rather than "tarabut" so it doesn't collide with
-// that existing static route.
+// The one case study with enough real design copy to fill every field
+// honestly: Tarabut's own content, previously split across the bespoke
+// /case-studies/tarabut page's hardcoded constants and (briefly) a
+// TarabutProblemSolution singleton row — both now retired in favor of this
+// one CaseStudy row, so the [slug] template renders it exactly as before.
 async function seedCaseStudies() {
     const author = await prisma.author.findFirst({ where: { name: "Margaret Thorne" } });
-    const slug = "tarabut-open-banking";
+    const slug = "tarabut";
 
     const existing = await prisma.caseStudy.findUnique({ where: { slug } });
     if (existing) return;
@@ -419,114 +418,29 @@ async function seedCaseStudies() {
             slug,
             heroTitle: "Powering Secure Open Banking Innovation",
             heroSubtitle:
-                "Virtuosoft has been partnering with Tarabut's Riyadh subsidiary for over 1.6 years as a software development and security controls implementation partner. As the MENA region's leading open banking and embedded finance platform, Tarabut enables secure, API-driven connectivity between banks, fintechs, and third-party service providers.",
+                "Virtuosoft has been partnering with Tarabut's Riyadh subsidiary for over 1.6 years as a software development and security controls implementation partner. As the MENA region's leading open banking and embedded finance platform, Tarabut enables secure, API-driven connectivity between banks, fintechs, and third-party service providers. Virtuosoft supported the design and development of regulated open banking platform components, accelerating development cycles while ensuring security, scalability and regulatory alignment across the ecosystem.",
             heroImage: "/assets/Images/casestudies/detail/visual-tarabut.png",
             thumbnailImage: "/assets/Images/casestudies/card-tarabut-visual.png",
+            logoImage: "/assets/Images/ClientLogo/tarabut-white.png",
+            liveSiteUrl: "https://www.tarabut.com",
             industryId: industry?.id,
             serviceAreas: { connect: serviceAreas.map((s) => ({ id: s.id })) },
-
-            summary:
-                "Virtuosoft partnered with Tarabut, the MENA region's leading open banking platform, to scale engineering, QA and DevOps teams for faster delivery and secure financial infrastructure.",
-
-            situationParagraphs:
-                "Tarabut faced rapid growth challenges with scaling its core platform while maintaining security and compliance across MENA markets.",
-            situationQuestions: [
-                "Skilled backend and frontend engineers to build scalable microservices and responsive interfaces.",
-                "QA experts to automate testing and maintain stability in a highly regulated environment.",
-                "Cloud and DevOps specialists to streamline deployments and ensure high availability.",
-                "Faster development cycles to deliver new open banking APIs and stay competitive.",
-            ].join("\n"),
-            situationClosing: null,
-
-            challenge:
-                "<p>Tarabut needed to scale its open banking platform across MENA markets without compromising security, compliance, or delivery speed — all while operating in one of the region's most heavily regulated fintech environments.</p>",
-
-            approachIntro:
-                "Virtuosoft strengthened Tarabut's engineering capabilities with dedicated experts, scalable architecture, and automated delivery processes.",
-
-            outcome:
-                "This engagement demonstrates Virtuosoft's capability to deliver secure, regulation-aligned fintech and Open Banking solutions within the KSA market.",
-            keyResults: [
-                "Streamlined full-stack teams delivering faster cycles",
-                "Automated QA testing removed release bottlenecks",
-                "Reliable cloud infrastructure with CI/CD automation",
-                "Stable, skilled teams maintained predictable delivery",
-            ].join("\n"),
-
-            calloutHeading: null,
-            calloutText: null,
-            calloutButtonHref: null,
-            calloutButtonLabel: null,
-
             authorId: author?.id,
 
-            approachCards: {
+            heroTags: ["Growth", "Success"].join("\n"),
+            heroStats: {
                 create: [
-                    {
-                        title: "Embedded Engineering Teams",
-                        description:
-                            "Embedded specialized backend and frontend engineers into Tarabut's product teams.",
-                        order: 1,
-                    },
-                    {
-                        title: "Automated QA & Compliance Testing",
-                        description:
-                            "Automated QA processes with regression and compliance testing to improve release stability.",
-                        order: 2,
-                    },
-                    {
-                        title: "Managed Cloud & DevOps",
-                        description:
-                            "Managed cloud infrastructure, CI/CD pipelines, and site reliability to improve deployment speed and reduce downtime.",
-                        order: 3,
-                    },
-                    {
-                        title: "Domain Expertise in Financial Services",
-                        description:
-                            "Delivered hands-on domain expertise in financial services, contributing to both technical execution and product evolution.",
-                        order: 4,
-                    },
+                    { icon: "institutions", value: "50+", label: "Financial institutions integrated in KSA & UAE", order: 1 },
+                    { icon: "users", value: "2.5M+", label: "Users with digital financial access", order: 2 },
+                    { icon: "funding", value: "$45M", label: "Funding secured in total", order: 3 },
                 ],
             },
-            timeline: {
-                create: [
-                    { phase: "Engineering Ramp-Up", duration: "Weeks 1–6", order: 1 },
-                    { phase: "Scaled Delivery & Compliance Hardening", duration: "Ongoing (1.6+ years)", order: 2 },
-                ],
-            },
-            relatedServices: {
-                create: [
-                    {
-                        label: "Software Engineering",
-                        href: "/services/softengineering/custom-software-development",
-                        order: 1,
-                    },
-                    {
-                        label: "Cybersecurity",
-                        href: "/services/cybersecurity/managed-cybersecurity-service",
-                        order: 2,
-                    },
-                ],
-            },
-        },
-    });
-    console.log(`Created case study: ${slug}`);
-}
 
-// Seeds the singleton row backing the Problem/Solution panels on the
-// bespoke /case-studies/tarabut page (see prisma/schema.prisma's
-// TarabutProblemSolution). Copy matches caseStudies_Problem/Solution in
-// app/_constant/index.ts exactly, so the page renders unchanged the moment
-// it switches from those constants to this row.
-async function seedTarabutProblemSolution() {
-    const id = "tarabut";
+            summaryHeadingLead: "How Virtuosoft Helped Tarabut Scale Secure",
+            summaryHeadingAccent: "Open Banking Across MENA",
+            summaryIntro:
+                "Virtuosoft partnered with Tarabut, the MENA region's leading open banking platform, to scale engineering, QA and DevOps teams for faster delivery and secure financial infrastructure.",
 
-    const existing = await prisma.tarabutProblemSolution.findUnique({ where: { id } });
-    if (existing) return;
-
-    await prisma.tarabutProblemSolution.create({
-        data: {
-            id,
             problemTitleLead: "Problem",
             problemTitleAccent: "Statement",
             problemIntro:
@@ -537,6 +451,7 @@ async function seedTarabutProblemSolution() {
                 "Cloud and DevOps specialists to streamline deployments and ensure high availability.",
                 "Faster development cycles to deliver new open banking APIs and stay competitive.",
             ].join("\n"),
+
             solutionTitleLead: "How Virtuosoft",
             solutionTitleAccent: "Solved It",
             solutionIntro:
@@ -547,9 +462,44 @@ async function seedTarabutProblemSolution() {
                 "Managed cloud infrastructure, CI/CD pipelines, and site reliability to improve deployment speed and reduce downtime.",
                 "Delivered hands-on domain expertise in financial services, contributing to both technical execution and product evolution.",
             ].join("\n"),
+
+            impactRows: {
+                create: [
+                    {
+                        icon: "efficiency",
+                        label: "Efficiency",
+                        before: "Fragmented engineering resources",
+                        after: "Streamlined full-stack teams delivering faster cycles",
+                        order: 1,
+                    },
+                    {
+                        icon: "latency",
+                        label: "Latency",
+                        before: "Slower release cycles due to manual QA",
+                        after: "Automated QA testing removed release bottlenecks",
+                        order: 2,
+                    },
+                    {
+                        icon: "availability",
+                        label: "Availability",
+                        before: "Deployment downtime risks",
+                        after: "Reliable cloud infrastructure with CI/CD automation",
+                        order: 3,
+                    },
+                    {
+                        icon: "delivery",
+                        label: "Efficiency",
+                        before: "Resource gaps slowed feature delivery",
+                        after: "Stable, skilled teams maintained predictable delivery",
+                        order: 4,
+                    },
+                ],
+            },
+            impactNote:
+                "This engagement demonstrates Virtuosoft's capability to deliver secure, regulation-aligned fintech and Open Banking solutions within the KSA market.",
         },
     });
-    console.log("Created tarabut problem/solution copy");
+    console.log(`Created case study: ${slug}`);
 }
 
 async function main() {
@@ -561,7 +511,6 @@ async function main() {
     await seedTestimonials();
     await seedBlogPosts();
     await seedCaseStudies();
-    await seedTarabutProblemSolution();
 }
 
 main()

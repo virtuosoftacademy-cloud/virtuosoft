@@ -18,6 +18,7 @@ export const getCaseStudyCards = cache(async () => {
                 heroSubtitle: true,
                 heroImage: true,
                 thumbnailImage: true,
+                logoImage: true,
                 industry: { select: { label: true } },
                 serviceAreas: { select: { label: true }, orderBy: { label: "asc" } },
             },
@@ -37,6 +38,7 @@ type CaseStudyCardRow = {
     heroSubtitle: string;
     heroImage: string;
     thumbnailImage: string | null;
+    logoImage: string | null;
     industry: { label: string } | null;
     serviceAreas: { label: string }[];
 };
@@ -55,6 +57,30 @@ export function toCard(row: CaseStudyCardRow): CaseStudyCardProps {
         title: row.heroTitle,
         summary: row.heroSubtitle,
         serviceAreas: row.serviceAreas.map((a) => a.label),
+        href: `/case-studies/${row.slug}`,
+    };
+}
+
+export type CaseStudyCarouselCardProps = {
+    id: string;
+    visual: string;
+    logoImage: string | null;
+    title: string;
+    description: string;
+    industry: string;
+    href: string;
+};
+
+/** Card shape for the "More Case Studies" carousel on a detail page. */
+export function toCarouselCard(row: CaseStudyCardRow): CaseStudyCarouselCardProps {
+    return {
+        id: row.id,
+        visual: [row.thumbnailImage, row.heroImage].find(isRenderableImageSrc)
+            ?? FALLBACK_POST_IMAGE,
+        logoImage: isRenderableImageSrc(row.logoImage) ? row.logoImage : null,
+        title: row.heroTitle,
+        description: row.heroSubtitle,
+        industry: row.industry?.label ?? "",
         href: `/case-studies/${row.slug}`,
     };
 }

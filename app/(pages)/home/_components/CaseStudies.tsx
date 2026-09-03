@@ -87,29 +87,27 @@ const stories: Story[] = [
 
 function CaseStudies() {
   return (
-    <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-0 my-16 lg:my-24">
-      <div className="inline-flex items-center gap-2 rounded-full border border-primary bg-[#F8FAFF] px-4 py-2">
-        <Image src={BadgeIcon} alt="" className="size-3.5" />
-        <span className="text-xs font-bold text-primary">Who Built This</span>
+    <div className="px-6 sm:px-10 lg:px-0 my-16 lg:my-24">
+      <div className="max-w-7xl mx-auto">
+        <div className="inline-flex items-center gap-2 rounded-full border border-primary bg-white px-4 py-2">
+          <Image src={BadgeIcon} alt="" className="size-3.5" />
+          <span className="text-xs font-bold text-primary">Who Built This</span>
+        </div>
+        <h2 className="mt-5 max-w-3xl text-4xl leading-[1.2] text-[#080e19] md:text-[40px]">
+          16+ Years Building Enterprise Systems That{" "}
+          <span className="text-primary font-bold">Work in Production</span>
+        </h2>
+        <p className="mt-3 text-base leading-[1.4] text-[#4c5468] max-w-2xl">
+          Virtuosoft is an enterprise technology and AI consulting firm with offices in Pakistan, Saudi Arabia, UAE, USA and France. We have scaled 50+ startups and enterprises, impacted 50,000+ users and built systems across ERP, FinTech, cybersecurity and custom software engineering.
+        </p>
       </div>
-      <h2 className="mt-5 max-w-3xl text-4xl leading-[1.2] text-[#080e19] md:text-[40px]">
-        16+ Years Building Enterprise Systems That{" "}
-        <span className="text-primary font-bold">Work in Production</span>
-      </h2>
-      <p className="mt-3 text-base leading-[1.4] text-[#4c5468] max-w-2xl">
-        Virtuosoft is an enterprise technology and AI consulting firm with offices in Pakistan, Saudi Arabia, UAE, USA and France. We have scaled 50+ startups and enterprises, impacted 50,000+ users and built systems across ERP, FinTech, cybersecurity and custom software engineering.
-      </p>
-
+<div className="ml-26">
       <Carousel opts={{ align: "start", loop: true }} className="w-full mt-10">
         <CarouselContent>
           {stories.map((story) => (
             <CarouselItem key={story.title} className="basis-full sm:basis-1/2 lg:basis-3/5">
               <div
-                className="group flex h-full flex-col overflow-hidden rounded-[22px] border border-white/95 p-3 shadow-[0_0_29px_0_rgba(52,67,122,0.09)]"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(146.76deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.62) 71.43%)",
-                }}
+                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/5 p-4 bg-accent/20 shadow-xl/20"
               >
                 {/* Visual */}
                 <div className="relative aspect-[736/406] w-full overflow-hidden rounded-[18px] bg-[#1B2334]">
@@ -128,9 +126,8 @@ function CaseStudies() {
                       alt={story.logo.alt}
                       width={800}
                       height={200}
-                      className={`absolute left-4 top-6 lg:left-8 lg:top-8 h-auto w-[150px] max-w-[15%] object-contain ${
-                        story.logo.forceWhite ? "brightness-0 invert" : ""
-                      }`}
+                      className={`absolute left-4 top-6 lg:left-8 lg:top-8 h-auto w-[150px] max-w-[15%] object-contain ${story.logo.forceWhite ? "brightness-0 invert" : ""
+                        }`}
                     />
                   ) : (
                     <span className="absolute left-8 top-8 text-sm font-bold text-white">
@@ -165,6 +162,8 @@ function CaseStudies() {
           <CarouselNext className="static size-10 translate-x-0 translate-y-0" />
         </div>
       </Carousel>
+</div>
+
     </div>
   )
 }

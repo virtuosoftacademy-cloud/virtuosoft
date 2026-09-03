@@ -9,7 +9,7 @@ function Technology() {
 
     return (
         <>
-            <div className="max-w-7xl mx-auto px-10 my-12 lg:my-14">
+            <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-0 my-12 lg:my-14">
                 <div className="flex flex-col gap-8 lg:flex-row justify-between items-center">
 
                     <div className="lg:-space-y-4">

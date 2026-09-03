@@ -133,8 +133,6 @@ function SimpleMegaDropdown({
               </div>
             </div>
           ) : (
-            // A `fill` image is absolutely positioned and contributes no
-            // height, so the panel needs its own aspect ratio.
             <div
               className={cn(
                 "relative w-[330px] shrink-0 self-center overflow-hidden rounded-lg",
@@ -170,10 +168,10 @@ export default function Nav() {
   const useDarkLogo = isLightBackground || mobileOpen;
 
   const pillItem = cn(
-    "rounded-full px-4 py-2 text-sm font-medium transition-colors data-[state=open]:bg-white data-[state=open]:text-[#0b1020] data-[state=open]:hover:text-[#0b1020]",
-    isLightBackground ? "text-[#0b1020] hover:text-primary" : "text-white hover:text-foreground"
+    "rounded-full px-4 py-2 text-sm font-medium transition-colors data-[state=open]:bg-white data-[state=open]:text-[#002D7D] data-[state=open]:hover:text-[#002D7D]",
+    isLightBackground ? "text-[#002D7D] hover:text-primary" : "text-white hover:text-[#002D7D]"
   );
-  const pillItemActive = "bg-linear-to-r from-[rgba(0,81,228,0.8)] to-[rgba(0,81,228,0.4)] text-white!"
+  const pillItemActive = "bg-background text-[#002D7D]! font-bold"
 
   interface ServiceItemProps {
     service: NavServiceItem;
@@ -297,7 +295,7 @@ export default function Nav() {
         <NavigationMenu className="hidden lg:flex">
           <NavigationMenuList
             className={cn(
-              "gap-0.75 rounded-full bg-accent/5 backdrop-blur-sm px-1.75 py-1.5 border border-white/20")}
+              "gap-0.75 rounded-full bg-foreground/5 backdrop-blur-lg border border-white/20 px-1.75 py-1.5")}
           >
             <NavigationMenuItem>
               <NavigationMenuTrigger className={cn(pillItem, isActivePath("/services") && pillItemActive)}>

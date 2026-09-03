@@ -5,11 +5,8 @@ import Cta from "@/components/common/Cta"
 import { prisma } from "@/app/api/lib/prisma"
 import { caseStudyInclude, toDetailProps } from "@/app/api/lib/case-study/types"
 import Hero from "./_components/Hero"
-import Situation from "./_components/Situation"
-import Challenge from "./_components/Challenge"
-import Approach from "./_components/Approach"
-import Outcome from "./_components/Outcome"
-import Callout from "./_components/Callout"
+import ProblemSolution from "./_components/ProblemSolution"
+import Impact from "./_components/Impact"
 import MoreCaseStudies from "./_components/MoreCaseStudies"
 
 interface CaseStudyPageProps {
@@ -74,11 +71,9 @@ export default async function CaseStudyDetailPage({
   return (
     <>
       <Hero caseStudy={caseStudy} />
-      <Situation caseStudy={caseStudy} />
-      <Challenge caseStudy={caseStudy} />
-      <Approach caseStudy={caseStudy} />
-      <Outcome caseStudy={caseStudy} />
-      {caseStudy.callout ? <Callout callout={caseStudy.callout} /> : <Cta />}
+      <ProblemSolution caseStudy={caseStudy} />
+      <Impact caseStudy={caseStudy} />
+      <Cta />
       <MoreCaseStudies excludeSlug={slug} />
     </>
   )

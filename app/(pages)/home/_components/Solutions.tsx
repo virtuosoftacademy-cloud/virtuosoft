@@ -14,7 +14,7 @@ function Solutions() {
   const [openId, setOpenId] = useState<string | undefined>(global_Solutions[0]?.id)
 
   return (
-    <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-0 my-16 lg:my-36">
+    <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-0 my-16 lg:my-36">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-primary bg-[#F8FAFF] px-4 py-2">
@@ -23,10 +23,10 @@ function Solutions() {
               Purpose-Built Solutions
             </span>
           </div>
-          <h2 className="mt-5 text-4xl md:text-[40px] leading-[1.2] text-[#050f21]">
-            Innovative Solution <span className="text-primary font-bold">Real Results</span>
+          <h2 className="mt-5 text-4xl md:text-[40px] leading-[1.2] text-[#050f21] whitespace-pre">
+            Innovative Solution {"\n"}<span className="text-primary font-bold">Real Results</span>
           </h2>
-          <p className="mt-4 text-base leading-[1.4] text-[#474747] max-w-md">
+          <p className="mt-4 text-base leading-[1.4] text-[#474747] max-w-lg">
             From powerful web applications to enterprise systems, we transform your ideas into high-performance digital products.
           </p>
 

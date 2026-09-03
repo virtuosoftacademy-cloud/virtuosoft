@@ -84,6 +84,11 @@ model ServiceArea {
   caseStudies CaseStudy[] // implicit many-to-many
 }
 
+/// One shared template for every case study detail page: a hero with a
+/// laptop mockup + floating stats, a Problem/Solution panel pair, and an
+/// Impact before/after table. Every field below the hero basics is optional
+/// so a case study can be published incrementally — the public page hides
+/// whatever section is still empty rather than printing a bare heading.
 model CaseStudy {
   id           String @id @default(cuid())
   slug         String @unique
@@ -96,77 +101,25 @@ model CaseStudy {
   /// fall back to heroImage for those.
   thumbnailImage String?
 
+  /// Client logo shown on the "More Case Studies" carousel card. Falls back
+  /// to no logo (just the background visual) when blank.
+  logoImage String?
+
+  /// Optional "View Live Site" link in the hero.
+  liveSiteUrl String?
+
   industryId Int?
   industry   Industry? @relation(fields: [industryId], references: [id])
 
   serviceAreas ServiceArea[] // implicit many-to-many
 
-  summary String @db.LongText // paragraphs separated by blank lines
+  heroTags String @db.Text // one per line — small pill row in the hero
+  heroStats CaseStudyHeroStat[]
 
-  situationParagraphs String  @db.LongText // paragraphs separated by blank lines
-  situationQuestions  String  @db.Text // one per line
-  situationClosing    String? @db.Text
-
-  challenge     String @db.LongText // paragraphs separated by blank lines
-  approachIntro String @db.LongText // paragraphs separated by blank lines
-  outcome       String @db.LongText // paragraphs separated by blank lines
-  keyResults    String @db.Text // one per line
-
-  calloutHeading     String?
-  calloutText        String? @db.Text
-  calloutButtonHref  String?
-  calloutButtonLabel String?
-
-  approachCards   ApproachCard[]
-  timeline        TimelinePhase[]
-  relatedServices RelatedService[]
-
-  authorId String?
-  author   Author? @relation(fields: [authorId], references: [id])
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model ApproachCard {
-  id          Int    @id @default(autoincrement())
-  title       String
-  description String @db.Text
-  order       Int    @default(0)
-
-  caseStudyId String
-  caseStudy   CaseStudy @relation(fields: [caseStudyId], references: [id], onDelete: Cascade)
-}
-
-model TimelinePhase {
-  id       Int    @id @default(autoincrement())
-  phase    String
-  duration String
-  order    Int    @default(0)
-
-  caseStudyId String
-  caseStudy   CaseStudy @relation(fields: [caseStudyId], references: [id], onDelete: Cascade)
-}
-
-model RelatedService {
-  id    Int    @id @default(autoincrement())
-  label String
-  href  String
-  order Int    @default(0)
-
-  caseStudyId String
-  caseStudy   CaseStudy @relation(fields: [caseStudyId], references: [id], onDelete: Cascade)
-}
-
-// ─────────────────────── Tarabut case study (custom page) ───────────────────────
-
-/// Editable copy for the Problem/Solution panels on the bespoke
-/// /case-studies/tarabut page. That page isn't part of the generic
-/// CaseStudy model above — its layout is custom-built — so this is a
-/// singleton row (fixed id "tarabut") holding just the panel copy,
-/// editable from the admin without a code deploy.
-model TarabutProblemSolution {
-  id String @id @default(cuid())
+  // "How Virtuosoft Helped X Scale…" heading + paragraph above the panels.
+  summaryHeadingLead   String
+  summaryHeadingAccent String
+  summaryIntro         String @db.Text
 
   problemTitleLead   String
   problemTitleAccent String
@@ -178,7 +131,39 @@ model TarabutProblemSolution {
   solutionIntro       String @db.Text
   solutionPoints      String @db.Text // one per line
 
+  impactRows CaseStudyImpactRow[]
+  impactNote String @db.Text
+
+  authorId String?
+  author   Author? @relation(fields: [authorId], references: [id])
+
+  createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+/// A floating stat card in the case-study hero (max 3, per the design).
+model CaseStudyHeroStat {
+  id    Int    @id @default(autoincrement())
+  icon  String // "institutions" | "users" | "funding"
+  value String
+  label String
+  order Int    @default(0)
+
+  caseStudyId String
+  caseStudy   CaseStudy @relation(fields: [caseStudyId], references: [id], onDelete: Cascade)
+}
+
+/// A before/after row in the case-study Impact table.
+model CaseStudyImpactRow {
+  id     Int    @id @default(autoincrement())
+  icon   String // "efficiency" | "latency" | "availability" | "delivery"
+  label  String
+  before String
+  after  String
+  order  Int    @default(0)
+
+  caseStudyId String
+  caseStudy   CaseStudy @relation(fields: [caseStudyId], references: [id], onDelete: Cascade)
 }
 
 // ─────────────────────────── Testimonials ───────────────────────────

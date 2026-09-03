@@ -9,7 +9,7 @@ import { services_Section } from "@/app/_constant";
 
 function InnovativeSolutions() {
     return (
-        <div className="max-w-7xl mx-auto px-10 my-8 lg:my-10">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-0 my-8 lg:my-10">
             <div className="-space-y-2 lg:-space-y-4">
                 <h4 className={`font-normal ${CommonHead}`}>
                     Innovative{" "}

@@ -7,15 +7,37 @@ import HeroBg from "@/public/assets/Images/home/ksa/hero-bg.png"
 import ConsultationModal from "@/components/common/ConsultationModal"
 import LogoCloud from "./LogoCloud"
 
-// One background film per regional home page, keyed by the file's own name in
-// public/assets/videos.
-const HERO_VIDEOS = {
-  global: "/assets/videos/global.webm",
-  uk: "/assets/videos/uk.webm",
-  ksa: "/assets/videos/ksa.webm",
+// Copy and backdrop per regional home page, from the "Hero glass card" frames
+// in Figma: Global 1929:18719, UK 1929:20051, KSA 1929:21383. The video keys
+// match the file names in public/assets/videos.
+const HERO_CONTENT = {
+  global: {
+    video: "/assets/videos/global.webm",
+    titleRegular:"AI That Moves the Needle,\n",
+    title: "Not Just the Conversation",
+    body: "Our experience and trusted partnerships help enterprises move past AI hype and into transformation that actually redefines how they operate, compete and grow.",
+    workLabel: "See Our Work",
+    width:"max-w-[46em]"
+  },
+  uk: {
+    video: "/assets/videos/uk.webm",
+    titleRegular:"AI Transformation, Delivered \nWith Proof, ",
+    title: "Not Promises",
+    body: "We bring enterprise-grade AI expertise within reach, so growing businesses can compete, streamline operations and make smarter decisions without the enterprise price tag or complexity.",
+    workLabel: "See the work",
+    width:"max-w-[50em]"
+  },
+  ksa: {
+    video: "/assets/videos/ksa.webm",
+    titleRegular:"Where Proven Expertise \nMeets",
+    title: " AI Transformation",
+    body: "Our partnerships and regional presence give you a partner who understands enterprise complexity, delivering AI solutions built for scale, security and long-term advantage.",
+    workLabel: "See the work",
+    width:"max-w-[45em]"
+  },
 } as const
 
-export type HeroRegion = keyof typeof HERO_VIDEOS
+export type HeroRegion = keyof typeof HERO_CONTENT
 
 interface HeroProps {
   region?: HeroRegion
@@ -23,6 +45,7 @@ interface HeroProps {
 
 function Hero({ region = "global" }: HeroProps) {
   const [isConsultationOpen, setIsConsultationOpen] = useState(false)
+  const content = HERO_CONTENT[region]
 
   return (
     <section
@@ -45,25 +68,28 @@ function Hero({ region = "global" }: HeroProps) {
           preload="metadata"
           aria-hidden="true"
         >
-          <source src={HERO_VIDEOS[region]} type="video/webm" />
+          <source src={content.video} type="video/webm" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/35 to-black/60" />
       </div>
 
 
 
-      <div className="absolute -top-32 -left-56 size-[550px] rounded-full bg-primary/20 blur-3xl" />
-      <div className="absolute -top-24 -right-40 size-[500px] rounded-full bg-orange-200/40 blur-3xl" />
+      <div className="absolute -left-40 size-[800px] bg-primary/20 blur-3xl" />
+      <div className="absolute size-full -right-40 bg-primary/12 blur-3xl" />
 
       <div className="relative mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-0 pb-16">
         <div
-          className="mx-auto lg:mx-0 max-w-2xl rounded-3xl px-8 py-10 md:px-12 md:py-10 bg-accent/5 backdrop-blur-sm border border-white/20"
+          className={`mx-auto lg:mx-0 rounded-3xl px-8 py-10 md:pl-12 md:pr-0 md:py-10 bg-foreground/5 backdrop-blur-lg border border-white/20 ${content.width}`}
         >
-          <h1 className="text-4xl md:text-6xl font-semibold text-white leading-[1.05] tracking-tight">
-            Innovative Tech That Drives Progress
+          <h1 className="text-4xl md:text-[3.50em] md:whitespace-pre font-semibold text-white leading-[1.05] tracking-tight">
+            <span className="font-normal">
+              {content.titleRegular}
+            </span>
+            {content.title}
           </h1>
           <p className="mt-5 text-sm md:text-base text-white/85 leading-relaxed max-w-lg">
-            From custom applications to full scale enterprise systems, we help businesses cut through complexity and ship technology that drives real results, without the bureaucracy of a big consultancy.
+            {content.body}
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <Button
@@ -77,7 +103,7 @@ function Hero({ region = "global" }: HeroProps) {
               className="rounded-full text-white bg-accent/5 backdrop-blur-3xl hover:bg-white/20 hover:text-white border border-white/20 font-bold"
               asChild
             >
-              <Link href="/services">See Our Work →</Link>
+              <Link href="/services">{content.workLabel} →</Link>
             </Button>
           </div>
         </div>

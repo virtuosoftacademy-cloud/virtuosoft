@@ -11,7 +11,7 @@ export default async function ViewCaseStudiesPage() {
         orderBy: { updatedAt: "desc" },
         include: {
             industry: { select: { label: true } },
-            _count: { select: { approachCards: true, timeline: true } },
+            _count: { select: { heroStats: true, impactRows: true } },
         },
     });
 
@@ -66,7 +66,7 @@ export default async function ViewCaseStudiesPage() {
                                         {cs.industry?.label ?? <span className="text-neutral-400">—</span>}
                                     </td>
                                     <td className="whitespace-nowrap px-4 py-3 text-xs text-neutral-500">
-                                        {cs._count.approachCards} cards · {cs._count.timeline} phases
+                                        {cs._count.heroStats} stats · {cs._count.impactRows} impact rows
                                     </td>
                                     <td className="whitespace-nowrap px-4 py-3 text-neutral-600">
                                         {cs.updatedAt.toISOString().slice(0, 10)}

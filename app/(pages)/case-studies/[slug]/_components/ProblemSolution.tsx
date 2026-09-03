@@ -1,16 +1,14 @@
 import Image, { StaticImageData } from "next/image"
-import SectionBadge from "./SectionBadge"
-import { caseStudies_Problem, caseStudies_Solution } from "@/app/_constant"
-import {
-  getTarabutProblemSolution,
-  type TarabutPanel,
-} from "@/app/api/lib/case-study/tarabut-problem-solution"
+import { SHELL, SectionBadge } from "../../_components/Ui"
+import type { CaseStudyDetailProps } from "@/app/api/lib/case-study/types"
 
 import Tick from "@/public/assets/Images/casestudies/tick.svg"
 import ProblemVisual from "@/public/assets/Images/casestudies/problem-visual.png"
 import SolutionVisual from "@/public/assets/Images/casestudies/solution-visual.png"
 
-function Panel({ panel, visual }: { panel: TarabutPanel; visual: StaticImageData }) {
+type Panel = NonNullable<CaseStudyDetailProps["problem"]>
+
+function Panel({ panel, visual }: { panel: Panel; visual: StaticImageData }) {
   return (
     <div className="flex h-full flex-col drop-shadow-[0px_4px_4px_rgba(0,0,0,0.07)]">
       <div className="rounded-t-[20px] border border-[#dbeafe] bg-white px-6 py-5 md:px-8">
@@ -50,31 +48,31 @@ function Panel({ panel, visual }: { panel: TarabutPanel; visual: StaticImageData
   )
 }
 
-async function ProblemSolution() {
-  // Falls back to the hardcoded copy if the admin hasn't saved a row yet
-  // (or the DB is unreachable), so the page never renders blank panels.
-  const content = await getTarabutProblemSolution()
-  const problem = content?.problem ?? caseStudies_Problem
-  const solution = content?.solution ?? caseStudies_Solution
+function ProblemSolution({ caseStudy }: { caseStudy: CaseStudyDetailProps }) {
+  const { summaryHeading, summaryIntro, problem, solution } = caseStudy
+
+  if (!problem && !solution) return null
 
   return (
-    <section className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-0 py-16 lg:py-24 z-30 relative">
+    <section className={`${SHELL} py-16 lg:py-24 z-30 relative`}>
       <SectionBadge label="Customer Success Story" />
 
-      <h2 className="mt-5 max-w-[766px] text-4xl leading-[1.2] text-[#080e19] md:text-[40px]">
-        How Virtuosoft Helped Tarabut Scale Secure{" "}
-        <span className="font-bold text-[#0051e4]">Open Banking Across MENA</span>
-      </h2>
+      {summaryHeading && (
+        <h2 className="mt-5 max-w-[766px] text-4xl leading-[1.2] text-[#080e19] md:text-[40px]">
+          {summaryHeading.lead}{" "}
+          <span className="font-bold text-[#0051e4]">{summaryHeading.accent}</span>
+        </h2>
+      )}
 
-      <p className="mt-3 max-w-[730px] text-base leading-[22px] text-[#474747]">
-        Virtuosoft partnered with Tarabut, the MENA region&rsquo;s leading open banking platform, to
-        scale engineering, QA and DevOps teams for faster delivery and secure financial
-        infrastructure.
-      </p>
+      {summaryIntro && (
+        <p className="mt-3 max-w-[730px] text-base leading-[22px] text-[#474747]">
+          {summaryIntro}
+        </p>
+      )}
 
       <div className="mt-10 grid gap-6 lg:grid-cols-2">
-        <Panel panel={problem} visual={ProblemVisual} />
-        <Panel panel={solution} visual={SolutionVisual} />
+        {problem && <Panel panel={problem} visual={ProblemVisual} />}
+        {solution && <Panel panel={solution} visual={SolutionVisual} />}
       </div>
     </section>
   )

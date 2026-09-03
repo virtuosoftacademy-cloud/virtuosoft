@@ -1,6 +1,6 @@
 import Image from "next/image"
-import SectionBadge from "./SectionBadge"
-import { caseStudies_Impact, caseStudies_ImpactNote } from "@/app/_constant"
+import { SHELL, SectionBadge } from "../../_components/Ui"
+import type { CaseStudyDetailProps, ImpactRowIcon } from "@/app/api/lib/case-study/types"
 
 import IconEfficiency from "@/public/assets/Images/casestudies/impact-efficiency.svg"
 import IconLatency from "@/public/assets/Images/casestudies/impact-latency.svg"
@@ -9,16 +9,20 @@ import IconDelivery from "@/public/assets/Images/casestudies/impact-delivery.svg
 import Arrow from "@/public/assets/Images/casestudies/impact-arrow.svg"
 import NoteFlag from "@/public/assets/Images/casestudies/impact-note-flag.svg"
 
-const rowIcons = {
+const rowIcons: Record<ImpactRowIcon, typeof IconEfficiency> = {
   efficiency: IconEfficiency,
   latency: IconLatency,
   availability: IconAvailability,
   delivery: IconDelivery,
 }
 
-function Impact() {
+function Impact({ caseStudy }: { caseStudy: CaseStudyDetailProps }) {
+  const { impactRows, impactNote } = caseStudy
+
+  if (impactRows.length === 0) return null
+
   return (
-    <section className="mx-auto max-w-7xl px-6 pb-16 md:px-10 lg:pb-24">
+    <section className={`${SHELL} pb-16 lg:pb-24`}>
       <SectionBadge label="Business Impact" />
 
       <h2 className="mt-5 max-w-[766px] text-4xl leading-[1.2] text-[#050f21] md:text-[40px]">
@@ -30,7 +34,7 @@ function Impact() {
       </p>
 
       <div className="mt-7 overflow-hidden rounded-[20px] border-[1.15px] border-[#e0e3e9] bg-white p-2">
-        {caseStudies_Impact.map((row, index) => (
+        {impactRows.map((row, index) => (
           <div
             key={`${row.label}-${row.before}`}
             className={`flex flex-col gap-4 px-4 py-[18px] lg:flex-row lg:items-center lg:gap-4 ${
@@ -63,10 +67,12 @@ function Impact() {
         ))}
       </div>
 
-      <div className="mt-4 flex items-start gap-3 rounded-[14px] border-[1.15px] border-[#e0e3e9] bg-white px-4 py-4">
-        <Image src={NoteFlag} alt="" className="mt-0.5 h-[22px] w-[19px] shrink-0" />
-        <p className="text-sm leading-[1.5] text-[#4a5261]">{caseStudies_ImpactNote}</p>
-      </div>
+      {impactNote && (
+        <div className="mt-4 flex items-start gap-3 rounded-[14px] border-[1.15px] border-[#e0e3e9] bg-white px-4 py-4">
+          <Image src={NoteFlag} alt="" className="mt-0.5 h-[22px] w-[19px] shrink-0" />
+          <p className="text-sm leading-[1.5] text-[#4a5261]">{impactNote}</p>
+        </div>
+      )}
     </section>
   )
 }

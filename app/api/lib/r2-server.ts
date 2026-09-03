@@ -37,7 +37,7 @@ function createR2Client() {
 
 // ── Types ──────────────────────────────────────────────────────────
 
-export type ImageKind = "post" | "post-thumb" | "case-study" | "case-study-thumb" | "avatar";
+export type ImageKind = "post" | "post-thumb" | "case-study" | "case-study-thumb" | "case-study-logo" | "avatar";
 
 export interface R2UploadResult {
     success: boolean;
@@ -95,6 +95,7 @@ function objectKeyFor(kind: ImageKind, fileName: string): string {
         "post-thumb": "virtuosoft/posts/thumbnails",
         "case-study": "virtuosoft/case-studies",
         "case-study-thumb": "virtuosoft/case-studies/thumbnails",
+        "case-study-logo": "virtuosoft/case-studies/logos",
         avatar: "virtuosoft/avatars",
     }[kind];
     const ext = fileName.includes(".")
